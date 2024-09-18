@@ -6,7 +6,12 @@ Today students need help finding professional clothing as they prepare to enter 
 
 ## Technologies
 
-- C#.Net Web API
-- JS Frontend
-- SQL Database
-  - Entity Framework Core
+- Django
+
+## Installation
+
+pip install django
+python manage.py makemigrations
+python manage.py migrate
+python manage.py createsuperuser
+python manage.py runserver

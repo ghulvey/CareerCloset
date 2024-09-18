@@ -1,6 +1,0 @@
-@GoldenOpportunitiesAPI_HostAddress = http://localhost:5241
-
-GET {{GoldenOpportunitiesAPI_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
