@@ -16,7 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.urls import path, include
+from CareerCloset.admin import admin_site
+from CareerCloset import views
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('admin/', admin_site.urls),
+    path('oidc/', include('mozilla_django_oidc.urls')),
+    path('', views.index, name='index'),
 ]

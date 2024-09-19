@@ -10,8 +10,17 @@ Today students need help finding professional clothing as they prepare to enter 
 
 ## Installation
 
-pip install django
+```bash
+# Install Dependencies
+pip install -r requirements.txt
+
+# Migrate the database
 python manage.py makemigrations
 python manage.py migrate
+
+# Create a admin user
 python manage.py createsuperuser
+
+# Run the server
 python manage.py runserver
+```

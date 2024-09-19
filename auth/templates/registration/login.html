@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Career Closet | Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://unpkg.com/htmx.org@2.0.2/dist/htmx.js" integrity="sha384-yZq+5izaUBKcRgFbxgkRYwpHhHHCpp5nseXp0MEQ1A4MTWVMnqkmcuFez8x5qfxr" crossorigin="anonymous"></script>
+
+
+    <script>
+        function showLocal() {
+            document.getElementById("local").style.display = "block";
+            document.getElementById("oidc").style.display = "none";
+            console.log("showLocal");
+        }
+        function showOidc() {
+            document.getElementById("oidc").style.display = "block";
+            document.getElementById("local").style.display = "none";
+            console.log("showOidc");
+        }
+    </script>
+
+</head>
+<body class="login-body">
+<div class="login-container">
+    <div>
+        <div class="login-header">
+            <img src="/static/images/ksu-white-logo.png" height="50">
+            <h2 class="login-title">Career Closet</h2>
+        </div>
+        <div class="card login-form">
+            <div class="card-body">
+                <h4 class="card-title" style="text-align: center">Login</h4>
+
+                {% if form.errors %}
+                    <div class="alert alert-danger">
+                        {% for field in form %}
+                            {% for error in field.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        {% endfor %}
+                        {% for error in form.non_field_errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                
+                <div id="oidc" style="display: block">
+                    <a href="{% url 'oidc_authentication_init' %}" class="btn btn-primary" style="width: 100%">Login via FlashLine</a>
+                    <hr>
+                    <a onclick="showLocal()" href="#"  style="text-align: center; width: 100%;">Use a local account to log in.</a>
+                </div>
+                <div id="local" style="display: none">
+                    <form method="post" action="{% url 'login' %}?next=/admin">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input type="text" class="form-control" id="username" name="username" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%">Login</button>
+                        <hr>
+                        <a onclick="showOidc()" href="#"  style="text-align: center; width: 100%;">Login with FlashLine.</a>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

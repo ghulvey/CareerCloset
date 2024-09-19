@@ -1,0 +1,50 @@
+﻿:root {
+    /* https://www.kent.edu/brand/swatches */
+    
+    --ksu-primary-color: #003976;
+    --ksu-secondary-color: #efab00;
+    
+    --ksu-light-blue: #2c8ecd;
+    --ksu-yellow: #FFD702;
+    --ksu-gray: #96A0A5;
+    --ksu-dark-blue: #00295F;
+    
+}
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+    height: 100vh;
+}
+
+.login-container > div {
+    width: 100%;
+    max-width: 450px;
+}
+
+.login-body {
+    background: linear-gradient(rgba(0, 57, 118, 0.75), rgba(0, 57, 118, 0.75)), url('/static/images/risman-plaza-background.jpg') no-repeat center center fixed;
+}
+
+.login-header {
+    text-align: center;
+    padding: 20px;
+}
+
+.login-header h2 {
+    padding-top: 15px;
+    color: white;
+}
+
+.login-form {
+    width: 100%;
+    max-width: 400px;
+    padding: 15px;
+    margin: auto;
+}
+
+.btn-primary {
+    background-color: var(--ksu-primary-color);
+    border-color: var(--ksu-primary-color);
+}
