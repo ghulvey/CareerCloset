@@ -1,0 +1,50 @@
+﻿{% extends 'base.html' %}
+
+{% block title %}Career Closet | Access Manager{% endblock %}
+
+{% block content %}
+    <div>
+        <h2>Pending Invites</h2>
+        <a href="/auth/access/invite/">Invite User</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>Email</th>
+                    <th>Expiration Date</th>
+                    <th>Invite Link</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in invites %}
+                <tr>
+                    <td>{{ i.email }}</td>
+                    <td>{{ i.invite_expires_at }}</td>
+                    <td><a href="/auth/access/accept/{{ i.invite_code }}">{{ i.invite_code }}</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <h2>Access List</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Email</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for u in users %}
+                <tr>
+                    <td>{{ u.email }}</td>
+                    <td>{{ u.first_name }}</td>
+                    <td>{{ u.last_name }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

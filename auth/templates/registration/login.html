@@ -47,12 +47,12 @@
                 {% endif %}
                 
                 <div id="oidc" style="display: block">
-                    <a href="{% url 'oidc_authentication_init' %}" class="btn btn-primary" style="width: 100%">Login via FlashLine</a>
+                    <a href="{% url 'oidc_authentication_init' %}?next={{ request.GET.next|urlencode }}" class="btn btn-primary" style="width: 100%">Login via FlashLine</a>
                     <hr>
                     <a onclick="showLocal()" href="#"  style="text-align: center; width: 100%;">Use a local account to log in.</a>
                 </div>
                 <div id="local" style="display: none">
-                    <form method="post" action="{% url 'login' %}?next=/admin">
+                    <form method="post" action="{% url 'login' %}?next={{ request.GET.next|urlencode }}">
                         {% csrf_token %}
                         <div class="form-group">
                             <label for="username">Username</label>

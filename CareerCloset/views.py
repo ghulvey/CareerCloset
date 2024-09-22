@@ -1,12 +1,14 @@
 ﻿from django.contrib.auth import authenticate
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 
 
+@login_required
 def index(request):
-    return render(request, 'index.html')
+    return render(request, 'home.html')
 
 
 def login(request, *args, **kwargs):

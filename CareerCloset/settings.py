@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 from pathlib import Path
+import CareerCloset.secrets as secrets
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -36,6 +37,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     'mozilla_django_oidc',
+    'access',
     'django_htmx',
 ]
 
@@ -54,8 +56,7 @@ ROOT_URLCONF = "CareerCloset.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / 'templates', BASE_DIR / 'auth/templates']
-        ,
+        "DIRS": [BASE_DIR / 'templates'],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -75,6 +76,16 @@ WSGI_APPLICATION = "CareerCloset.wsgi.application"
 
 STATIC_URL = "static/"
 STATICFILES_DIRS = [ BASE_DIR / 'static', ]
+
+"""
+Email Settings
+"""
+
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+EMAIL_FILE_PATH = "/tmp/app-messages"
+
+EMAIL_FROM = "noreply@kent.edu"
+
 
 """
 Database Settings
@@ -125,8 +136,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 OIDC_RP_SCOPES = 'openid profile email'
 OIDC_STORE_ACCESS_TOKEN = True
-OIDC_RP_CLIENT_ID = ''
-OIDC_RP_CLIENT_SECRET = ''
+OIDC_RP_CLIENT_ID = secrets.ENTRA_CLIENT_ID
+OIDC_RP_CLIENT_SECRET = secrets.ENTRA_CLIENT_SECRET
 OIDC_OP_AUTHORIZATION_ENDPOINT = 'https://login.microsoftonline.com/common/oauth2/v2.0/authorize'
 OIDC_OP_TOKEN_ENDPOINT = 'https://login.microsoftonline.com/common/oauth2/v2.0/token'
 OIDC_OP_USER_ENDPOINT = 'https://graph.microsoft.com/oidc/userinfo'
