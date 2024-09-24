@@ -1,5 +1,8 @@
 ﻿from django.contrib import admin
+from django.contrib.admin.models import LogEntry
 from django.contrib.auth.models import User, Group, Permission
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.sessions.models import Session
 
 from access.models import Invite
 
@@ -16,6 +19,9 @@ admin_site = CareerClosetAdminSite()
 admin_site.register(User)
 admin_site.register(Group)
 admin_site.register(Permission)
+admin_site.register(ContentType)
+admin_site.register(Session)
+admin_site.register(LogEntry)
 
 
 class InviteAdmin(admin.ModelAdmin):

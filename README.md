@@ -21,28 +21,31 @@ python manage.py migrate
 # Create a admin user
 python manage.py createsuperuser
 
+# Create groups and map permission
+python manage.py create_groups
+
 # Run the server
 python manage.py runserver
 ```
 
 ### Microsoft Entra Setup
 
-Copy the secrets from the `SECRET` file in Google Drive and paste them in the `settings.py` file. We should find a better way to store these secrets in the future.
+Copy the secrets from the `SECRET` file in Google Drive and paste them in the `secrets.py` file. We should find a better way to store these secrets in the future.
 
 ```python
-OIDC_RP_CLIENT_ID = 'SECRET'
-OIDC_RP_CLIENT_SECRET = 'SECRET'
+ENTRA_CLIENT_ID = 'SECRET'
+ENTRA_CLIENT_SECRET = 'SECRET'
 ```
 
-Click login with Flashline and login with your Kent State credentials.
+Click login with Flashline and log in with your Kent State credentials.
 
 **(Optional)** Grant admin permissions to your Flashline account.
 - Go to `/admin`
 - Login with the superuser account
-- Go to `Users` and click on your user, the one with a random looking username
+- Go to `Users` and click on your user, the one with a random-looking username
 - Check the `is_staff` and `is_superuser` boxes
 - Save
-- Logout and login with your Flashline account
+- Logout and log in with your Flashline account
 - Personal information (first name, last name) will now be mapped to your user account
 
 

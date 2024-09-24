@@ -1,0 +1,22 @@
+{% extends 'admin/base.html' %}
+
+{% block extrastyle %}{{ block.super }}
+<style>
+      html[data-theme="light"],
+      html[data-theme="dark"],
+      :root {
+        --header-bg: #003976;
+        --header-fg: #efab00;
+        --breadcrumbs-bg: #2c8ecd;
+        --breadcrumbs-fg: #ffffff;
+        --default-button-bg: #efab00;
+        --default-button-fg: #ffffff;
+        --default-button-hover-bg: #ffcc00;
+        --default-button-hover-fg: #ffffff;
+        --button-bg: #003976;
+        --button-fg: #ffffff;
+        --button-hover-bg: #00295F;
+        --button-hover-fg: #ffffff;
+    }
+</style>
+{% endblock %}

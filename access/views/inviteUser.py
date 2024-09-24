@@ -1,5 +1,5 @@
 ﻿from django.contrib.auth import logout
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.db import transaction
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
@@ -16,10 +16,12 @@ class InviteUser(View):
     template_name = 'inviteUser.html'
 
     @method_decorator(login_required)
+    @method_decorator(permission_required('access.add_invite', raise_exception=True))
     def get(self, request, *args, **kwargs):
         return render(request, self.template_name, {})
 
     @method_decorator(login_required)
+    @method_decorator(permission_required('access.add_invite', raise_exception=True))
     def post(self, request, *args, **kwargs):
         email = request.POST['email']
         expiration = request.POST['expDate']

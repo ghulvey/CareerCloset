@@ -6,12 +6,13 @@
     <div>
         <h2>Pending Invites</h2>
         <a href="/auth/access/invite/">Invite User</a>
-        <table>
+        <table class="table">
             <thead>
                 <tr>
                     <th>Email</th>
                     <th>Expiration Date</th>
                     <th>Invite Link</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -20,6 +21,7 @@
                     <td>{{ i.email }}</td>
                     <td>{{ i.invite_expires_at }}</td>
                     <td><a href="/auth/access/accept/{{ i.invite_code }}">{{ i.invite_code }}</a></td>
+                    <td><a href="/auth/access/cancel/{{ i.invite_code }}" class="link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Cancel</a></td>
                 </tr>
                 {% endfor %}
             </tbody>
@@ -27,7 +29,7 @@
     </div>
     <div>
         <h2>Access List</h2>
-        <table>
+        <table class="table">
             <thead>
                 <tr>
                     <th>Email</th>
@@ -41,6 +43,7 @@
                     <td>{{ u.email }}</td>
                     <td>{{ u.first_name }}</td>
                     <td>{{ u.last_name }}</td>
+                    <td><a href="">Change Permissions</a> <a href="">Revoke Access</a></td>
                 </tr>
                 {% endfor %}
             </tbody>

@@ -25,7 +25,14 @@ class AcceptInvite(View):
         invite.assigned_user = request.user
         # set user to staff and add to group
         user.is_staff = True
-        user.groups.add(2)
+        user.groups.clear()
+        user.groups.add(invite.assigned_group)
+
+        if invite.assigned_group.name == 'Admin':
+            user.is_superuser = True
+        else:
+            user.is_superuser = False
+
         # execute in a transaction
         try:
             with transaction.atomic():
