@@ -17,6 +17,8 @@ pip install -r requirements.txt
 # Migrate the database
 python manage.py makemigrations
 python manage.py migrate
+python manage.py makemigrations access
+python manage.py migrate access
 
 # Create a admin user
 python manage.py createsuperuser
