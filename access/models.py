@@ -22,7 +22,7 @@ class Invite(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     invite_expires_at = models.DateTimeField(default=datetime.now() + timedelta(days=7))
     access_expires_at = models.DateTimeField(default=None, null=True)
-    assigned_group = models.ForeignKey(Group, on_delete=models.SET_NULL, null=True, default=Group.objects.get(name='Student Employee').id)
+    assigned_group = models.OneToOneField(Group, on_delete=models.CASCADE, null=True)
     assigned_user = models.OneToOneField('auth.User', on_delete=models.CASCADE, null=True)
     created_by = models.ForeignKey('auth.User', on_delete=models.CASCADE, related_name='created_by', null=True)
 
