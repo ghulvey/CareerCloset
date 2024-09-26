@@ -77,10 +77,9 @@ class ClothingItem(models.Model):
 class Customer(models.Model):
     user_id = models.AutoField(primary_key=True)  # Random identifier or confirmation number
     email = models.EmailField(max_length=254)
-    admin_priv = models.BooleanField(default=False)
 
     def __str__(self):
-        return f"{self.email} - {self.phone_number}"
+        return f"{self.email} - {self.user_id}"
 
 
 # Transaction Model
