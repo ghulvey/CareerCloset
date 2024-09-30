@@ -3,70 +3,77 @@
 {% block title %}Career Closet | Access Manager{% endblock %}
 
 {% block content %}
-    <div class="container">
-        <div class="d-flex justify-content-between align-items-center my-3">
-            <h2>Pending Invites</h2>
-            <a href="/auth/access/invite/" class="button btn btn-primary ">Invite User</a>
+    <div class="container my-4">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center my-3">
+                    <h2>Pending Invites</h2>
+                    <a href="/auth/access/invite/" class="button btn btn-primary ">Invite User</a>
+                </div>
+
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Email</th>
+                        <th>Expiration Date</th>
+                        <th>Invite Link</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for i in invites %}
+                        <tr>
+                            <td>{{ i.email }}</td>
+                            <td>{{ i.invite_expires_at }}</td>
+                            <td><a href="/auth/access/accept/{{ i.invite_code }}">{{ i.invite_code }}</a></td>
+                            <td><a href="/auth/access/delete-invite/{{ i.id }}/" class="link-danger">Revoke Invite</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
-        
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Email</th>
-                    <th>Expiration Date</th>
-                    <th>Invite Link</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for i in invites %}
-                <tr>
-                    <td>{{ i.email }}</td>
-                    <td>{{ i.invite_expires_at }}</td>
-                    <td><a href="/auth/access/accept/{{ i.invite_code }}">{{ i.invite_code }}</a></td>
-                    <td><a href="/auth/access/delete-invite/{{ i.id }}/">Revoke</a></td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+
+        <div class="card mt-4">
+            <div class="card-body">
+                <h2 class="my-3">Access List</h2>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Expiration</th>
+                        <th>Actions</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for u in users %}
+                        <tr>
+                            <td>{{ u.assigned_user.first_name }}</td>
+                            <td>{{ u.assigned_user.last_name }}</td>
+                            <td>{{ u.assigned_user.email }}</td>
+                            <td>{{ u.assigned_group.name }}</td>
+                            <td>{{ u.access_expires_at }}</td>
+                            <td><a href="/auth/access/change/{{ u.id }}/">Update Access</a></td>
+                            <td><a href="/auth/access/revoke/{{ u.id }}/" class="link-danger">Revoke Access</a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-    
-    <div class="container">
-        <h2 class="my-3">Access List</h2>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Email</th>
-                    <th>Role</th>
-                    <th>Expiration</th>
-                    <th>Actions</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for u in users %}
-                <tr>
-                    <td>{{ u.assigned_user.first_name }}</td>
-                    <td>{{ u.assigned_user.last_name }}</td>
-                    <td>{{ u.assigned_user.email }}</td>
-                    <td>{{ u.assigned_group.name }}</td>
-                    <td>{{ u.access_expires_at }}</td>
-                    <td><a href="/auth/access/change/{{ u.id }}/">Update Access</a></td>
-                    <td><a href="/auth/access/revoke/{{ u.id }}/" class="link-danger">Revoke Access</a></td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
-    
+
     <script>
         function openDialog(event) {
             event.preventDefault();
             document.querySelector('dialog').showModal();
         }
-        
+
         function closeDialog() {
             document.querySelector('dialog').close();
         }

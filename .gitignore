@@ -140,3 +140,7 @@ GitHub.sublime-settings
 # Settings
 CareerCloset/secrets.py
 emails/
+/kent-bootstrap/node_modules/
+**/migrations/
+
+/.idea/
