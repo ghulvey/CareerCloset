@@ -82,9 +82,12 @@ Email Settings
 """
 
 EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
-EMAIL_FILE_PATH = "/tmp/app-messages"
+EMAIL_FILE_PATH = BASE_DIR / "emails"
 
 EMAIL_FROM = "noreply@kent.edu"
+
+WEBSITE_URL = "http://localhost:8000"
+REPLY_TO_EMAIL = "carrercloset@kent.edu"
 
 
 """

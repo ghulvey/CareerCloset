@@ -1,0 +1,26 @@
+﻿{% extends 'base.html' %}
+
+{% block title %}Career Closet | Revoke Access{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="card mt-4">
+            <div class="card-body">
+                <h2>Revoke Access</h2>
+
+                <p>
+                    Are you sure you want to revoke access
+                    for {{ invite.assigned_user.first_name }} {{ invite.assigned_user.last_name }}
+                    ({{ invite.assigned_user.email }})?
+                </p>
+
+                <form action="/auth/access/revoke/{{ invite.id }}/" method="post">
+                    {% csrf_token %}
+
+                    <button type="submit" class="btn-danger btn">Revoke</button>
+                    <button type="button" class="btn-secondary btn" onclick="window.history.back()">Cancel</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

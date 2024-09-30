@@ -136,3 +136,11 @@ GitHub.sublime-settings
 !.vscode/launch.json 
 !.vscode/extensions.json 
 .history
+
+# Settings
+CareerCloset/secrets.py
+emails/
+/kent-bootstrap/node_modules/
+**/migrations/
+
+/.idea/

@@ -9,12 +9,12 @@ from django.shortcuts import render, redirect
 from django.template.defaulttags import now
 from django.utils import timezone
 
-from access.models import Invite
+from access.models import AccessAssignment
 
 
 def access_list(request):
     context = {
-        'invites': Invite.objects.filter(state='pending'),
+        'invites': AccessAssignment.objects.filter(state='pending'),
         'users': User.objects.filter(is_staff=True)
     }
     return render(request, 'accessList.html', context)

@@ -4,16 +4,16 @@ from django.shortcuts import render
 from django.utils.decorators import method_decorator
 from django.views import View
 
-from access.models import Invite
+from access.models import AccessAssignment
 
 
 class AccessList(View):
+
     @method_decorator(login_required)
     @method_decorator(permission_required('access.view_invite', raise_exception=True))
-    @staticmethod
-    def get(request, *args, **kwargs):
+    def get(self, request, *args, **kwargs):
         context = {
-            'invites': Invite.objects.filter(state='pending'),
-            'users': User.objects.filter(is_staff=True)
+            'invites': AccessAssignment.objects.filter(state='pending'),
+            'users': AccessAssignment.objects.filter(state='applied'),
         }
         return render(request, 'accessList.html', context)
