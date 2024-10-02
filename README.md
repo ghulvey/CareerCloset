@@ -28,6 +28,9 @@ python manage.py create_groups
 
 # Run the server
 python manage.py runserver
+
+#Populate DB with sample clothes
+python manage.py loaddata seed_data.json
 ```
 
 ### Microsoft Entra Setup
