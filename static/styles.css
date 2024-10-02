@@ -48,3 +48,10 @@
     background-color: var(--ksu-primary-color);
     border-color: var(--ksu-primary-color);
 }
+
+.no-content-message {
+    text-align: center;
+    margin: 30px 0;
+    color: #343a40;
+    font-size: 1.5rem;
+}

@@ -10,7 +10,7 @@ from access.models import AccessAssignment
 class RevokeAccessView(View):
 
     @method_decorator(login_required)
-    @method_decorator(permission_required('access.add_invite', raise_exception=True))
+    @method_decorator(permission_required('access.delete_accessassignment', raise_exception=True))
     def post(self, request, *args, **kwargs):
         invite = AccessAssignment.objects.get(id=kwargs['pk'])
         user = invite.assigned_user
@@ -27,9 +27,9 @@ class RevokeAccessView(View):
         return redirect('access_list')
 
     @method_decorator(login_required)
-    @method_decorator(permission_required('access.add_invite', raise_exception=True))
+    @method_decorator(permission_required('access.delete_accessassignment', raise_exception=True))
     def get(self, request, *args, **kwargs):
         invite = AccessAssignment.objects.get(id=kwargs['pk'])
-        return render(request, 'revokeAccess.html', {
+        return render(request, 'revoke-access.html', {
             'invite': invite
         })

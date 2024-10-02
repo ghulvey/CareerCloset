@@ -1,4 +1,4 @@
-﻿{% extends 'base.html' %}
+﻿{% extends base_template %}
 
 {% block title %}Career Closet | Access Manager{% endblock %}
 
@@ -11,6 +11,9 @@
                     <a href="/auth/access/invite/" class="button btn btn-primary ">Invite User</a>
                 </div>
 
+                {% if invites|length == 0 %}
+                    <p class="no-content-message">No pending invites.</p>
+                {% else %}
                 <table class="table">
                     <thead>
                     <tr>
@@ -32,12 +35,17 @@
                     {% endfor %}
                     </tbody>
                 </table>
+                {% endif %}
             </div>
         </div>
 
         <div class="card mt-4">
             <div class="card-body">
                 <h2 class="my-3">Access List</h2>
+
+                {% if users|length == 0 %}
+                    <p class="no-content-message">No users have been granted access.</p>
+                {% else %}
                 <table class="table">
                     <thead>
                     <tr>
@@ -64,6 +72,7 @@
                     {% endfor %}
                     </tbody>
                 </table>
+                {% endif %}
             </div>
         </div>
     </div>

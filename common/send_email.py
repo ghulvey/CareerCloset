@@ -7,7 +7,7 @@ from CareerCloset import settings
 Sends an email to the specified email address using the regular email template.
 """
 def send_generic_email(to, subject, body):
-    html_template = "genericEmail.html"
+    html_template = "generic-email.html"
     html_message = render_to_string(html_template, {'subject': subject, 'body': body, 'website_url': settings.WEBSITE_URL, 'reply_to_email': settings.REPLY_TO_EMAIL})
     send_mail(
         subject,
