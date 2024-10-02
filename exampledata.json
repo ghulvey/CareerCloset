@@ -1058,107 +1058,21 @@
     }
 },
 {
-    "model": "contenttypes.contenttype",
-    "pk": 1,
-    "fields": {
-        "app_label": "admin",
-        "model": "logentry"
-    }
-},
-{
-    "model": "contenttypes.contenttype",
+    "model": "auth.user",
     "pk": 2,
     "fields": {
-        "app_label": "auth",
-        "model": "permission"
-    }
-},
-{
-    "model": "contenttypes.contenttype",
-    "pk": 3,
-    "fields": {
-        "app_label": "auth",
-        "model": "group"
-    }
-},
-{
-    "model": "contenttypes.contenttype",
-    "pk": 4,
-    "fields": {
-        "app_label": "auth",
-        "model": "user"
-    }
-},
-{
-    "model": "contenttypes.contenttype",
-    "pk": 5,
-    "fields": {
-        "app_label": "contenttypes",
-        "model": "contenttype"
-    }
-},
-{
-    "model": "contenttypes.contenttype",
-    "pk": 6,
-    "fields": {
-        "app_label": "sessions",
-        "model": "session"
-    }
-},
-{
-    "model": "contenttypes.contenttype",
-    "pk": 7,
-    "fields": {
-        "app_label": "access",
-        "model": "invite"
-    }
-},
-{
-    "model": "contenttypes.contenttype",
-    "pk": 8,
-    "fields": {
-        "app_label": "access",
-        "model": "category"
-    }
-},
-{
-    "model": "contenttypes.contenttype",
-    "pk": 9,
-    "fields": {
-        "app_label": "access",
-        "model": "color"
-    }
-},
-{
-    "model": "contenttypes.contenttype",
-    "pk": 10,
-    "fields": {
-        "app_label": "access",
-        "model": "size"
-    }
-},
-{
-    "model": "contenttypes.contenttype",
-    "pk": 11,
-    "fields": {
-        "app_label": "access",
-        "model": "customer"
-    }
-},
-{
-    "model": "contenttypes.contenttype",
-    "pk": 12,
-    "fields": {
-        "app_label": "access",
-        "model": "clothingitem"
-    }
-},
-{
-    "model": "contenttypes.contenttype",
-    "pk": 13,
-    "fields": {
-        "app_label": "access",
-        "model": "transaction"
+        "password": "pbkdf2_sha256$870000$KCuFeyhjwtAMeFFMqeuaJR$i6ZRYLSM/IEJxXtWAtDplUygAfQQtU+pHY2cJ5Vu3Zs=",
+        "last_login": "2024-10-02T01:14:10.294Z",
+        "is_superuser": true,
+        "username": "lanes",
+        "first_name": "",
+        "last_name": "",
+        "email": "lsimps14@kent.edu",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2024-10-02T01:13:58.311Z",
+        "groups": [],
+        "user_permissions": []
     }
 },
 {
@@ -1167,6 +1081,14 @@
     "fields": {
         "session_data": ".eJxVj8tuwjAURP_F6yh17Nh57EBVRRcgUaCo3Vh-JTYEWyQxaory701UNmxnzh2dewfeKsm6nve6A-UdhLC6Gvn6djvatBq2dkN_6_X3bmH6g5LoupgZ6ZVmN93ayuoWlC40TQScd1KDEmy67VHtP9EFrz6GQ6ZPjcwCNu9hOezPu68LiABXSivmHSiTDGU4KWiSxASTNM_TcYz-lRpfW8ec_umn0ZfpivHQGxY63TKrpix5zgSXZ-3mQp24q30svetbK-IZiR9tF68n92b5YJ8GDO_MPEtxhWCRQkKJhBAqxVMI-aSZwKJAiBdSZTlGWFCoKyIolUIQLHg-PVXlGIx_OgBu9w:1stelW:eWYlKuPIDsDrJYjxeuFi1WqxBfm9CXSrNRBN3q-lsbI",
         "expire_date": "2024-10-10T03:02:02.028Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "udwb5r6zeekqmmpxh0kadh42i9nowcdw",
+    "fields": {
+        "session_data": ".eJxVjDsOwjAQBe_iGln2-rM2JT1nsNY_HECOFCcV4u4QKQW0b2beiwXa1ha2UZYwZXZmwE6_W6T0KH0H-U79NvM093WZIt8VftDBr3Muz8vh_h00Gu1bk6jFefBSScQkjfa1CiCESOicU6Rc1DJZkJVEtjUT1KIINViDxgN7fwDOtzdH:1svnwQ:jNyJ7b67MpuCT8Ja8-EI5WNjGT4uJ8SMF4XsBOiaT5E",
+        "expire_date": "2024-10-16T01:14:10.298Z"
     }
 },
 {
