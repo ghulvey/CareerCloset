@@ -15,10 +15,10 @@ from common.send_email import send_generic_email
 
 
 class InviteUser(View):
-    template_name = 'inviteUser.html'
+    template_name = 'invite-user.html'
 
     @method_decorator(login_required)
-    @method_decorator(permission_required('access.add_invite', raise_exception=True))
+    @method_decorator(permission_required('access.add_accessassignment', raise_exception=True))
     def delete(self, request, *args, **kwargs):
         invite_id = request.GET['id']
         invite = AccessAssignment.objects.get(id=invite_id)
@@ -27,7 +27,7 @@ class InviteUser(View):
         return HttpResponse('Invite deleted')
 
     @method_decorator(login_required)
-    @method_decorator(permission_required('access.add_invite', raise_exception=True))
+    @method_decorator(permission_required('access.add_accessassignment', raise_exception=True))
     def get(self, request, *args, **kwargs):
         default_expiration = (timezone.now() + timezone.timedelta(days=180)).strftime('%Y-%m-%d')
         groups = Group.objects.all()
@@ -37,7 +37,7 @@ class InviteUser(View):
         })
 
     @method_decorator(login_required)
-    @method_decorator(permission_required('access.add_invite', raise_exception=True))
+    @method_decorator(permission_required('access.add_accessassignment', raise_exception=True))
     def post(self, request, *args, **kwargs):
         email = request.POST['email']
         expiration = request.POST['expDate']

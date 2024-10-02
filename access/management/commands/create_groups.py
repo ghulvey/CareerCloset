@@ -7,7 +7,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         group_names = [
-            ("Admin", ['add_invite', 'change_invite', 'delete_invite', 'view_invite']),
+            ("Admin", ['add_accessassignment', 'change_accessassignment', 'delete_accessassignment', 'view_accessassignment']),
             ("Employee", []),
             ("Student Employee", [])
         ]

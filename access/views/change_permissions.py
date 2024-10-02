@@ -11,7 +11,7 @@ from access.models import AccessAssignment
 class ChangePermissions(View):
 
     @method_decorator(login_required)
-    @method_decorator(permission_required('access.add_invite', raise_exception=True))
+    @method_decorator(permission_required('access.update_accessassignment', raise_exception=True))
     def post(self, request, *args, **kwargs):
         invite = AccessAssignment.objects.get(id=kwargs['pk'])
         user = invite.assigned_user
@@ -38,10 +38,10 @@ class ChangePermissions(View):
         return redirect('access_list')
 
     @method_decorator(login_required)
-    @method_decorator(permission_required('access.add_invite', raise_exception=True))
+    @method_decorator(permission_required('access.update_accessassignment', raise_exception=True))
     def get(self, request, *args, **kwargs):
         invite = AccessAssignment.objects.get(id=kwargs['pk'])
-        return render(request, 'changePermissions.html', {
+        return render(request, 'change-permissions.html', {
             'invite': invite,
             'groups': Group.objects.all()
         })

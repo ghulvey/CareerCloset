@@ -10,10 +10,10 @@ from access.models import AccessAssignment
 class AccessList(View):
 
     @method_decorator(login_required)
-    @method_decorator(permission_required('access.view_invite', raise_exception=True))
+    @method_decorator(permission_required('access.view_accessassignment', raise_exception=True))
     def get(self, request, *args, **kwargs):
         context = {
             'invites': AccessAssignment.objects.filter(state='pending'),
             'users': AccessAssignment.objects.filter(state='applied'),
         }
-        return render(request, 'accessList.html', context)
+        return render(request, 'access-list.html', context)

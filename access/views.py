@@ -17,7 +17,7 @@ def access_list(request):
         'invites': AccessAssignment.objects.filter(state='pending'),
         'users': User.objects.filter(is_staff=True)
     }
-    return render(request, 'accessList.html', context)
+    return render(request, 'access-list.html', context)
 
 
 @login_required()

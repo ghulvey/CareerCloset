@@ -9,13 +9,13 @@ from access.models import AccessAssignment
 class DeleteInvite(View):
 
     @method_decorator(login_required)
-    @method_decorator(permission_required('access.add_invite', raise_exception=True))
+    @method_decorator(permission_required('access.delete_accessassignment', raise_exception=True))
     def get(self, request, *args, **kwargs):
         invite = get_object_or_404(AccessAssignment, pk=kwargs['pk'])
-        return render(request, 'deleteInvite.html', {'invite': invite})
+        return render(request, 'delete-invite.html', {'invite': invite})
 
     @method_decorator(login_required)
-    @method_decorator(permission_required('access.add_invite', raise_exception=True))
+    @method_decorator(permission_required('access.delete_accessassignment', raise_exception=True))
     def post(self, request, *args, **kwargs):
         invite = get_object_or_404(AccessAssignment, pk=kwargs['pk'])
         invite.state = 'canceled'

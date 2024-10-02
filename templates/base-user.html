@@ -19,7 +19,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="/auth/access/">Access Manager</a>
                 </li>
@@ -27,6 +27,13 @@
                     <a class="nav-link" href="/admin/">Django Admin</a>
                 </li>
             </ul>
+
+
+                    <form action="{% url 'logout' %}" method="post" class="form-inline ml-auto">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-light">Log Out</button>
+                    </form>
+
         </div>
     </div>
 </nav>
