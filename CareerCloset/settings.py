@@ -64,6 +64,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "CareerCloset.context_processor.user_base_template",
             ],
         },
     },
@@ -82,9 +83,12 @@ Email Settings
 """
 
 EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
-EMAIL_FILE_PATH = "/tmp/app-messages"
+EMAIL_FILE_PATH = BASE_DIR / "emails"
 
 EMAIL_FROM = "noreply@kent.edu"
+
+WEBSITE_URL = "http://localhost:8000"
+REPLY_TO_EMAIL = "carrercloset@kent.edu"
 
 
 """
@@ -145,9 +149,10 @@ OIDC_RP_SIGN_ALGO = 'RS256'
 OIDC_OP_JWKS_ENDPOINT = 'https://login.microsoftonline.com/common/discovery/v2.0/keys'
 
 AUTHENTICATION_BACKENDS = (
-    'auth.oidcBackend.CareerClosetOIDCAuthenticationBackend',  # Microsoft Entra
+    'auth.oidc_backend.CareerClosetOIDCAuthenticationBackend',  # Microsoft Entra
     'django.contrib.auth.backends.ModelBackend',  # Default Django auth
 )
 
 LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'

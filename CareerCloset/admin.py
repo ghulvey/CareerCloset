@@ -4,7 +4,7 @@ from django.contrib.auth.models import User, Group, Permission
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.sessions.models import Session
 
-from access.models import Invite, Size, Color, Category, ClothingItem, Customer, Transaction
+from access.models import AccessAssignment, Size, Color, Category, ClothingItem, Customer, Transaction
 
 class CareerClosetAdminSite(admin.AdminSite):
     site_header = 'Career Closet'
@@ -31,7 +31,7 @@ admin_site.register(Transaction)
 
 class InviteAdmin(admin.ModelAdmin):
     list_display = (
-        'invite_code', 'email', 'state', 'created_at', 'updated_at', 'invite_expires_at', 'access_expires_at', 'assigned_user',
+        'invite_code', 'email', 'state', 'assigned_group', 'created_at', 'updated_at', 'invite_expires_at', 'access_expires_at', 'assigned_user',
         'created_by')
     list_filter = (
         'state', 'created_at', 'updated_at', 'invite_expires_at', 'access_expires_at', 'assigned_user', 'created_by')
@@ -39,4 +39,4 @@ class InviteAdmin(admin.ModelAdmin):
     ordering = ('-created_at',)
 
 
-admin_site.register(Invite, InviteAdmin)
+admin_site.register(AccessAssignment, InviteAdmin)

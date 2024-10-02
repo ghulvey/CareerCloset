@@ -7,6 +7,7 @@ Today students need help finding professional clothing as they prepare to enter 
 ## Technologies
 
 - Django
+- Bootstrap
 
 ## Installation
 
@@ -53,3 +54,15 @@ Click login with Flashline and log in with your Kent State credentials.
 - Save
 - Logout and log in with your Flashline account
 - Personal information (first name, last name) will now be mapped to your user account
+
+### Custom Bootstrap Theme
+
+To customize the Bootstrap theme edit the custom.scss file in `/kent-boostrap/scss/custom.scss` and run the following command to compile the scss file.
+
+```bash
+cd kent-bootstrap
+npm install
+npm run build-css
+```
+
+The compiled css file will be placed in `/static/kent-bootsrap.css`

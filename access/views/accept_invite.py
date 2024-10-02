@@ -7,13 +7,13 @@ from django.utils import timezone
 from django.views import View
 from django.utils.decorators import method_decorator
 
-from access.models import Invite
+from access.models import AccessAssignment
 
 
 class AcceptInvite(View):
     @method_decorator(login_required)
     def get(self, request, invite_code=None, *args, **kwargs):
-        invite = Invite.objects.get(invite_code=invite_code)
+        invite = AccessAssignment.objects.get(invite_code=invite_code)
         if invite.state != 'pending':
             return HttpResponse('Invite is not pending')
         if invite.invite_expires_at < timezone.now():
@@ -21,7 +21,7 @@ class AcceptInvite(View):
         if invite.email != request.user.email:
             return HttpResponse('Invite email does not match user email')
         user = request.user
-        invite.state = 'accepted'
+        invite.state = 'applied'
         invite.assigned_user = request.user
         # set user to staff and add to group
         user.is_staff = True

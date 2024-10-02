@@ -1,0 +1,16 @@
+{
+  "name": "kent-bootstrap",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "build-css": "sass scss/custom.scss ../static/kent-bootstrap.css",
+    "watch-css": "sass --watch scss/custom.scss:../static/kent-bootstrap.css"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^5.3.3",
+    "sass": "^1.79.4"
+  }
+}

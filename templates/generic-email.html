@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ subject }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <p>Hello,</p>
+    <p>{% block body %}
+    	{{ body|safe }}
+    {% endblock %}</p>
+    <p>Thank you,</p>
+    <p>Career Closet</p>
+    <hr>
+    <p>This is an automated message. Please do not reply to this email.</p>
+    <p>If you have any questions, please contact the Career Closet team at <a href="mailto:{{ reply_to_email }}">{{ reply_to_email }}</a></p>
+    <p>Visit the Career Closet at <a href="{{ website_url }}"></a></p>
+</body>
+</html>
