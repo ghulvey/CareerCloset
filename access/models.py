@@ -34,3 +34,65 @@ class AccessAssignment(models.Model):
 
     def __str__(self):
         return self.email
+
+# Size Model
+class Size(models.Model):
+    size_id = models.AutoField(primary_key=True)
+    size_value = models.CharField(max_length=10)
+
+    def __str__(self):
+        return self.size_value
+
+
+# Color Model
+class Color(models.Model):
+    color_id = models.AutoField(primary_key=True)
+    color_name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.color_name
+
+
+# Category Model
+class Category(models.Model):
+    category_id = models.AutoField(primary_key=True)
+    category_name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.category_name
+
+
+# ClothingItem Model
+class ClothingItem(models.Model):
+    clothing_id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=100)
+    description = models.TextField()
+    size = models.ForeignKey(Size, on_delete=models.CASCADE)  # ForeignKey to Size
+    color = models.ForeignKey(Color, on_delete=models.CASCADE)  # ForeignKey to Color
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)  # ForeignKey to Category
+    image_url = models.URLField(max_length=200)
+    availability_status = models.CharField(max_length=50)
+    date_added = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
+
+
+# User (for identification only)
+class Customer(models.Model):
+    user_id = models.AutoField(primary_key=True)  # Random identifier or confirmation number
+    email = models.EmailField(max_length=254)
+
+    def __str__(self):
+        return f"{self.email} - {self.user_id}"
+
+
+# Transaction Model
+class Transaction(models.Model):
+    transaction_id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(Customer, on_delete=models.CASCADE)  # ForeignKey to User for identification
+    clothing_item = models.ForeignKey(ClothingItem, on_delete=models.CASCADE)  # ForeignKey to ClothingItem
+    transaction_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Transaction {self.transaction_id}: {self.user.email} - {self.clothing_item.name} on {self.transaction_date}"

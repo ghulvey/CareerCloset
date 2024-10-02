@@ -29,6 +29,9 @@ python manage.py create_groups
 
 # Run the server
 python manage.py runserver
+
+#Populate DB with sample clothes
+python manage.py loaddata exampledata.json
 ```
 
 ### Microsoft Entra Setup
@@ -43,6 +46,7 @@ ENTRA_CLIENT_SECRET = 'SECRET'
 Click login with Flashline and log in with your Kent State credentials.
 
 **(Optional)** Grant admin permissions to your Flashline account.
+
 - Go to `/admin`
 - Login with the superuser account
 - Go to `Users` and click on your user, the one with a random-looking username
@@ -62,5 +66,3 @@ npm run build-css
 ```
 
 The compiled css file will be placed in `/static/kent-bootsrap.css`
-
-
