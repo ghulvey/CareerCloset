@@ -38,7 +38,9 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     'mozilla_django_oidc',
     'access',
+    "inventory",
     'django_htmx',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -56,7 +58,7 @@ ROOT_URLCONF = "CareerCloset.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / 'templates', BASE_DIR / 'auth/templates'],
+        "DIRS": [BASE_DIR / 'templates', BASE_DIR / 'auth/templates', BASE_DIR / 'inventory/templates'],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -99,6 +101,14 @@ Database Settings
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
+    "postgres": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": secrets.POSTGRES_DB,
+        "USER": secrets.POSTGRES_USER,
+        "PASSWORD": secrets.POSTGRES_PASSWORD,
+        "HOST": secrets.POSTGRES_HOST,
+        "PORT": secrets.POSTGRES_PORT,
+    },
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
@@ -120,6 +130,25 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+"""
+Storage Settings
+"""
+
+SUPABASE_PROJECT_REF = 'sfdlddfxbyifrmyvhvxg'
+
+AWS_ACCESS_KEY_ID = secrets.S3_ACCESS_KEY_ID
+AWS_SECRET_ACCESS_KEY = secrets.S3_SECRET_ACCESS_KEY
+AWS_STORAGE_BUCKET_NAME = secrets.S3_BUCKET_NAME
+AWS_S3_ENDPOINT_URL = secrets.S3_ENDPOINT_URL
+AWS_S3_REGION_NAME = secrets.S3_REGION
+AWS_S3_SIGNATURE_VERSION = 's3v4'
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = None
+
+
+MEDIA_URL = secrets.S3_MEDIA_URL
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 """
 Authentication Settings

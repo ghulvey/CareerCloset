@@ -27,5 +27,6 @@ urlpatterns = [
     path('admin/', admin_site.urls),
     path('auth/', include('access.urls')),
     path('oidc/', include('mozilla_django_oidc.urls')),
+    path('inventory/', include('inventory.urls')),
     path('', views.index, name='index'),
 ]

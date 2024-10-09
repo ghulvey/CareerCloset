@@ -70,13 +70,19 @@ class ClothingItem(models.Model):
     size = models.ForeignKey(Size, on_delete=models.CASCADE)  # ForeignKey to Size
     color = models.ForeignKey(Color, on_delete=models.CASCADE)  # ForeignKey to Color
     category = models.ForeignKey(Category, on_delete=models.CASCADE)  # ForeignKey to Category
-    image_url = models.URLField(max_length=200)
     availability_status = models.CharField(max_length=50)
     date_added = models.DateTimeField(auto_now_add=True)
+    images = models.ManyToManyField('ClothingItemImage', related_name='images')
 
     def __str__(self):
         return self.name
 
+class ClothingItemImage(models.Model):
+    clothing_item = models.ForeignKey(ClothingItem, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='inventory/')
+
+    def __str__(self):
+        return self.clothing_item.name
 
 # User (for identification only)
 class Customer(models.Model):
