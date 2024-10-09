@@ -24,8 +24,6 @@ RUN pip install --upgrade pip
 # Install Python dependencies
 COPY requirements.txt .
 RUN pip install -r requirements.txt
-RUN python manage.py makemigrations
-RUN python manage.py makemigrations access
 
 # Copy the rest of the project files
 COPY . .
