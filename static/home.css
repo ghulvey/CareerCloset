@@ -189,6 +189,15 @@ h1 {
  z-index: 10;   
 }
 
+.fade-in {
+ opacity: 0; 
+ transition: opacity 1s ease-in; 
+}
+
+.fade-in.visible {
+ opacity: 1;
+}
+
 .img-whitescrib1{
  position: absolute;     
  background: none;       
@@ -214,14 +223,14 @@ h1 {
 }
 /* container: about */
 #about {
- min-height: 500px;    /* adjust this value to make the container longer */
+ min-height: 500px; /* adjust this value to make the container longer */
 }
 
 .image-container2 {
  margin-bottom: 10px;
- display: flex;        /* makes the container flex */
+ display: flex; 
  padding-left: 50px;
- align-items: center;  /* align items vertically */
- gap: 25px;            /* space between images */
- position: relative;   /* allows absolute positioning inside */
+ align-items: center; 
+ gap: 25px; 
+ position: relative; 
 }
