@@ -1,51 +1,43 @@
-<!-- shop.html -->
-<!DOCTYPE html>
-<html>
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shop - Our Products</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <style>
-        /* Ensure all images are the same size */
-        .product-image {
-            width: 100%;  /* Full width of the card */
-            height: 200px; /* Fixed height */
-            object-fit: cover; /* Maintain aspect ratio, cover the entire area */
-        }
-    </style>
-</head>
-<head>
-    <title>Shop Page</title>
-</head>
+{% block content %}
 <body>
-    <h1>Our Products</h1>
+    <div class="jumbotron">
+        <div class="background-container">
+            <img src="static/images/bluebackground.png" alt="Bubbly Blue Background" style="width: 100%; height: 100%; margin-top: 2px;">
+        </div>
+      </div>
+    <style>
+        .product-image {
+            width: 100%;
+            height: 200px; 
+            object-fit: cover; 
+        }
+        
+    </style>
+    <div class="frontwords-container">
+        <div class="container my-5">
+            <h1 class="text-center mb-4">Women Clothing</h1>
 
-    <div class="container my-5">
-        <h1 class="text-center mb-4">Our Products</h1>
-
-        <!-- Product Grid -->
-        <div class="row">
-            {% for item in items %}
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    <!-- Fixed-size image with object-fit -->
-                    <img src="../static/images/careercloset.png" class="card-img-top product-image" alt="{{ item.name }}">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ item.name }}</h5>
-                        <p class="card-text">{{ item.description|truncatewords:20 }}</p>
-                        <p class="card-text"><strong>${{ item.price }}</strong></p>
-                        <a href="#" class="btn btn-primary">Add to Cart</a>
+            <div class="row">
+                {% for item in items %}
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <!-- Fixed-size image with object-fit -->
+                        <img src="../static/images/careercloset.png" class="card-img-top product-image" alt="{{ item.name }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ item.name }}</h5>
+                            <p class="card-text">{{ item.description|truncatewords:20 }}</p>
+                            <p class="card-text"><strong>${{ item.price }}</strong></p>
+                            <a href="#" class="btn btn-primary">Add to Cart</a>
+                        </div>
                     </div>
                 </div>
+                {% empty %}
+                <p class="text-center">No products available at the moment.</p>
+                {% endfor %}
             </div>
-            {% empty %}
-            <p class="text-center">No products available at the moment.</p>
-            {% endfor %}
         </div>
     </div>
 </body>
-</html>
+{% endblock %}

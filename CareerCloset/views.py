@@ -34,7 +34,6 @@ items = [
     {'name': 'Product 3', 'description': 'Description of product 3', 'price': 19.99},
 ]
 
-def women_view(request):
-    # Pass the items to the template
+def women(request):
     context = {'items': items}
     return render(request, 'women.html', context)

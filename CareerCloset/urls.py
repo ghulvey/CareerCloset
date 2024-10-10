@@ -21,7 +21,6 @@ from django.urls import path, include
 import auth
 from CareerCloset.admin import admin_site
 from CareerCloset import views
-from .views import women_view
 
 urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
@@ -29,5 +28,5 @@ urlpatterns = [
     path('auth/', include('access.urls')),
     path('oidc/', include('mozilla_django_oidc.urls')),
     path('', views.index, name='index'),
-    path('women/', women_view, name='women'),
+    path('women.html', views.women, name='women'),
 ]
