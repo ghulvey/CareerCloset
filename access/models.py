@@ -6,6 +6,8 @@ from django.template.defaultfilters import default
 from django.template.defaulttags import now
 from django.utils.crypto import get_random_string
 
+from common.file_storage import MediaStorage
+
 enum = (
     ('pending', 'Pending'),
     ('applied', 'Applied'),
@@ -79,7 +81,7 @@ class ClothingItem(models.Model):
 
 class ClothingItemImage(models.Model):
     clothing_item = models.ForeignKey(ClothingItem, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='inventory/')
+    image = models.ImageField(upload_to='inventory', storage=MediaStorage())
 
     def __str__(self):
         return self.clothing_item.name

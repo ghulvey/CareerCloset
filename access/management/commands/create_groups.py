@@ -7,9 +7,9 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         group_names = [
-            ("Admin", ['add_accessassignment', 'change_accessassignment', 'delete_accessassignment', 'view_accessassignment']),
-            ("Employee", []),
-            ("Student Employee", [])
+            ("Admin", ['add_accessassignment', 'change_accessassignment', 'delete_accessassignment', 'view_accessassignment', 'add_clothingitem', 'change_clothingitem', 'delete_clothingitem', 'view_clothingitem']),
+            ("Employee", ['add_clothingitem', 'change_clothingitem', 'delete_clothingitem', 'view_clothingitem']),
+            ("Student Employee", ['add_clothingitem', 'change_clothingitem', 'delete_clothingitem', 'view_clothingitem']),
         ]
         for group_name in group_names:
             group, created = Group.objects.get_or_create(name=group_name[0])

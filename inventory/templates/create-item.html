@@ -7,18 +7,13 @@
         <div class="card mt-4">
             <div class="card-body">
                 <h2>Create Item</h2>
-
-{#                <div class="alert alert-info" role="alert">#}
-{#                    All invitations will expire <strong>7 days</strong> after being created.#}
-{#                </div>#}
-{##}
                 <form action="/inventory/create/" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input type="text" class="form-control" id="name" name="name" placeholder="Calvin Klein Suit">
                     </div>
-{##}                <div class="form-group">
+                <div class="form-group">
                         <label for="category">Category</label>
                         <select class="form-select" id="category" name="category">
                             {% for category in categories %}
@@ -44,12 +39,55 @@
                     </div>
                     <div class="form-group">
                         <label for="image" class="form-label">Images</label>
-                        <input class="form-control" type="file" id="image" name="image" accept="image/png, image/jpeg">
+                        <div id="file-inputs">
+                            <div class="file-input-wrapper">
+                                <input class="form-control" type="file" id="image" name="image0" accept="image/png, image/jpeg">
+                                <a href="#" class="delete-image link-danger">Delete</a>
+                            </div>
+                        </div>
+                        <a href="#" id="add-file-input">Add Image</a>
                     </div>
                     <button type="submit" class="btn-primary btn mt-3">Create</button>
                     <button type="button" class="btn-secondary btn mt-3" onclick="window.history.back()">Cancel</button>
                 </form>
+
             </div>
         </div>
     </div>
+    <style>
+        .file-input-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+    </style>
+    <script>
+        document.getElementById('add-file-input').addEventListener('click', function(e) {
+            e.preventDefault();
+            var fileInput = document.createElement('input');
+            fileInput.setAttribute('type', 'file');
+            fileInput.setAttribute('class', 'form-control');
+            fileInput.setAttribute('name', 'image' + document.querySelectorAll('input[type="file"]').length);
+            fileInput.setAttribute('accept', 'image/png, image/jpeg');
+            var deleteLink = document.createElement('a');
+            deleteLink.setAttribute('href', '#');
+            deleteLink.setAttribute('class', 'delete-image link-danger');
+            deleteLink.innerText = 'Delete';
+            var div = document.createElement('div');
+            div.appendChild(fileInput);
+            div.appendChild(deleteLink);
+            div.classList.add('file-input-wrapper');
+            document.getElementById('file-inputs').appendChild(div);
+        });
+
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('delete-image')) {
+                e.preventDefault();
+                e.target.parentElement.remove();
+                document.querySelectorAll('input[type="file"]').forEach((input, index) => {
+                    input.setAttribute('name', 'image' + index);
+                });
+            }
+        });
+    </script>
 {% endblock %}
