@@ -11,15 +11,19 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 from pathlib import Path
 import CareerCloset.secrets as secrets
+import os
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+load_dotenv()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-^ji0o!050az)14x0pmyt6__-is00*+b1zk74jfaa1*-p_bw!77"
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -169,8 +173,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 OIDC_RP_SCOPES = 'openid profile email'
 OIDC_STORE_ACCESS_TOKEN = True
-OIDC_RP_CLIENT_ID = secrets.ENTRA_CLIENT_ID
-OIDC_RP_CLIENT_SECRET = secrets.ENTRA_CLIENT_SECRET
+OIDC_RP_CLIENT_ID = os.getenv('ENTRA_CLIENT_ID') 
+OIDC_RP_CLIENT_SECRET = os.getenv('ENTRA_CLIENT_SECRET') 
 OIDC_OP_AUTHORIZATION_ENDPOINT = 'https://login.microsoftonline.com/common/oauth2/v2.0/authorize'
 OIDC_OP_TOKEN_ENDPOINT = 'https://login.microsoftonline.com/common/oauth2/v2.0/token'
 OIDC_OP_USER_ENDPOINT = 'https://graph.microsoft.com/oidc/userinfo'
