@@ -43,6 +43,13 @@ class Size(models.Model):
     def __str__(self):
         return self.size_value
 
+# Gender Model
+class Gender(models.Model):
+    gender_id = models.AutoField(primary_key=True)
+    gender_name = models.CharField(max_length=50, default='Genderless')
+
+    def __str__(self):
+        return self.gender_name
 
 # Color Model
 class Color(models.Model):
@@ -70,6 +77,7 @@ class ClothingItem(models.Model):
     size = models.ForeignKey(Size, on_delete=models.CASCADE)  # ForeignKey to Size
     color = models.ForeignKey(Color, on_delete=models.CASCADE)  # ForeignKey to Color
     category = models.ForeignKey(Category, on_delete=models.CASCADE)  # ForeignKey to Category
+    gender = models.ForeignKey(Gender, on_delete=models.SET_NULL, null=True, default=1)
     image_url = models.URLField(max_length=200)
     availability_status = models.CharField(max_length=50)
     date_added = models.DateTimeField(auto_now_add=True)
