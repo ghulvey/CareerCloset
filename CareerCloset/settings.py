@@ -107,11 +107,11 @@ Database Settings
 DATABASES = {
     "postgres": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": secrets.POSTGRES_DB,
-        "USER": secrets.POSTGRES_USER,
-        "PASSWORD": secrets.POSTGRES_PASSWORD,
-        "HOST": secrets.POSTGRES_HOST,
-        "PORT": secrets.POSTGRES_PORT,
+        "NAME": os.getenv('POSTGRES_DB'),
+        "USER": os.getenv('POSTGRES_USER'),
+        "PASSWORD": os.getenv('POSTGRES_PASSWORD'),
+        "HOST": os.getenv('POSTGRES_HOST'),
+        "PORT": os.getenv('POSTGRES_PORT'),
     },
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
@@ -139,19 +139,17 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 Storage Settings
 """
 
-SUPABASE_PROJECT_REF = 'sfdlddfxbyifrmyvhvxg'
-
-AWS_ACCESS_KEY_ID = secrets.S3_ACCESS_KEY_ID
-AWS_SECRET_ACCESS_KEY = secrets.S3_SECRET_ACCESS_KEY
-AWS_STORAGE_BUCKET_NAME = secrets.S3_BUCKET_NAME
-AWS_S3_ENDPOINT_URL = secrets.S3_ENDPOINT_URL
-AWS_S3_REGION_NAME = secrets.S3_REGION
+AWS_ACCESS_KEY_ID = os.getenv('S3_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.getenv('S3_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = os.getenv('S3_BUCKET_NAME')
+AWS_S3_ENDPOINT_URL = os.getenv('S3_ENDPOINT_URL')
+AWS_S3_REGION_NAME = os.getenv('S3_REGION')
 AWS_S3_SIGNATURE_VERSION = 's3v4'
 AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None
 
 
-MEDIA_URL = secrets.S3_MEDIA_URL
+MEDIA_URL = os.getenv('S3_MEDIA_URL')
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 """
