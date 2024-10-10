@@ -27,3 +27,14 @@ def login(request, *args, **kwargs):
     else:
         form = AuthenticationForm()
     return render(request,'registration/login.html',{'form':form})
+
+items = [
+    {'name': 'Product 1', 'description': 'Description of product 1', 'price': 29.99},
+    {'name': 'Product 2', 'description': 'Description of product 2', 'price': 49.99},
+    {'name': 'Product 3', 'description': 'Description of product 3', 'price': 19.99},
+]
+
+def women_view(request):
+    # Pass the items to the template
+    context = {'items': items}
+    return render(request, 'women.html', context)
