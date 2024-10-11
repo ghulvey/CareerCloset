@@ -27,6 +27,7 @@ urlpatterns = [
     path('admin/', admin_site.urls),
     path('auth/', include('access.urls')),
     path('oidc/', include('mozilla_django_oidc.urls')),
-    path('home.html', views.index, name='index'),
+    path('', views.index, name='index'),
     path('women.html', views.women, name='women'),
+    path('home.html', views.index, name='home'),
 ]
