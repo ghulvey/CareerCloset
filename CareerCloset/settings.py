@@ -150,17 +150,7 @@ AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None
 
 
-MEDIA_URL = os.getenv('S3_MEDIA_URL')
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-
-
-
-if USE_SUPPABASE_FILE_STORAGE:
-    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-    MEDIA_URL = os.getenv('S3_MEDIA_URL')
-else:
-    DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
-    MEDIA_URL = '/media/'
+MEDIA_URL = os.getenv('S3_MEDIA_URL', '/media/')
 
 STORAGES = {
     "default": {
