@@ -6,7 +6,7 @@ from django.template.defaultfilters import default
 from django.template.defaulttags import now
 from django.utils.crypto import get_random_string
 
-from common.file_storage import MediaStorage
+from common.file_storage import get_random_filename
 
 enum = (
     ('pending', 'Pending'),
@@ -74,14 +74,14 @@ class ClothingItem(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)  # ForeignKey to Category
     availability_status = models.CharField(max_length=50)
     date_added = models.DateTimeField(auto_now_add=True)
-    images = models.ManyToManyField('ClothingItemImage', related_name='images')
+    images = models.ManyToManyField('ClothingItemImage', related_name='clothing_images')
 
     def __str__(self):
         return self.name
 
 class ClothingItemImage(models.Model):
-    clothing_item = models.ForeignKey(ClothingItem, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='inventory', storage=MediaStorage())
+    clothing_item = models.ForeignKey(ClothingItem, on_delete=models.CASCADE, related_name='clothing_images')
+    image = models.ImageField(upload_to=get_random_filename)
 
     def __str__(self):
         return self.clothing_item.name

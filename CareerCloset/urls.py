@@ -17,6 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 
 import auth
 from CareerCloset.admin import admin_site
@@ -29,4 +31,4 @@ urlpatterns = [
     path('oidc/', include('mozilla_django_oidc.urls')),
     path('inventory/', include('inventory.urls')),
     path('', views.index, name='index'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

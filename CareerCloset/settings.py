@@ -12,7 +12,10 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import os
 from dotenv import load_dotenv
+from common import file_storage
 
+USE_SUPPABASE_DB = False
+USE_SUPPABASE_FILE_STORAGE = True
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -84,6 +87,8 @@ WSGI_APPLICATION = "CareerCloset.wsgi.application"
 STATIC_URL = "static/"
 STATICFILES_DIRS = [ BASE_DIR / 'static', ]
 
+
+
 """
 Email Settings
 """
@@ -105,17 +110,13 @@ Database Settings
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    "postgres": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.getenv('POSTGRES_DB'),
-        "USER": os.getenv('POSTGRES_USER'),
-        "PASSWORD": os.getenv('POSTGRES_PASSWORD'),
-        "HOST": os.getenv('POSTGRES_HOST'),
-        "PORT": os.getenv('POSTGRES_PORT'),
-    },
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql" if USE_SUPPABASE_DB else "django.db.backends.sqlite3",
+        "NAME": os.getenv('POSTGRES_DB') if USE_SUPPABASE_DB else BASE_DIR / "db.sqlite3",
+        "USER": os.getenv('POSTGRES_USER') if USE_SUPPABASE_DB else '',
+        "PASSWORD": os.getenv('POSTGRES_PASSWORD') if USE_SUPPABASE_DB else '',
+        "HOST": os.getenv('POSTGRES_HOST') if USE_SUPPABASE_DB else '',
+        "PORT": os.getenv('POSTGRES_PORT') if USE_SUPPABASE_DB == 'True' else '',
     }
 }
 
@@ -151,6 +152,31 @@ AWS_DEFAULT_ACL = None
 
 MEDIA_URL = os.getenv('S3_MEDIA_URL')
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+
+
+if USE_SUPPABASE_FILE_STORAGE:
+    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    MEDIA_URL = os.getenv('S3_MEDIA_URL')
+else:
+    DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
+    MEDIA_URL = '/media/'
+
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage" if not USE_SUPPABASE_FILE_STORAGE else "storages.backends.s3boto3.S3Boto3Storage",
+        "options": {} if USE_SUPPABASE_FILE_STORAGE else {
+            "location": BASE_DIR / 'media',
+        }
+
+    },
+    "staticfiles": {
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+    },
+}
+
+
+
 
 """
 Authentication Settings
