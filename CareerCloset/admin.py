@@ -4,7 +4,7 @@ from django.contrib.auth.models import User, Group, Permission
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.sessions.models import Session
 
-from access.models import AccessAssignment, Size, Color, Category, ClothingItem, Customer, Transaction
+from access.models import AccessAssignment, Size, Color, Category, ClothingItem, ClothingItemImage, Customer, Transaction
 
 class CareerClosetAdminSite(admin.AdminSite):
     site_header = 'Career Closet'
@@ -25,9 +25,9 @@ admin_site.register(Size)
 admin_site.register(Color)
 admin_site.register(Category)
 admin_site.register(ClothingItem)
+admin_site.register(ClothingItemImage)
 admin_site.register(Customer)
 admin_site.register(Transaction)
-
 
 class InviteAdmin(admin.ModelAdmin):
     list_display = (
