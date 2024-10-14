@@ -4,6 +4,7 @@ from django.contrib.auth.models import Group
 from django.db import models
 from django.template.defaultfilters import default
 from django.template.defaulttags import now
+from django.utils import timezone
 from django.utils.crypto import get_random_string
 
 from common.file_storage import get_random_filename
@@ -23,7 +24,7 @@ class AccessAssignment(models.Model):
     state = models.CharField(max_length=10, choices=enum, default='pending')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    invite_expires_at = models.DateTimeField(default=datetime.now() + timedelta(days=7))
+    invite_expires_at = models.DateTimeField(default=None, null=True)
     access_expires_at = models.DateTimeField(default=None, null=True)
     assigned_group = models.ForeignKey('auth.Group', on_delete=models.CASCADE, null=True)
     assigned_user = models.OneToOneField('auth.User', on_delete=models.CASCADE, null=True)
