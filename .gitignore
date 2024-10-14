@@ -22,6 +22,8 @@ media
 
 # Generated files
 .idea/**/contentModel.xml
+.idea/encodings.xml
+.idea/vcs.xml
 
 # Sensitive or high-churn files
 .idea/**/dataSources/
@@ -98,7 +100,7 @@ celerybeat-schedule.*
 *.sage.py 
 
 # Environments 
-CareerCloset/.env 
+.env
 .venv 
 env/ 
 venv/ 
@@ -144,3 +146,4 @@ emails/
 **/migrations/
 
 /.idea/
+.env

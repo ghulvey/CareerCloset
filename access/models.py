@@ -6,6 +6,8 @@ from django.template.defaultfilters import default
 from django.template.defaulttags import now
 from django.utils.crypto import get_random_string
 
+from common.file_storage import get_random_filename
+
 enum = (
     ('pending', 'Pending'),
     ('applied', 'Applied'),
@@ -78,13 +80,19 @@ class ClothingItem(models.Model):
     color = models.ForeignKey(Color, on_delete=models.CASCADE)  # ForeignKey to Color
     category = models.ForeignKey(Category, on_delete=models.CASCADE)  # ForeignKey to Category
     gender = models.ForeignKey(Gender, on_delete=models.SET_NULL, null=True, default=1)
-    image_url = models.URLField(max_length=200)
     availability_status = models.CharField(max_length=50)
     date_added = models.DateTimeField(auto_now_add=True)
+    images = models.ManyToManyField('ClothingItemImage', related_name='clothing_images')
 
     def __str__(self):
         return self.name
 
+class ClothingItemImage(models.Model):
+    clothing_item = models.ForeignKey(ClothingItem, on_delete=models.CASCADE, related_name='clothing_images')
+    image = models.ImageField(upload_to=get_random_filename)
+
+    def __str__(self):
+        return self.clothing_item.name
 
 # User (for identification only)
 class Customer(models.Model):

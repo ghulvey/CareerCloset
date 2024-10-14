@@ -1,4 +1,0 @@
-﻿
-
-ENTRA_CLIENT_ID = ""
-ENTRA_CLIENT_SECRET = ""
