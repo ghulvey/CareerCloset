@@ -1,27 +1,27 @@
 {% extends base_template %}
 
-{% block title %}Career Closet | Create Item{% endblock %}
+{% block title %}Career Closet | Edit Inventory{% endblock %}
 
 {% block content %}
     <div class="container">
         <div class="card mt-4">
             <div class="card-body">
-                <h2>Create Item</h2>
+                <h2>Edit: {{ item.name }}</h2>
                 <form action="/inventory/create/" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Calvin Klein Suit">
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Calvin Klein Suit" value="{{ item.name }}">
                     </div>
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <textarea class="form-control" id="description" name="description" rows="3" placeholder="A nice suit"></textarea>
+                        <textarea class="form-control" id="description" name="description" rows="3" placeholder="A nice suit" >{{ item.description }}</textarea>
                     </div>
                     <div class="form-group">
                         <label for="category">Category</label>
                         <select class="form-select" id="category" name="category">
                             {% for category in categories %}
-                                <option value="{{ category.category_id }}">{{ category.category_name }}</option>
+                                <option value="{{ category.category_id }}" {% if category.category_id == item.category_id %}selected{% endif %}>{{ category.category_name }}</option>
                             {% endfor %}
                         </select>
                     </div>
@@ -29,7 +29,7 @@
                         <label for="gender">Gender</label>
                         <select class="form-select" id="gender" name="gender">
                             {%  for gender in genders %}
-                                <option value="{{ gender.gender_id }}">{{ gender.gender_name }}</option>
+                                <option value="{{ gender.gender_id }}" {% if gender.gender_id == item.gender_id %}selected{% endif %}>{{ gender.gender_name }}</option>
                             {% endfor %}
                         </select>
                     </div>
@@ -37,7 +37,7 @@
                         <label for="color">Color</label>
                         <select class="form-select" id="color" name="color">
                             {% for color in colors %}
-                                <option value="{{ color.color_id }}">{{ color.color_name }}</option>
+                                <option value="{{ color.color_id }}" {% if color.color_id == item.color_id %}selected{% endif %}>{{ color.color_name }}</option>
                             {% endfor %}
                         </select>
                     </div>
@@ -45,9 +45,22 @@
                         <label for="size">Size</label>
                         <select class="form-select" id="size" name="size">
                             {% for size in sizes %}
-                                <option value="{{ size.size_id }}">{{ size.size_value }}</option>
+                                <option value="{{ size.size_id }}" {% if size.size_id == item.size_id %}selected{% endif %}>{{ size.size_value }}</option>
                             {% endfor %}
                         </select>
+                    </div>
+                    <div class="form-group">
+                        {% if item.images %}
+                            <label>Current Images</label>
+                            <div class="row">
+                                {% for image in images %}
+                                    <div class="col-3 sortable-item" data-index="{{ image.index }}">
+                                        <img src="{{ image.image.url }}" class="img-fluid" alt="">
+                                        <p>{{ image.index }}</p>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
                     </div>
                     <div class="form-group">
                         <label for="image" class="form-label">Images</label>
@@ -71,6 +84,9 @@
             display: flex;
             align-items: center;
             gap: 10px;
+        }
+        .sortable-item {
+            cursor: move;
         }
     </style>
     <script>
