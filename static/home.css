@@ -12,11 +12,24 @@ body {
  src: url('fonts/the_seasons/Fontspring-DEMO-theseasons-lt.otf');
 }
 
+@font-face{
+ font-family: 'The Seasons Bold';
+ src: url('fonts/the_seasons/Fontspring-DEMO-theseasons-bd.otf');
+}
+
 h1 {  
  font-family: 'The Seasons';
  font-size: 80px !important;
  text-transform: uppercase;
  color: #ffffff;
+ text-align: left;
+}
+
+h2{
+ font-family: 'The Seasons';
+ font-size: 180px !important;
+ text-transform: uppercase;
+ color: #323232;
  text-align: left;
 }
 
@@ -156,7 +169,8 @@ h1 {
 
 .background-container {
  padding: 0;
- margin: 0;  width: 100%; /* ensure the image spans the full width */
+ margin: 0;  
+ width: 100%;                 /* ensure the image spans the full width */
  height: auto;
  z-index: 0;
 }
@@ -165,14 +179,14 @@ h1 {
  width: 200px;          
  height: auto;          
  padding: 10px;         
- margin: 20px;          
+ margin: 20px;        
  transform: scaleY(0.97);  
  z-index: 2;
 }
 
 .frontwords-container{
  padding: 0;
- margin: 0;  width: 100%; /* ensure the image spans the full width */
+ margin: 0;  width: 100%;   /* ensure the image spans the full width */
  height: auto;
  z-index: 1;
 }
@@ -221,9 +235,30 @@ h1 {
  left: 46%;
  z-index: 8;  
 }
-/* container: about */
-#about {
+/* container: one */
+#one {
  min-height: 500px; /* adjust this value to make the container longer */
+}
+
+.text-container{
+ position: absolute;
+ z-index: 10;
+ margin-top: -450px;
+ margin-left: 34px;
+ width: 1200px;
+}
+
+.seasonreg-text{
+ font-family: 'The Season Bold';
+ font-size: 90px;
+ color: #323232;
+}
+
+.seasonitl-text{
+ font-family: 'The Season Bold';
+ font-style: italic;
+ font-size: 70px;
+ color: #323232;
 }
 
 .image-container2 {
