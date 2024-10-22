@@ -16,7 +16,7 @@
 
         .product-image {
             width: 100%;
-            height: 200px; 
+            height: 100%; 
             object-fit: cover; 
         }
 
@@ -33,23 +33,28 @@
     <!-- Front content container -->
     <div class="frontwords-container">
         <div class="container my-5">
-            <h1 class="text-center mb-4">Women Clothing</h1>
+            <h1 class="text-center mb-4">Womens Green Clothing</h1>
 
             <div class="row">
-                {% for item in items %}
+
+                {% for item in green_clothing_items %}
                 <div class="col-md-4 mb-4">
                     <div class="card h-100">
-                        <img src="../static/images/careercloset.png" class="card-img-top product-image" alt="{{ item.name }}">
+                        <!-- Use item.image_url to dynamically fetch the image -->
+                        <img src="{{ item.image_url }}" class="card-img-top product-image" alt="{{ item.name }}">
                         <div class="card-body">
                             <h5 class="card-title">{{ item.name }}</h5>
                             <p class="card-text">{{ item.description|truncatewords:20 }}</p>
+                            <!-- Assuming price is added in ClothingItem model -->
+                            {% if item.price %}
                             <p class="card-text"><strong>${{ item.price }}</strong></p>
+                            {% endif %}
                             <a href="#" class="btn btn-primary">Add to Cart</a>
                         </div>
                     </div>
                 </div>
                 {% empty %}
-                <p class="text-center">No products available at the moment.</p>
+                <p class="text-center">No green clothing items available at the moment.</p>
                 {% endfor %}
             </div>
         </div>
