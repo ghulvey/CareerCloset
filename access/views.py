@@ -8,8 +8,9 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.template.defaulttags import now
 from django.utils import timezone
+from django.urls import reverse
 
-from access.models import AccessAssignment
+from access.models import AccessAssignment, ClothingItem, ShoppingCart
 
 
 def access_list(request):

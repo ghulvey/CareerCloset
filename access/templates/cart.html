@@ -1,0 +1,52 @@
+<!-- cart/cart.html-->
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Cart</title>
+    <style>
+        .cart-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+
+            list-style: none;
+            padding: 0;
+        }
+
+        .cart-item {
+            flex: 1;
+            max-width: 30%;
+            margin: 10px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .add-to-cart-button {
+            display: block;
+            margin: 10px auto;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+    </style>
+</html>
+
+<body>
+    <h1>Cart</h1>
+    <ul class="cart-list">
+        {% for product in products %}
+            <li class="cart-item">
+                <h2>{{ product.name }}</h2>
+                <p>{{ product.description }}</p>
+                <p>Price: ${{ product.price }}</p>
+                <a href="/remove/{{ product.id }}" class="add-to-cart-button">Remove</a>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="/checkout" class="add-to-cart-button">Checkout</a>
+</body>

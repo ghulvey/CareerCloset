@@ -47,6 +47,3 @@ def remove_from_cart(request, cart_id):
     cart_item = ShoppingCart.objects.get(pk=cart_id)
     cart_item.delete()
     return redirect(reverse('cart'))
-
-def home(request):
-    return render(request, 'home.html')

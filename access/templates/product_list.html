@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Catalog</title>
+    <style>
+        .product-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+
+            list-style: none;
+            padding: 0;
+        }
+
+        .product-item {
+            flex: 1;
+            max-width: 30%;
+            margin: 10px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .select-now-button{
+            display: block;
+            margin: 10px auto;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Catalog</h1>
+    <ul class="product-list">
+        {% for product in products %}
+            <li class="product-item">
+                <h2>{{ product.name }}</h2>
+                <p>{{ product.description }}</p>
+                <p>Price: ${{ product.price }}</p>
+                <a href="/order/{{ product.id }}" class="select-now-button">Select Now</a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
