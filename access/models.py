@@ -113,3 +113,14 @@ class Transaction(models.Model):
 
     def __str__(self):
         return f"Transaction {self.transaction_id}: {self.user.email} - {self.clothing_item.name} on {self.transaction_date}"
+
+
+# Shopping Cart Model
+class ShoppingCart(models.Model):
+    cart_id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(Customer, on_delete=models.CASCADE)  # ForeignKey to User for identification
+    clothing_item = models.ForeignKey(ClothingItem, on_delete=models.CASCADE)  # ForeignKey to ClothingItem
+    date_added = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user.email} - {self.clothing_item.name} on {self.date_added}"
