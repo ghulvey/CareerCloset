@@ -35,6 +35,16 @@ def women(request):
     green_clothing_items = models.ClothingItem.objects.filter(color=green_color)
 
     context = {
-        'green_clothing_items': green_clothing_items,
+        'context': green_clothing_items,
     }
     return render(request, 'women.html', context)
+
+def men(request):
+    grey_color = models.Color.objects.get(color_name='Grey')
+    
+    grey_clothing_items = models.ClothingItem.objects.filter(color=grey_color)
+
+    context = {
+        'context': grey_clothing_items,
+    }
+    return render(request, 'men.html', context)
