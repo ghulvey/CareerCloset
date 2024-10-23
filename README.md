@@ -31,17 +31,12 @@ python manage.py create_groups
 python manage.py runserver
 
 #Populate DB with sample clothes
-python manage.py loaddata exampledata.json
+python manage.py loaddata seed.json
 ```
 
 ### Microsoft Entra Setup
 
-Copy the secrets from the `SECRET` file in Google Drive and paste them in the `secrets.py` file. We should find a better way to store these secrets in the future.
-
-```python
-ENTRA_CLIENT_ID = 'SECRET'
-ENTRA_CLIENT_SECRET = 'SECRET'
-```
+Copy the secrets from the `SECRET` file in Google Drive and create a new file `CareerCloset/.env` and paste the contents inside.
 
 Click login with Flashline and log in with your Kent State credentials.
 

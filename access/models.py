@@ -4,7 +4,10 @@ from django.contrib.auth.models import Group
 from django.db import models
 from django.template.defaultfilters import default
 from django.template.defaulttags import now
+from django.utils import timezone
 from django.utils.crypto import get_random_string
+
+from common.file_storage import get_random_filename
 
 enum = (
     ('pending', 'Pending'),
@@ -21,7 +24,7 @@ class AccessAssignment(models.Model):
     state = models.CharField(max_length=10, choices=enum, default='pending')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    invite_expires_at = models.DateTimeField(default=datetime.now() + timedelta(days=7))
+    invite_expires_at = models.DateTimeField(default=None, null=True)
     access_expires_at = models.DateTimeField(default=None, null=True)
     assigned_group = models.ForeignKey('auth.Group', on_delete=models.CASCADE, null=True)
     assigned_user = models.OneToOneField('auth.User', on_delete=models.CASCADE, null=True)
@@ -43,6 +46,13 @@ class Size(models.Model):
     def __str__(self):
         return self.size_value
 
+# Gender Model
+class Gender(models.Model):
+    gender_id = models.AutoField(primary_key=True)
+    gender_name = models.CharField(max_length=50, default='Genderless')
+
+    def __str__(self):
+        return self.gender_name
 
 # Color Model
 class Color(models.Model):
@@ -70,13 +80,20 @@ class ClothingItem(models.Model):
     size = models.ForeignKey(Size, on_delete=models.CASCADE)  # ForeignKey to Size
     color = models.ForeignKey(Color, on_delete=models.CASCADE)  # ForeignKey to Color
     category = models.ForeignKey(Category, on_delete=models.CASCADE)  # ForeignKey to Category
-    image_url = models.URLField(max_length=200)
+    gender = models.ForeignKey(Gender, on_delete=models.SET_NULL, null=True, default=1)
     availability_status = models.CharField(max_length=50)
     date_added = models.DateTimeField(auto_now_add=True)
+    images = models.ManyToManyField('ClothingItemImage', related_name='clothing_images')
 
     def __str__(self):
         return self.name
 
+class ClothingItemImage(models.Model):
+    clothing_item = models.ForeignKey(ClothingItem, on_delete=models.CASCADE, related_name='clothing_images')
+    image = models.ImageField(upload_to=get_random_filename)
+
+    def __str__(self):
+        return self.clothing_item.name
 
 # User (for identification only)
 class Customer(models.Model):

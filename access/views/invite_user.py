@@ -53,7 +53,7 @@ class InviteUser(View):
         group = Group.objects.get(id=group_id)
         # create a new invite object
         invite = AccessAssignment.objects.create(email=email, access_expires_at=expiration, created_by=request.user,
-                                                 assigned_group=group)
+                                                 assigned_group=group, invite_expires_at=(timezone.now() + timezone.timedelta(days=7)))
         invite_link = settings.WEBSITE_URL + '/auth/access/accept/' + invite.invite_code + '/'
         print("Invite created for email: ", invite.email, " with code: ", invite.invite_code)
         send_generic_email(email, 'Invitation to Career Closet', 'You have been granted backend access to Career '

@@ -100,7 +100,7 @@ celerybeat-schedule.*
 *.sage.py 
 
 # Environments 
-CareerCloset/.env 
+.env
 .venv 
 env/ 
 venv/ 
@@ -146,3 +146,4 @@ emails/
 **/migrations/
 
 /.idea/
+.env
