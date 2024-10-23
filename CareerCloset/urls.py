@@ -31,4 +31,7 @@ urlpatterns = [
     path('oidc/', include('mozilla_django_oidc.urls')),
     path('inventory/', include('inventory.urls')),
     path('', views.index, name='index'),
+    path('women.html', views.women, name='women'),
+    path('men.html', views.men, name='men'),
+    path('home.html', views.index, name='home'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
