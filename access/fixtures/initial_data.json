@@ -1,0 +1,337 @@
+[
+{
+    "model": "access.size",
+    "pk": 1,
+    "fields": {
+        "size_value": "44"
+    }
+},
+{
+    "model": "access.size",
+    "pk": 2,
+    "fields": {
+        "size_value": "N/A"
+    }
+},
+{
+    "model": "access.size",
+    "pk": 3,
+    "fields": {
+        "size_value": "Large"
+    }
+},
+{
+    "model": "access.gender",
+    "pk": 1,
+    "fields": {
+        "gender_name": "Female"
+    }
+},
+{
+    "model": "access.gender",
+    "pk": 2,
+    "fields": {
+        "gender_name": "Men"
+    }
+},
+{
+    "model": "access.gender",
+    "pk": 3,
+    "fields": {
+        "gender_name": "Genderless"
+    }
+},
+{
+    "model": "access.color",
+    "pk": 1,
+    "fields": {
+        "color_name": "Green"
+    }
+},
+{
+    "model": "access.color",
+    "pk": 2,
+    "fields": {
+        "color_name": "Beige"
+    }
+},
+{
+    "model": "access.color",
+    "pk": 3,
+    "fields": {
+        "color_name": "Plaid"
+    }
+},
+{
+    "model": "access.color",
+    "pk": 4,
+    "fields": {
+        "color_name": "N/A"
+    }
+},
+{
+    "model": "access.color",
+    "pk": 5,
+    "fields": {
+        "color_name": "Blue"
+    }
+},
+{
+    "model": "access.color",
+    "pk": 6,
+    "fields": {
+        "color_name": "Pink"
+    }
+},
+{
+    "model": "access.color",
+    "pk": 7,
+    "fields": {
+        "color_name": "Grey"
+    }
+},
+{
+    "model": "access.category",
+    "pk": 1,
+    "fields": {
+        "category_name": "Skirt"
+    }
+},
+{
+    "model": "access.category",
+    "pk": 2,
+    "fields": {
+        "category_name": "Outfit"
+    }
+},
+{
+    "model": "access.category",
+    "pk": 3,
+    "fields": {
+        "category_name": "Tie"
+    }
+},
+{
+    "model": "access.category",
+    "pk": 4,
+    "fields": {
+        "category_name": "Shirt"
+    }
+},
+{
+    "model": "access.category",
+    "pk": 5,
+    "fields": {
+        "category_name": "Blazer"
+    }
+},
+{
+    "model": "access.category",
+    "pk": 6,
+    "fields": {
+        "category_name": "Pants"
+    }
+},
+{
+    "model": "access.clothingitem",
+    "pk": 1,
+    "fields": {
+        "name": "Green Skirt",
+        "description": "A Green Skirt",
+        "size": 1,
+        "color": 1,
+        "category": 1,
+        "gender": 1,
+        "availability_status": "Available",
+        "date_added": "2024-10-26T19:32:48.022Z",
+        "images": [
+            1
+        ]
+    }
+},
+{
+    "model": "access.clothingitem",
+    "pk": 2,
+    "fields": {
+        "name": "Men's Beige Outfit",
+        "description": "Men's beige outfit consisting of stripped shirt and slacks.",
+        "size": 2,
+        "color": 2,
+        "category": 2,
+        "gender": 2,
+        "availability_status": "Available",
+        "date_added": "2024-10-26T19:34:48.359Z",
+        "images": []
+    }
+},
+{
+    "model": "access.clothingitem",
+    "pk": 3,
+    "fields": {
+        "name": "Womens Plaid Outfit",
+        "description": "A plaid women's outfit with skirt and button up vest over a dress shirt",
+        "size": 2,
+        "color": 3,
+        "category": 2,
+        "gender": 1,
+        "availability_status": "Available",
+        "date_added": "2024-10-26T19:38:24.424Z",
+        "images": []
+    }
+},
+{
+    "model": "access.clothingitem",
+    "pk": 4,
+    "fields": {
+        "name": "Ties",
+        "description": "Assortment of ties",
+        "size": 2,
+        "color": 4,
+        "category": 3,
+        "gender": 3,
+        "availability_status": "Available",
+        "date_added": "2024-10-26T19:39:18.135Z",
+        "images": []
+    }
+},
+{
+    "model": "access.clothingitem",
+    "pk": 5,
+    "fields": {
+        "name": "Polo Shirt",
+        "description": "Navy blue, GAP polo shirt size large.",
+        "size": 3,
+        "color": 5,
+        "category": 4,
+        "gender": 2,
+        "availability_status": "Available",
+        "date_added": "2024-10-26T19:40:13.478Z",
+        "images": []
+    }
+},
+{
+    "model": "access.clothingitem",
+    "pk": 6,
+    "fields": {
+        "name": "Pink Floral Blazer",
+        "description": "A pink floral blazer",
+        "size": 2,
+        "color": 6,
+        "category": 5,
+        "gender": 1,
+        "availability_status": "Available",
+        "date_added": "2024-10-26T19:41:16.307Z",
+        "images": []
+    }
+},
+{
+    "model": "access.clothingitem",
+    "pk": 7,
+    "fields": {
+        "name": "Grey Blazer",
+        "description": "A grey blazer",
+        "size": 2,
+        "color": 7,
+        "category": 5,
+        "gender": 2,
+        "availability_status": "Available",
+        "date_added": "2024-10-26T19:41:51.359Z",
+        "images": []
+    }
+},
+{
+    "model": "access.clothingitem",
+    "pk": 8,
+    "fields": {
+        "name": "Green Pants",
+        "description": "Green pants",
+        "size": 2,
+        "color": 1,
+        "category": 6,
+        "gender": 2,
+        "availability_status": "Available",
+        "date_added": "2024-10-26T19:42:42.973Z",
+        "images": []
+    }
+},
+{
+    "model": "access.clothingitemimage",
+    "pk": 1,
+    "fields": {
+        "clothing_item": 1,
+        "image": "media/c4defd56-0dfd-4453-9cdb-86c77f2971ff.jpg"
+    }
+},
+{
+    "model": "access.clothingitemimage",
+    "pk": 2,
+    "fields": {
+        "clothing_item": 2,
+        "image": "media/1fce2e29-53f7-4315-b693-628fde8df447.jpg"
+    }
+},
+{
+    "model": "access.clothingitemimage",
+    "pk": 3,
+    "fields": {
+        "clothing_item": 3,
+        "image": "media/2b380df4-a3f0-401e-9aa3-9981bf4de5c6.jpg"
+    }
+},
+{
+    "model": "access.clothingitemimage",
+    "pk": 4,
+    "fields": {
+        "clothing_item": 4,
+        "image": "media/5a5308ca-0a1a-48ba-8fd5-2cdcc16017fc.jpg"
+    }
+},
+{
+    "model": "access.clothingitemimage",
+    "pk": 5,
+    "fields": {
+        "clothing_item": 5,
+        "image": "media/6eb78d76-e57e-4874-988b-a0c5de7b7225.jpg"
+    }
+},
+{
+    "model": "access.clothingitemimage",
+    "pk": 6,
+    "fields": {
+        "clothing_item": 6,
+        "image": "media/9a4fa46b-787c-4597-976e-5e7f7ae811a3.jpg"
+    }
+},
+{
+    "model": "access.clothingitemimage",
+    "pk": 7,
+    "fields": {
+        "clothing_item": 7,
+        "image": "media/1b56721c-d957-4011-b79e-4aa677dddafb.jpg"
+    }
+},
+{
+    "model": "access.clothingitemimage",
+    "pk": 8,
+    "fields": {
+        "clothing_item": 8,
+        "image": "media/5ccf6017-0f11-41cc-b007-7e2113796e2e.jpg"
+    }
+},
+{
+    "model": "access.customer",
+    "pk": 1,
+    "fields": {
+        "email": "jdoe@kent.edu"
+    }
+},
+{
+    "model": "access.transaction",
+    "pk": 1,
+    "fields": {
+        "user": 1,
+        "clothing_item": 1,
+        "transaction_date": "2024-10-26T19:44:19.652Z"
+    }
+}
+]
