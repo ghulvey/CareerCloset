@@ -83,7 +83,7 @@ class ClothingItem(models.Model):
     gender = models.ForeignKey(Gender, on_delete=models.SET_NULL, null=True, default=1)
     availability_status = models.CharField(max_length=50)
     date_added = models.DateTimeField(auto_now_add=True)
-    images = models.ManyToManyField('ClothingItemImage', related_name='clothing_images')
+    images = models.ManyToManyField('ClothingItemImage', related_name='clothing_images', blank=True)
 
     def __str__(self):
         return self.name
