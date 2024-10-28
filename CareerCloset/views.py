@@ -75,10 +75,12 @@ def view_cart(request):
 
 @login_required
 def remove_from_cart(request, cart_item_id):
-    cart = get_object_or_404(Customer, user=request.user)
+    customer = get_object_or_404(Customer, user=request.user)
+    cart = get_object_or_404(Cart, user=customer)
     cart_item = get_object_or_404(CartItem, cart=cart, id=cart_item_id)
     cart_item.delete()
     return redirect("view_cart")
+
 
 @login_required
 def checkout(request):
