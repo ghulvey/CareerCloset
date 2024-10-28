@@ -84,8 +84,9 @@ def remove_from_cart(request, cart_item_id):
 
 @login_required
 def checkout(request):
-    cart = get_object_or_404(Cart, user=request.user)
+    customer = get_object_or_404(Customer, user=request.user)
+    cart = get_object_or_404(Cart, user=customer)
     for item in cart.items.all():
-        Transaction.objects.create(user=request.user, clothing_item=item.clothing_item)
+        Transaction.objects.create(user=customer, clothing_item=item.clothing_item)
     cart.items.all().delete()
-    return render(request, 'cart/checkout.html')
+    return render(request, "cart/checkout.html")
