@@ -10,9 +10,12 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 from pathlib import Path
-import CareerCloset.secrets as secrets
 import os
 from dotenv import load_dotenv
+from common import file_storage
+
+USE_SUPPABASE_DB = False
+USE_SUPPABASE_FILE_STORAGE = True
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -42,7 +45,9 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     'mozilla_django_oidc',
     'access',
+    "inventory",
     'django_htmx',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -60,7 +65,7 @@ ROOT_URLCONF = "CareerCloset.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / 'templates', BASE_DIR / 'auth/templates'],
+        "DIRS": [BASE_DIR / 'templates', BASE_DIR / 'auth/templates', BASE_DIR / 'inventory/templates'],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -81,6 +86,8 @@ WSGI_APPLICATION = "CareerCloset.wsgi.application"
 
 STATIC_URL = "static/"
 STATICFILES_DIRS = [ BASE_DIR / 'static', ]
+
+
 
 """
 Email Settings
@@ -104,8 +111,12 @@ Database Settings
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql" if USE_SUPPABASE_DB else "django.db.backends.sqlite3",
+        "NAME": os.getenv('POSTGRES_DB') if USE_SUPPABASE_DB else BASE_DIR / "db.sqlite3",
+        "USER": os.getenv('POSTGRES_USER') if USE_SUPPABASE_DB else '',
+        "PASSWORD": os.getenv('POSTGRES_PASSWORD') if USE_SUPPABASE_DB else '',
+        "HOST": os.getenv('POSTGRES_HOST') if USE_SUPPABASE_DB else '',
+        "PORT": os.getenv('POSTGRES_PORT') if USE_SUPPABASE_DB == 'True' else '',
     }
 }
 
@@ -124,6 +135,38 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+"""
+Storage Settings
+"""
+
+AWS_ACCESS_KEY_ID = os.getenv('S3_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.getenv('S3_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = os.getenv('S3_BUCKET_NAME')
+AWS_S3_ENDPOINT_URL = os.getenv('S3_ENDPOINT_URL')
+AWS_S3_REGION_NAME = os.getenv('S3_REGION')
+AWS_S3_SIGNATURE_VERSION = 's3v4'
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = None
+
+
+MEDIA_URL = os.getenv('S3_MEDIA_URL', '/media/')
+
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage" if not USE_SUPPABASE_FILE_STORAGE else "storages.backends.s3boto3.S3Boto3Storage",
+        "options": {} if USE_SUPPABASE_FILE_STORAGE else {
+            "location": BASE_DIR / 'media',
+        }
+
+    },
+    "staticfiles": {
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+    },
+}
+
+
+
 
 """
 Authentication Settings
