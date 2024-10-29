@@ -56,4 +56,4 @@ class CreateItem(View):
             item.images.add(image)
             number_of_images += 1
 
-        return redirect('inventory_create')
+        return redirect('inventory_view')

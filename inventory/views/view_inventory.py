@@ -12,7 +12,7 @@ class ViewInventory(View):
     @method_decorator(permission_required('view_clothingitem', raise_exception=True))
     def get(self, request):
 
-        items = ClothingItem.objects.all()
+        items = ClothingItem.objects.filter(availability_status='available')
 
         return render(request, 'view-inventory.html', {
             'items': items
