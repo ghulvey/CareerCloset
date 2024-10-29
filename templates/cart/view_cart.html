@@ -1,38 +1,111 @@
-<h2>Your Cart</h2>
+{% extends 'base.html' %}
+{% block content %}
+<style>
+  /* Background styling */
+  .background-container {
+    background-color: #9edcff;
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+  }
 
-{% if cart.items.all %}
-<div class="cart-container">
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Item</th>
-        <th>Description</th>
-        <th>Size</th>
-        <th>Color</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for item in cart.items.all %}
-      <tr>
-        <td>{{ item.clothing_item.name }}</td>
-        <td><img src="{{ item.image_url }}" alt="{{ item.name }}" style="width: 80px; height: auto;"></td>
-        <td>{{ item.Size}}</td>
-        <td>{{ item.Color }}</td>
-        <td>
-          <a href="{% url 'remove_from_cart' item.id %}" class="btn btn-danger btn-sm">Remove</a>
-        </td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+  /* Cart container styling */
+  .cart-container {
+    margin: 3rem auto;
+    max-width: 800px;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  }
 
-  <div class="cart-summary">
-    <h3>Cart Summary</h3>
-    <p><strong>Subtotal:</strong> ${{ cart.total_price|floatformat:2 }}</p>
-    <a href="{% url 'checkout' %}" class="btn btn-success">Proceed to Checkout</a>
+  /* Table styling */
+  .cart-container .table {
+    margin-bottom: 0; /* Remove extra space below table */
+  }
+
+  /* Table header styling */
+  .table thead th {
+    background-color: #f7f7f7;
+    color: #333;
+    font-weight: bold;
+  }
+
+  /* Button styling */
+  .btn-danger {
+    font-size: 0.9rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 5px;
+  }
+
+  .btn-success {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    font-weight: bold;
+  }
+
+  /* Cart summary styling */
+  .cart-summary {
+    margin-top: 1rem;
+    text-align: center;
+  }
+
+  /* Empty cart message */
+  .empty-cart {
+    text-align: center;
+    font-style: italic;
+    color: #555;
+    margin-top: 2rem;
+  }
+</style>
+<body>
+<div class="background-container"></div>
+
+<div class="container">
+  <h2 class="text-center my-4">Your Cart</h2>
+
+  {% if cart.items.all %}
+  <div class="cart-container">
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Image</th>
+          <th>Description</th>
+          <th>Size</th>
+          <th>Color</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in cart.items.all %}
+        <tr>
+          <td>{{ item.clothing_item.name }}</td>
+          <td><img src="{{ item.image_url }}" alt="{{ item.name }}" style="width: 80px; height: auto;"></td>
+          <td>{{ item.clothing_item.description }}</td>
+          <td>{{ item.clothing_item.size }}</td>
+          <td>{{ item.clothing_item.color }}</td>
+          <td>
+            <a href="{% url 'remove_from_cart' item.id %}" class="btn btn-primary">Remove</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <div class="cart-summary">
+      <a href="{% url 'checkout' %}" class="btn btn-success">Proceed to Checkout</a>
+    </div>
   </div>
-</div>
 
-{% else %}
-<p>Your cart is empty.</p>
-{% endif %}
+  {% else %}
+  <p class="empty-cart">Your cart is empty.</p>
+  {% endif %}
+</div>
+</body>
+{% endblock %}
