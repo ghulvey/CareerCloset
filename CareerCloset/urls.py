@@ -31,4 +31,11 @@ urlpatterns = [
     path('oidc/', include('mozilla_django_oidc.urls')),
     path('inventory/', include('inventory.urls')),
     path('', views.index, name='index'),
+    path('women.html', views.women, name='women'),
+    path('men.html', views.men, name='men'),
+    path('home.html', views.index, name='home'),
+    path("cart/add/<int:clothing_id>/", views.add_to_cart, name="add_to_cart"),
+    path("cart/", views.view_cart, name="view_cart"),
+    path("cart/remove/<int:cart_item_id>/", views.remove_from_cart, name="remove_from_cart"),
+    path("cart/checkout/", views.checkout, name="checkout"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
