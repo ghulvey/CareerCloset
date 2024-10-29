@@ -22,7 +22,7 @@
         <div class="navbar-header">
           <a class="navbar-brand" href="home.html">
             <img
-              src="static/images/ksu-white-logo.png"
+              src="../static/images/ksu-white-logo.png"
               alt="Kent State Logo"
               class="navbar-logo"
             />
@@ -31,10 +31,10 @@
 
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item me-3">
-            <a class="nav-link text-decoration-none" href="women.html">WOMEN</a>
+            <a class="nav-link text-decoration-none" href="{% url 'women' %}">WOMEN</a>
           </li>
           <li class="nav-item me-3">
-            <a class="nav-link text-decoration-none" href="men.html">MEN</a>
+            <a class="nav-link text-decoration-none" href="{% url 'men' %}">MEN</a>
           </li>
         </ul>
 
@@ -45,14 +45,14 @@
           </div>
           <a class="nav-link" href="#hearted">
             <img
-              src="static/images/heart.png"
+              src="../static/images/heart.png"
               class="img-heart"
               alt="White Heart"
             />
           </a>
           <a class="nav-link" href="{% url 'view_cart' %}">
             <img
-              src="static/images/shoppingbag.png"
+              src="../static/images/shoppingbag.png"
               class="img-bag"
               alt="White Shopping Bag"
             />
