@@ -73,6 +73,13 @@ class Category(models.Model):
     def __str__(self):
         return self.category_name
 
+availability_statuses = (
+    ('available', 'Available'),
+    ('on_order', 'On Order'),
+    ('picked_up', 'Picked Up'),
+    ('archived', 'Archived'),
+)
+
 
 # ClothingItem Model
 class ClothingItem(models.Model):
@@ -83,7 +90,7 @@ class ClothingItem(models.Model):
     color = models.ForeignKey(Color, on_delete=models.CASCADE)  # ForeignKey to Color
     category = models.ForeignKey(Category, on_delete=models.CASCADE)  # ForeignKey to Category
     gender = models.ForeignKey(Gender, on_delete=models.SET_NULL, null=True, default=1)
-    availability_status = models.CharField(max_length=50)
+    availability_status = models.CharField(max_length=50, choices=availability_statuses, default='available')
     date_added = models.DateTimeField(auto_now_add=True)
     images = models.ManyToManyField('ClothingItemImage', related_name='clothing_images', blank=True)
 
@@ -93,6 +100,7 @@ class ClothingItem(models.Model):
 class ClothingItemImage(models.Model):
     clothing_item = models.ForeignKey(ClothingItem, on_delete=models.CASCADE, related_name='clothing_images')
     image = models.ImageField(upload_to=get_random_filename)
+    index = models.IntegerField(default=0)
 
     def __str__(self):
         return self.clothing_item.name
