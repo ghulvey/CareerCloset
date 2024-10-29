@@ -1,6 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <style>
+/* Navbar Styles */
+.navbar-nav .custom-dropdown-menu {
+  display: block; /* Ensure it is part of the layout */
+  position: absolute;
+  top: 100%; /* Aligns dropdown just below the parent item */
+  left: 0;
+  margin-top: 10px;
+  background-color: white;
+  list-style-type: none;
+  padding: 0;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+/* Show dropdown on hover */
+.navbar-nav .custom-dropdown:hover .custom-dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Dropdown item styling */
+.navbar-nav .custom-dropdown-menu .dropdown-item {
+  padding: 10px 20px;
+  color: #333;
+  text-decoration: none;
+  display: block;
+  white-space: nowrap;
+}
+
+.navbar-nav .custom-dropdown-menu .dropdown-item:hover {
+  background-color: #f2f2f2;
+}
+
+   </style> 
+
     <title>KentStateCareerCloset</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -29,14 +71,24 @@
           </a>
         </div>
 
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item me-3">
-            <a class="nav-link text-decoration-none" href="women.html">WOMEN</a>
-          </li>
-          <li class="nav-item me-3">
-            <a class="nav-link text-decoration-none" href="men.html">MEN</a>
-          </li>
+           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <li class="nav-item custom-dropdown me-3" style="position: relative;">
+        <a class="nav-link text-decoration-none" href="women.html">WOMEN</a>
+        <ul class="custom-dropdown-menu">
+          <li><a class="dropdown-item" href="#">Tops</a></li>
+          <li><a class="dropdown-item" href="#">Bottoms</a></li>
+          <li><a class="dropdown-item" href="#">Accessories</a></li>
         </ul>
+      </li>
+      <li class="nav-item custom-dropdown me-3" style="position: relative;">
+        <a class="nav-link text-decoration-none" href="men.html">MEN</a>
+        <ul class="custom-dropdown-menu">
+          <li><a class="dropdown-item" href="#">Shirts</a></li>
+          <li><a class="dropdown-item" href="#">Pants</a></li>
+          <li><a class="dropdown-item" href="#">Accessories</a></li>
+        </ul>
+      </li>
+    </ul>
 
         <div class="d-flex align-items-center ms-auto navbar-icons">
           <div class="search__container">
