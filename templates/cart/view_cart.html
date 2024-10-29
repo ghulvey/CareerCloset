@@ -1,14 +1,38 @@
 <h2>Your Cart</h2>
+
 {% if cart.items.all %}
-<ul>
-  {% for item in cart.items.all %}
-  <li>
-    {{ item.clothing_item.name }}
-    <a href="{% url 'remove_from_cart' item.id %}">Remove</a>
-  </li>
-  {% endfor %}
-</ul>
-<a href="{% url 'checkout' %}" class="btn btn-success">Checkout</a>
+<div class="cart-container">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th>Description</th>
+        <th>Size</th>
+        <th>Color</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in cart.items.all %}
+      <tr>
+        <td>{{ item.clothing_item.name }}</td>
+        <td><img src="{{ item.image_url }}" alt="{{ item.name }}" style="width: 80px; height: auto;"></td>
+        <td>{{ item.Size}}</td>
+        <td>{{ item.Color }}</td>
+        <td>
+          <a href="{% url 'remove_from_cart' item.id %}" class="btn btn-danger btn-sm">Remove</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <div class="cart-summary">
+    <h3>Cart Summary</h3>
+    <p><strong>Subtotal:</strong> ${{ cart.total_price|floatformat:2 }}</p>
+    <a href="{% url 'checkout' %}" class="btn btn-success">Proceed to Checkout</a>
+  </div>
+</div>
+
 {% else %}
 <p>Your cart is empty.</p>
 {% endif %}
