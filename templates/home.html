@@ -4,6 +4,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="/static/home.css"> 
+  
 {% block content %}
 <!-- jumbotron -->
 <div class="jumbotron">
@@ -93,12 +94,11 @@
   </div>
   <div class="seasonitl-text1">
     <p>Leave confident and prepared for your next opportunity</p>
-    <p>your next opportunity</p>
   </div> 
   <div class="seasonnumb-text1">
-    <p>3</p>
+    <p1>3</p1>
   </div>
-  <div class="dropdown">
+  <div class="dropdown dropdown-left">
     <button class="dropbtn">PICK IT UP</button>
     <div class="dropdown-content">
         <a href="#">GET AN ORDER NUMBER</a>
@@ -108,6 +108,125 @@
     </div>
   </div>
 </div>
+
+<!-- four -->
+<div id="four" class="container-fluid">
+  <div class="image-container5">
+    <img src="static/images/abouttext.png"    class="img-abouttext"  alt="Yellow About Header" />
+
+    <div class="img-whiteblock-container">
+      <img src="static/images/whiteblock.png" class="img-whiteblock" alt="White Block Image"   />
+      <img src="static/images/press.png"      class="img-press"      alt="Press Elements"      />
+    </div>
+
+    <div class="presstext-container1">
+      <h3>Kent State Career Closet Helps Students Make A Good First Impression</h3>
+      <p1>A good education and a solid résumé aren’t always enough to make a positive first impression. 
+        To bridge the gap, a group of Kent State University faculty and staff members have come together 
+        to establish the Kent State Career Closet</p1>
+      </div>
+    </div>
+
+    <a href="https://www.kent.edu/einside/news/kent-state-career-closet-helps-students-make-good-first-impression">
+      <img src="static/images/right-arrow.png" class="img-arrow1" alt="Yellow Arrow" />
+    </a>
+
+    <div class="presstext-container2">
+      <h3>Interview In Your Best Kent State Style</h3>
+      <p1>Moyé is a junior at the university, who just moved off campus and is now paying real bills, 
+        which has her on a tight budget. So when it came to interviewing for the president position of her organization, 
+        Moyé says part of her secret to nailing the job was the career closet.</p1>
+    </div>
+
+    <a href="https://www.kent.edu/flash-feed/news/interview-your-best-kent-state-style">
+      <img src="static/images/right-arrow.png" class="img-arrow2" alt="Yellow Arrow"   />
+    </a>
+
+    <div class="presstext-container3">
+      <h3>Kent State’s Career Closet Dresses Students To Achieve Success</h3>
+      <p1>Kent State University junior Stephanie Newton successfully juggles a tough schedule that includes taking classes
+        in hospitality management, while raising four children and working several campus dining services jobs.</p1>
+    </div>
+
+    <a href="https://www.kent.edu/kent/news/kent-state%E2%80%99s-career-closet-dresses-students-achieve-success">
+      <img src="static/images/right-arrow.png" class="img-arrow3" alt="Yellow Arrow"   />
+    </a>
+
+</div>
+
+<div class="slideshow-container">
+  <div class="mySlides">
+    <img src="static/images/aboutparagraph.png"  class="about1" alt="About Paragraph 1" />
+  </div>
+  <div class="mySlides">
+    <img src="static/images/aboutparagraph2.png" class="about2" alt="About Paragraph 2" />
+  </div>
+  <div class="mySlides">
+    <img src="static/images/aboutparagraph3.png" class="about3" alt="About Paragraph 3" />
+  </div>
+
+  <div class="about1"></div>
+    <div class="arrow-container">
+      <img src="static/images/left-arrow.png"  alt="Previous" class="arrow" id="prev">
+      <img src="static/images/right-arrow.png" alt="Next" class="arrow" id="next">
+    </div>
+  </div>
+</div>
+
+<!-- five -->
+<div id="five" class="container-fluid">
+  <div class="image-container6">
+    <img src="static/images/footer.png"         class="img-footer"     alt="Blue Footer" />
+    <img src="static/images/ksu-white-logo.png" class="img-footerlogo" alt="KSU logo" />
+
+    <div class="footertext-container">
+      <h4>Kent state Career Closet</h4>
+      <h5>Street Address</h5>
+      <p>Career Exploration & Development: 261 Schwartz Center | 800 East Summit Kent OH 44242
+      KSU Women's Center: Williamson House, 1200 E. Main Street Kent OH 44242
+      </p>
+      <h5>Mailing Address</h5>
+      <p>800 E. Summit St.
+      Kent, OH 44242
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- slide show script -->
+<script>
+let slideIndex = 0;
+
+function showSlides() {
+    const slides = document.getElementsByClassName("mySlides");
+    for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+    }
+    slides[slideIndex].style.display = "block";
+}
+
+function plusSlides(n) {
+    const slides = document.getElementsByClassName("mySlides");
+    slideIndex += n;
+    
+    if (slideIndex >= slides.length) { 
+        slideIndex = 0; 
+    } 
+    if (slideIndex < 0) { 
+        slideIndex = slides.length - 1; 
+    }
+    showSlides();
+}
+
+// add event listeners for the arrow clicks
+document.getElementById('prev').addEventListener('click', () => plusSlides(-1));
+document.getElementById('next').addEventListener('click', () => plusSlides(1));
+
+// initialize the slideshow by showing the first slide
+showSlides();
+</script>
+
+
 <!-- Include the JavaScript file -->
 <script src="/static/home.js"></script>
 {% endblock %}
