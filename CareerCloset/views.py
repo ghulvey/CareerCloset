@@ -51,6 +51,15 @@ def men(request):
     }
     return render(request, 'men.html', context)
 
+def clothing_item_detail(request, clothing_id):
+    clothing_item = get_object_or_404(ClothingItem, pk=clothing_id)
+    images = clothing_item.images.all()  # Retrieve all images associated with this clothing item
+
+    context = {
+        'clothing_item': clothing_item,
+        'images': images,
+    }
+    return render(request, 'clothing_item_detail.html', context)
 
 @login_required
 def add_to_cart(request, clothing_id):
