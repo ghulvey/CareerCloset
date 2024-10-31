@@ -32,8 +32,7 @@ def login(request, *args, **kwargs):
 
 def women(request):
     women_gender = models.Gender.objects.get(gender_name="Female")
-    
-    women_clothing_items = models.ClothingItem.objects.filter(gender=women_gender)
+    women_clothing_items = models.ClothingItem.objects.filter(gender=women_gender).prefetch_related('images')
 
     context = {
         'context': women_clothing_items,
@@ -41,14 +40,17 @@ def women(request):
     return render(request, 'women.html', context)
 
 def men(request):
-    men_gender = models.Gender.objects.get(gender_name='Men')
+    men_gender = models.Gender.objects.get(gender_name="Men")
+    men_clothing_items = models.ClothingItem.objects.filter(gender=men_gender).prefetch_related('images')
     
-    men_clothing_items = models.ClothingItem.objects.filter(gender=men_gender)
-
+    ontext = {
+        'context': men_clothing_items,
+    }
     context = {
         'context': men_clothing_items,
     }
     return render(request, 'men.html', context)
+
 
 @login_required
 def add_to_cart(request, clothing_id):

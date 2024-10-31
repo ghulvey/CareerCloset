@@ -35,11 +35,9 @@
         {% for item in context %}
         <div class="col-md-4 mb-4">
           <div class="card h-100">
-            <img
-              src="{{ item.image_url }}"
-              class="card-img-top product-image"
-              alt="{{ item.name }}"
-            />
+            {% for image in item.images.all %}
+            <img src="{{ image.image.url }}" alt="{{ item.name }} image" class="clothing-image">
+        {% endfor %}
             <div class="card-body">
               <h5 class="card-title">{{ item.name }}</h5>
               <p class="card-text">{{ item.description|truncatewords:20 }}</p>
