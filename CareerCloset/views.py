@@ -43,9 +43,6 @@ def men(request):
     men_gender = models.Gender.objects.get(gender_name="Men")
     men_clothing_items = models.ClothingItem.objects.filter(gender=men_gender).prefetch_related('images')
     
-    ontext = {
-        'context': men_clothing_items,
-    }
     context = {
         'context': men_clothing_items,
     }
@@ -53,7 +50,7 @@ def men(request):
 
 def clothing_item_detail(request, clothing_id):
     clothing_item = get_object_or_404(ClothingItem, pk=clothing_id)
-    images = clothing_item.images.all()  # Retrieve all images associated with this clothing item
+    images = clothing_item.images.all() 
 
     context = {
         'clothing_item': clothing_item,
@@ -81,7 +78,7 @@ def add_to_cart(request, clothing_id):
 @login_required
 def view_cart(request):
     customer = get_object_or_404(Customer, user=request.user)  # Get Customer associated with User
-    cart, created = Cart.objects.get_or_create(user=customer)  # Use Customer instance for Cart
+    cart, created = Cart.objects.get_or_create(user=customer)
     return render(request, 'cart/view_cart.html', {'cart': cart})
 
 @login_required

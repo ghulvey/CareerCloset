@@ -22,10 +22,6 @@
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
   }
 
-  .cart-container .table {
-    margin-bottom: 0;
-  }
-
   .table thead th {
     background-color: #f7f7f7;
     color: #333;
@@ -61,6 +57,13 @@
   .cart-heading {
     padding-top: 50px;
   }
+
+  .cart-image {
+    width: 80px;
+    height: auto;
+    object-fit: cover;
+    border-radius: 4px;
+  }
 </style>
 
 <div class="background-container"></div>
@@ -68,14 +71,12 @@
 <div class="container">
   <h1 class="text-center my-4" style="padding-top: 50px;">Cart</h1>
 
-
   {% if cart.items.all %}
   <div class="cart-container">
     <table class="table table-striped table-hover">
       <thead>
         <tr>
           <th>Item</th>
-          <th>Image</th>
           <th>Description</th>
           <th>Size</th>
           <th>Color</th>
@@ -85,13 +86,16 @@
       <tbody>
         {% for item in cart.items.all %}
         <tr>
-          <td>{{ item.clothing_item.name }}</td>
-          <td><img src="{{ item.image_url }}" alt="{{ item.name }}" style="width: 80px; height: auto;"></td>
+          <td>
+          <a href="{% url 'clothing_item_detail' item.clothing_item.clothing_id %}">
+            {{ item.clothing_item.name }}
+          </a>
+          </td>
           <td>{{ item.clothing_item.description }}</td>
           <td>{{ item.clothing_item.size }}</td>
-          <td>{{ item.clothing_item.color }}</td>
+          <td>{{ item.clothing_item.color.color_name }}</td>
           <td>
-            <a href="{% url 'remove_from_cart' item.id %}" class="btn btn-primary">Remove</a>
+            <a href="{% url 'remove_from_cart' item.id %}" class="btn btn-danger">Remove</a>
           </td>
         </tr>
         {% endfor %}
