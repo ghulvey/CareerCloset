@@ -32,7 +32,7 @@ def login(request, *args, **kwargs):
 
 def women(request):
     women_gender = models.Gender.objects.get(gender_name="Female")
-    women_clothing_items = models.ClothingItem.objects.filter(gender=women_gender).prefetch_related('images')
+    women_clothing_items = models.ClothingItem.objects.filter(gender=women_gender, availability_status="available").prefetch_related('images')
 
     context = {
         'context': women_clothing_items,
@@ -41,7 +41,7 @@ def women(request):
 
 def men(request):
     men_gender = models.Gender.objects.get(gender_name="Men")
-    men_clothing_items = models.ClothingItem.objects.filter(gender=men_gender).prefetch_related('images')
+    men_clothing_items = models.ClothingItem.objects.filter(gender=men_gender, availability_status="available").prefetch_related('images')
     
     context = {
         'context': men_clothing_items,
@@ -96,5 +96,8 @@ def checkout(request):
     cart = get_object_or_404(Cart, user=customer)
     for item in cart.items.all():
         Transaction.objects.create(user=customer, clothing_item=item.clothing_item)
+        item.clothing_item.availability_status = 'on_order'
+        item.clothing_item.save()
+
     cart.items.all().delete()
     return render(request, "cart/checkout.html")

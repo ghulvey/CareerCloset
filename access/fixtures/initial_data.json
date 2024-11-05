@@ -142,7 +142,7 @@
         "color": 1,
         "category": 1,
         "gender": 1,
-        "availability_status": "Available",
+        "availability_status": "available",
         "date_added": "2024-10-26T19:32:48.022Z",
         "images": [
             1
@@ -159,7 +159,7 @@
         "color": 2,
         "category": 2,
         "gender": 2,
-        "availability_status": "Available",
+        "availability_status": "available",
         "date_added": "2024-10-26T19:34:48.359Z",
         "images": []
     }
@@ -174,7 +174,7 @@
         "color": 3,
         "category": 2,
         "gender": 1,
-        "availability_status": "Available",
+        "availability_status": "available",
         "date_added": "2024-10-26T19:38:24.424Z",
         "images": []
     }
@@ -189,7 +189,7 @@
         "color": 4,
         "category": 3,
         "gender": 3,
-        "availability_status": "Available",
+        "availability_status": "available",
         "date_added": "2024-10-26T19:39:18.135Z",
         "images": []
     }
@@ -204,7 +204,7 @@
         "color": 5,
         "category": 4,
         "gender": 2,
-        "availability_status": "Available",
+        "availability_status": "available",
         "date_added": "2024-10-26T19:40:13.478Z",
         "images": []
     }
@@ -219,7 +219,7 @@
         "color": 6,
         "category": 5,
         "gender": 1,
-        "availability_status": "Available",
+        "availability_status": "available",
         "date_added": "2024-10-26T19:41:16.307Z",
         "images": []
     }
@@ -234,7 +234,7 @@
         "color": 7,
         "category": 5,
         "gender": 2,
-        "availability_status": "Available",
+        "availability_status": "available",
         "date_added": "2024-10-26T19:41:51.359Z",
         "images": []
     }
@@ -249,7 +249,7 @@
         "color": 1,
         "category": 6,
         "gender": 2,
-        "availability_status": "Available",
+        "availability_status": "available",
         "date_added": "2024-10-26T19:42:42.973Z",
         "images": []
     }
