@@ -32,7 +32,10 @@ def login(request, *args, **kwargs):
 
 def women(request):
     women_gender = models.Gender.objects.get(gender_name="Female")
+    genderless = models.Gender.objects.get(gender_name = "Genderless")
     women_clothing_items = models.ClothingItem.objects.filter(gender=women_gender, availability_status="available").prefetch_related('images')
+    women_clothing_items |= models.ClothingItem.objects.filter(gender=genderless, availability_status="available").prefetch_related('images')
+
 
     context = {
         'context': women_clothing_items,
@@ -41,7 +44,9 @@ def women(request):
 
 def men(request):
     men_gender = models.Gender.objects.get(gender_name="Men")
+    genderless = models.Gender.objects.get(gender_name="Genderless")
     men_clothing_items = models.ClothingItem.objects.filter(gender=men_gender, availability_status="available").prefetch_related('images')
+    men_clothing_items |= models.ClothingItem.objects.filter(gender=genderless, availability_status="available").prefetch_related('images')
     
     context = {
         'context': men_clothing_items,
