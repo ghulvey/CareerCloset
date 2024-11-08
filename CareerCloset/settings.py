@@ -65,7 +65,7 @@ ROOT_URLCONF = "CareerCloset.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / 'templates', BASE_DIR / 'auth/templates', BASE_DIR / 'inventory/templates'],
+        "DIRS": [BASE_DIR / 'templates', BASE_DIR / 'auth/templates', BASE_DIR / 'inventory/templates', BASE_DIR / 'orders/templates'],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -86,6 +86,7 @@ WSGI_APPLICATION = "CareerCloset.wsgi.application"
 
 STATIC_URL = "static/"
 STATICFILES_DIRS = [ BASE_DIR / 'static', ]
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 
 

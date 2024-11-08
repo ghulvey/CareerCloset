@@ -86,7 +86,11 @@ def remove_from_cart(request, cart_item_id):
 def checkout(request):
     customer = get_object_or_404(Customer, user=request.user)
     cart = get_object_or_404(Cart, user=customer)
+
+    order = models.Order.objects.create(user=request.user)
+
     for item in cart.items.all():
-        Transaction.objects.create(user=customer, clothing_item=item.clothing_item)
+        item.clothing_item.availability_status = 'on_order'
+        Transaction.objects.create(user=customer, clothing_item=item.clothing_item, order=order)
     cart.items.all().delete()
     return render(request, "cart/checkout.html")

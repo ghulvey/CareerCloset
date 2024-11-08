@@ -30,6 +30,7 @@ urlpatterns = [
     path('auth/', include('access.urls')),
     path('oidc/', include('mozilla_django_oidc.urls')),
     path('inventory/', include('inventory.urls')),
+    path('orders/', include('orders.urls')),
     path('', views.index, name='index'),
     path('women.html', views.women, name='women'),
     path('men.html', views.men, name='men'),
