@@ -73,6 +73,14 @@ class Category(models.Model):
     def __str__(self):
         return self.category_name
 
+availability_statuses = (
+    ('available', 'Available'),
+    ('on_order', 'On Order'),
+    ('ready_for_pickup', 'Ready for Pickup'),
+    ('picked_up', 'Picked Up'),
+    ('archived', 'Archived'),
+)
+
 
 # ClothingItem Model
 class ClothingItem(models.Model):
@@ -83,7 +91,7 @@ class ClothingItem(models.Model):
     color = models.ForeignKey(Color, on_delete=models.CASCADE)  # ForeignKey to Color
     category = models.ForeignKey(Category, on_delete=models.CASCADE)  # ForeignKey to Category
     gender = models.ForeignKey(Gender, on_delete=models.SET_NULL, null=True, default=1)
-    availability_status = models.CharField(max_length=50)
+    availability_status = models.CharField(max_length=50, choices=availability_statuses, default='available')
     date_added = models.DateTimeField(auto_now_add=True)
     images = models.ManyToManyField('ClothingItemImage', related_name='clothing_images', blank=True)
 
@@ -93,6 +101,7 @@ class ClothingItem(models.Model):
 class ClothingItemImage(models.Model):
     clothing_item = models.ForeignKey(ClothingItem, on_delete=models.CASCADE, related_name='clothing_images')
     image = models.ImageField(upload_to=get_random_filename)
+    index = models.IntegerField(default=0)
 
     def __str__(self):
         return self.clothing_item.name
@@ -106,14 +115,14 @@ class Customer(models.Model):
     def __str__(self):
         return f"{self.user.username} - {self.email}"
 
-@receiver(post_save, sender=User)
-def create_customer_profile(sender, instance, created, **kwargs):
-    if created:
-        Customer.objects.create(user=instance, email=instance.email)
+# @receiver(post_save, sender=User)
+# def create_customer_profile(sender, instance, created, **kwargs):
+#     if created:
+#         Customer.objects.create(user=instance, email=instance.email)
 
-@receiver(post_save, sender=User)
-def save_customer_profile(sender, instance, **kwargs):
-    instance.customer.save()
+# @receiver(post_save, sender=User)
+# def save_customer_profile(sender, instance, **kwargs):
+#     instance.customer.save()
 
 # Transaction Model
 class Transaction(models.Model):
@@ -121,9 +130,41 @@ class Transaction(models.Model):
     user = models.ForeignKey(Customer, on_delete=models.CASCADE)  # ForeignKey to User for identification
     clothing_item = models.ForeignKey(ClothingItem, on_delete=models.CASCADE)  # ForeignKey to ClothingItem
     transaction_date = models.DateTimeField(auto_now_add=True)
+    order = models.ForeignKey('Order', on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return f"Transaction {self.transaction_id}: {self.user.email} - {self.clothing_item.name} on {self.transaction_date}"
+    
+
+pickup_methods = (
+    ('self', 'Self Pickup'),
+    ('desk', 'Pickup at Desk'),
+)
+
+order_statuses = (
+    ('pending', 'Pending'),
+    ('processed', 'Processed'),
+    ('picked_up', 'Picked Up'),
+    ('canceled', 'Canceled'),
+)
+
+class Order(models.Model):
+    order_id = models.AutoField(primary_key=True)
+    order_status = models.CharField(max_length=50, choices=order_statuses, default='pending')
+    user = models.OneToOneField('auth.User', on_delete=models.CASCADE, null=True)
+    transactions = models.ManyToOneRel(Transaction, field_name='order', related_name='transactions', to='access.Transaction')
+    expiration_date = models.DateTimeField(blank=True, null=True)
+    order_date = models.DateTimeField(auto_now_add=True)
+
+    pickup_method = models.CharField(max_length=50, choices=pickup_methods, default='desk')
+    pickup_notes = models.TextField(blank=True)
+    pickup_code = models.CharField(max_length=10, blank=True)
+
+    order_processed_at = models.DateTimeField(blank=True, null=True)
+    order_picked_up_at = models.DateTimeField(blank=True, null=True)
+
+    def __str__(self):
+        return f"Order {self.order_id}: {self.user.email} on {self.order_date}"
 
 class Cart(models.Model):
     user = models.ForeignKey(Customer, on_delete=models.CASCADE)

@@ -1,47 +1,56 @@
-from pydoc import describe
-from unicodedata import category
-
-from django.contrib.auth.decorators import login_required, permission_required
-from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import permission_required, login_required
+from django.shortcuts import redirect, render
 from django.utils.decorators import method_decorator
 from django.views import View
 
-from access.models import Category, Color, Size, ClothingItem, ClothingItemImage, Gender
+from access.models import ClothingItem, Category, Color, Size, Gender, ClothingItemImage
 
 
-class CreateItem(View):
+class EditItem(View):
 
     @method_decorator(login_required)
-    @method_decorator(permission_required('access.add_clothingitem', raise_exception=True))
+    @method_decorator(permission_required('access.change_clothingitem', raise_exception=True))
     def get(self, request, *args, **kwargs):
+
+        item = ClothingItem.objects.get(clothing_id=kwargs['pk'])
+
         categories = Category.objects.all()
         colors = Color.objects.all()
         sizes = Size.objects.all()
         genders = Gender.objects.all()
-        return render(request, 'create-item.html', {
+
+        images = item.images.filter(clothing_item=item)
+
+        return render(request, 'edit-item.html', {
+            'item': item,
             'categories': categories,
             'colors': colors,
             'sizes': sizes,
-            'genders': genders
+            'genders': genders,
+            'images': images
         })
-
+    
     @method_decorator(login_required)
-    @method_decorator(permission_required('access.add_clothingitem', raise_exception=True))
+    @method_decorator(permission_required('access.change_clothingitem', raise_exception=True))
     def post(self, request, *args, **kwargs):
+
+        item = ClothingItem.objects.get(clothing_id=kwargs['pk'])
+
         name = request.POST['name']
         description = request.POST['description']
         category_id = request.POST['category']
         color_id = request.POST['color']
         size_id = request.POST['size']
-        gender_id = request.POST['gender']
 
         category = Category.objects.get(category_id=category_id)
         color = Color.objects.get(color_id=color_id)
         size = Size.objects.get(size_id=size_id)
-        gender = Gender.objects.get(gender_id=gender_id)
 
-        # create a new item object
-        item = ClothingItem.objects.create(name=name, description=description, category=category, color=color, size=size, gender=gender)
+        item.name = name
+        item.description = description
+        item.category = category
+        item.color = color
+        item.size = size
 
         number_of_images = item.images.count()
 
@@ -55,5 +64,7 @@ class CreateItem(View):
             image = ClothingItemImage.objects.create(clothing_item=item, image=file, index=number_of_images)
             item.images.add(image)
             number_of_images += 1
+
+        item.save()
 
         return redirect('inventory_view')
