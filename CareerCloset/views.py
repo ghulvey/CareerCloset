@@ -32,8 +32,10 @@ def login(request, *args, **kwargs):
 
 def women(request):
     women_gender = models.Gender.objects.get(gender_name="Female")
-    
-    women_clothing_items = models.ClothingItem.objects.filter(gender=women_gender)
+    genderless = models.Gender.objects.get(gender_name = "Genderless")
+    women_clothing_items = models.ClothingItem.objects.filter(gender=women_gender, availability_status="available").prefetch_related('images')
+    women_clothing_items |= models.ClothingItem.objects.filter(gender=genderless, availability_status="available").prefetch_related('images')
+
 
     context = {
         'context': women_clothing_items,
@@ -41,14 +43,25 @@ def women(request):
     return render(request, 'women.html', context)
 
 def men(request):
-    men_gender = models.Gender.objects.get(gender_name='Men')
+    men_gender = models.Gender.objects.get(gender_name="Men")
+    genderless = models.Gender.objects.get(gender_name="Genderless")
+    men_clothing_items = models.ClothingItem.objects.filter(gender=men_gender, availability_status="available").prefetch_related('images')
+    men_clothing_items |= models.ClothingItem.objects.filter(gender=genderless, availability_status="available").prefetch_related('images')
     
-    men_clothing_items = models.ClothingItem.objects.filter(gender=men_gender)
-
     context = {
         'context': men_clothing_items,
     }
     return render(request, 'men.html', context)
+
+def clothing_item_detail(request, clothing_id):
+    clothing_item = get_object_or_404(ClothingItem, pk=clothing_id)
+    images = clothing_item.images.all() 
+
+    context = {
+        'clothing_item': clothing_item,
+        'images': images,
+    }
+    return render(request, 'clothing_item_detail.html', context)
 
 @login_required
 def add_to_cart(request, clothing_id):
@@ -70,7 +83,7 @@ def add_to_cart(request, clothing_id):
 @login_required
 def view_cart(request):
     customer = get_object_or_404(Customer, user=request.user)  # Get Customer associated with User
-    cart, created = Cart.objects.get_or_create(user=customer)  # Use Customer instance for Cart
+    cart, created = Cart.objects.get_or_create(user=customer)
     return render(request, 'cart/view_cart.html', {'cart': cart})
 
 @login_required
@@ -92,5 +105,7 @@ def checkout(request):
     for item in cart.items.all():
         item.clothing_item.availability_status = 'on_order'
         Transaction.objects.create(user=customer, clothing_item=item.clothing_item, order=order)
+        item.clothing_item.save()
+
     cart.items.all().delete()
     return render(request, "cart/checkout.html")
