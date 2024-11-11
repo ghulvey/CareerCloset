@@ -1,0 +1,72 @@
+{% extends base_template %}
+
+{% block title %}Career Closet | View Orders{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="card mt-4">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center my-3">
+                    <h2>Pending Orders</h2>
+                </div>
+
+                    {% if pending_orders|length == 0 %}
+                        <p class="no-content-message">No active orders.</p>
+                    {% else %}
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Order No.</th>
+                                <th># of Items</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for order in pending_orders %}
+                                <tr>
+                                    <td>{{ order.order_id }}</td>
+                                    <td></td>
+                                    <td>
+                                        <a href="/orders/{{ order.order_id }}/" class="btn btn-primary">View</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    {% endif %}
+            </div>
+        </div>
+        <div class="card my-4">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center my-3">
+                    <h2>Ready for Pickup</h2>
+                </div>
+
+                    {% if pending_orders|length == 0 %}
+                        <p class="no-content-message">No active orders.</p>
+                    {% else %}
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Order No.</th>
+                                <th># of Items</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for item in items %}
+                                <tr>
+                                    <td>{{ order.order_id }}</td>
+                                    <td></td>
+                                    <td>
+                                        <a href="/orders/{{ order.order_id }}/" class="btn btn-primary">View</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
