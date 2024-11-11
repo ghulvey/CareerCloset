@@ -9,7 +9,7 @@ from access.models import ClothingItem
 class ViewInventory(View):
 
     @method_decorator(login_required)
-    @method_decorator(permission_required('view_clothingitem', raise_exception=True))
+    @method_decorator(permission_required('access.view_clothingitem', raise_exception=True))
     def get(self, request):
 
         items = ClothingItem.objects.filter(availability_status='available')

@@ -1,11 +1,13 @@
 ﻿from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import permission_required
 from django.urls import reverse
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 from access import models
 from access.models import Cart, CartItem, ClothingItem, Transaction, Customer
+from django.contrib.auth.models import Permission
 
 @login_required
 def index(request):
@@ -109,3 +111,23 @@ def checkout(request):
 
     cart.items.all().delete()
     return render(request, "cart/checkout.html")
+
+@login_required
+@permission_required('access.view_order')
+def backend_home(request):
+
+    permissions = request.user.get_all_permissions()
+    print(permissions)
+
+    access_permission = 'access.view_accessassignment' in permissions
+    order_permission = 'access.view_order' in permissions
+    inventory_permission = 'access.view_clothingitem' in permissions
+    django_admin_permission = request.user.is_superuser
+
+    context = {
+        'access_permission': access_permission,
+        'order_permission': order_permission,
+        'inventory_permission': inventory_permission,
+        'django_admin_permission': django_admin_permission,
+    }
+    return render(request, 'backend-home.html', context)

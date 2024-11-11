@@ -10,7 +10,7 @@ from access.models import ClothingItemImage
 class DeleteImage(View):
 
     @method_decorator(login_required)
-    @method_decorator(permission_required('delete_clothingitem', raise_exception=True))
+    @method_decorator(permission_required('access.delete_clothingitem', raise_exception=True))
     def get(self, request, *args, **kwargs):
 
         image = ClothingItemImage.objects.get(id=kwargs['pk'])
