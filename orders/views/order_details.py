@@ -13,7 +13,7 @@ from common.send_email import send_generic_email
 class OrderDetails(View):
 
     @method_decorator(login_required)
-    @method_decorator(permission_required('change_order', raise_exception=True))
+    @method_decorator(permission_required('access.change_order', raise_exception=True))
     def get(self, request, *args, **kwargs):
         order = get_object_or_404(Order, order_id=kwargs['pk'])
 
@@ -45,7 +45,7 @@ class OrderDetails(View):
         })
     
     @method_decorator(login_required)
-    @method_decorator(permission_required('view_order', raise_exception=True))
+    @method_decorator(permission_required('access.view_order', raise_exception=True))
     def post(self, request, *args, **kwargs):
         order = get_object_or_404(Order, order_id=kwargs['pk'])
 

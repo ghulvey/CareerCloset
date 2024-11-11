@@ -11,7 +11,7 @@ from access.models import Category, Color, Size, ClothingItem, ClothingItemImage
 class ArchiveItemView(View):
 
     @method_decorator(login_required)
-    @method_decorator(permission_required('change_item', raise_exception=True))
+    @method_decorator(permission_required('access.change_item', raise_exception=True))
     def get(self, request, *args, **kwargs):
         item_id = kwargs['pk']
         item = ClothingItem.objects.get(pk=item_id)
@@ -20,7 +20,7 @@ class ArchiveItemView(View):
         })
 
     @method_decorator(login_required)
-    @method_decorator(permission_required('change_item', raise_exception=True))
+    @method_decorator(permission_required('access.change_item', raise_exception=True))
     def post(self, request, *args, **kwargs):
         item_id = kwargs['pk']
         item = ClothingItem.objects.get(pk=item_id)

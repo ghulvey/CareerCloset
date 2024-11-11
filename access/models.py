@@ -115,14 +115,14 @@ class Customer(models.Model):
     def __str__(self):
         return f"{self.user.username} - {self.email}"
 
-@receiver(post_save, sender=User)
-def create_customer_profile(sender, instance, created, **kwargs):
-    if created:
-        Customer.objects.create(user=instance, email=instance.email)
+# @receiver(post_save, sender=User)
+# def create_customer_profile(sender, instance, created, **kwargs):
+#     if created:
+#         Customer.objects.create(user=instance, email=instance.email)
 
-@receiver(post_save, sender=User)
-def save_customer_profile(sender, instance, **kwargs):
-    instance.customer.save()
+# @receiver(post_save, sender=User)
+# def save_customer_profile(sender, instance, **kwargs):
+#     instance.customer.save()
 
 # Transaction Model
 class Transaction(models.Model):

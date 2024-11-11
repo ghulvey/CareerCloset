@@ -12,7 +12,7 @@ from access.models import Category, Color, Size, ClothingItem, ClothingItemImage
 class CreateItem(View):
 
     @method_decorator(login_required)
-    @method_decorator(permission_required('add_clothingitem', raise_exception=True))
+    @method_decorator(permission_required('access.add_clothingitem', raise_exception=True))
     def get(self, request, *args, **kwargs):
         categories = Category.objects.all()
         colors = Color.objects.all()
@@ -26,7 +26,7 @@ class CreateItem(View):
         })
 
     @method_decorator(login_required)
-    @method_decorator(permission_required('add_clothingitem', raise_exception=True))
+    @method_decorator(permission_required('access.add_clothingitem', raise_exception=True))
     def post(self, request, *args, **kwargs):
         name = request.POST['name']
         description = request.POST['description']
