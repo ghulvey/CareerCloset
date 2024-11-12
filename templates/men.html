@@ -1,59 +1,75 @@
-{% extends 'base.html' %}
-
+{% extends 'base.html' %} 
 {% block content %}
 <body>
-    <style>
-        /* Apply background color instead of image */
-        .background-container {
-            background-color: #9edcff; /* Light blue background */
-            width: 100%;
-            height: 100vh; /* Full viewport height */
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: -1;
-        }
+  <style>
+    .background-container {
+      background-color: #9edcff; /* Light blue background */
+      width: 100vw;
+      height: 100vh; 
+      position: fixed; 
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
 
-        .product-image {
-            width: 100%;
-            height: 100%; 
-            object-fit: cover; 
-        }
+    .product-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
 
-        .frontwords-container {
-            position: relative;
-            z-index: 1;
-            padding-top: 50px;
-        }
-    </style>
+    .frontwords-container {
+      position: relative;
+      z-index: 1;
+      padding-top: 50px;
+    }
 
-    <!-- Background container -->
-    <div class="background-container"></div>
+    .card-image {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
 
-    <!-- Front content container -->
-    <div class="frontwords-container">
-        <div class="container my-5">
-            <h1 class="text-center mb-4">Mens Clothing</h1>
+    .clothing-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  </style>
 
-            <div class="row">
+  <div class="background-container"></div>
 
-                {% for item in context %}
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100">
-                        <!-- Use item.image_url to dynamically fetch the image -->
-                        <img src="{{ item.image_url }}" class="card-img-top product-image" alt="{{ item.name }}">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ item.name }}</h5>
-                            <p class="card-text">{{ item.description|truncatewords:20 }}</p>
-                            <a href="#" class="btn btn-primary">Add to Cart</a>
-                        </div>
-                    </div>
-                </div>
-                {% empty %}
-                <p class="text-center">No green clothing items available at the moment.</p>
-                {% endfor %}
+  <div class="frontwords-container">
+    <div class="container my-5">
+      <h1 class="text-center mb-4">Mens Clothing</h1>
+
+      <div class="row">
+        {% for item in context %}
+        <div class="col-md-4 mb-4">
+          <div class="card h-100">
+            <div class="card-image">
+              {% if item.images.all %}
+                <a href="{% url 'clothing_item_detail' item.clothing_id %}">
+                  <img src="{{ item.images.first.image.url }}" alt="{{ item.name }} image" class="clothing-image">
+                </a>
+              {% else %}
+                <img src="../static/images/risman-plaza-background.jpg" alt="Placeholder Image" class="clothing-image">
+              {% endif %}
             </div>
+            <div class="card-body">
+              <h5 class="card-title">{{ item.name }}</h5>
+              <p class="card-text">{{ item.description|truncatewords:20 }}</p>
+              <a href="{% url 'add_to_cart' item.clothing_id %}" class="btn btn-primary">Add to Cart</a>
+            </div>
+          </div>
         </div>
+        {% empty %}
+        <p class="text-center">
+          No male clothing items available at the moment.
+        </p>
+        {% endfor %}
+      </div>
     </div>
+  </div>
 </body>
 {% endblock %}

@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% block content %}
+<body>
+  <style>
+    .background-container {
+      background-color: #9edcff; /* Light blue background */
+      width: 100vw;
+      height: 100vh; 
+      position: fixed; 
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+    .image-viewer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      max-width: 600px;
+      margin: 40px auto;
+    }
+
+    .image-viewer img {
+      width: 100%;
+      max-height: 80vh;
+      object-fit: cover;
+    }
+
+    .arrow {
+      position: absolute;
+      top: 50%;
+      font-size: 2rem;
+      color: #333;
+      cursor: pointer;
+      transform: translateY(-50%);
+    }
+
+    .arrow-left { left: -40px; }
+    .arrow-right { right: -40px; }
+
+    .item-details {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .item-name {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .item-description {
+      font-size: 1rem;
+      margin-bottom: 10px;
+    }
+
+    .item-specs {
+      font-size: 1rem;
+      color: #555;
+      margin-bottom: 10px;
+    }
+  </style>
+
+  <div class="background-container"></div>
+  <div class="container my-5" style="padding-top: 50px;">
+        <div class="image-viewer">
+          <span class="arrow arrow-left" onclick="prevImage()">&#10094;</span>
+          {% for image in images %}
+          <img src="{{ image.image.url }}" alt="{{ clothing_item.name }}" class="product-image">
+          {% endfor %}
+          <span class="arrow arrow-right" onclick="nextImage()">&#10095;</span>
+        </div>
+    
+        <div class="item-details">
+          <div class="item-name">{{ clothing_item.name }}</div>
+          <div class="item-description">{{ clothing_item.description }}</div>
+          <div class="item-specs">Size: {{ clothing_item.size }}</div>
+          <div class="item-specs">Color: {{ clothing_item.color.color_name }}</div>
+          <a href="{% url 'add_to_cart' clothing_item.clothing_id %}" class="btn btn-primary mt-3">Add to Cart</a>
+        </div>
+      </div>
+    
+      <script>
+        let currentImageIndex = 0;
+        const images = document.querySelectorAll('.product-image');
+    
+        function showImage(index) {
+          images.forEach((img, i) => {
+            img.style.display = i === index ? 'block' : 'none';
+          });
+        }
+    
+        function nextImage() {
+          currentImageIndex = (currentImageIndex + 1) % images.length;
+          showImage(currentImageIndex);
+        }
+    
+        function prevImage() {
+          currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+          showImage(currentImageIndex);
+        }
+      </script>
+    </body>
+    {% endblock %}

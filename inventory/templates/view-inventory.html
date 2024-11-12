@@ -1,0 +1,50 @@
+{% extends base_template %}
+
+{% block title %}Career Closet | View Inventory{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="card mt-4">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center my-3">
+                    <h2>Inventory</h2>
+                    <a href="/inventory/create/" class="button btn btn-primary ">Add Item</a>
+                </div>
+
+                    {% if items|length == 0 %}
+                        <p class="no-content-message">No items in inventory.</p>
+                    {% else %}
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Category</th>
+                                <th>Gender</th>
+                                <th>Color</th>
+                                <th>Size</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for item in items %}
+                                <tr>
+                                    <td>
+                                        <a href="/inventory/edit/{{ item.clothing_id }}">{{ item.name }}</a>
+                                    </td>
+                                    <td>{{ item.category.category_name }}</td>
+                                    <td>{{ item.gender.gender_name }}</td>
+                                    <td>{{ item.color.color_name }}</td>
+                                    <td>{{ item.size.size_value }}</td>
+                                    <td>
+                                        <a href="/inventory/edit/{{ item.clothing_id }}" class="btn btn-primary">Edit</a>
+                                        <a href="/inventory/archive/{{ item.clothing_id }}" class="btn btn-danger">Archive</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
