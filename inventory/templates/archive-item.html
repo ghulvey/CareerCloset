@@ -1,0 +1,21 @@
+{% extends base_template %}
+
+{% block title %}Career Closet | Edit Inventory{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="card mt-4">
+            <div class="card-body">
+                <h2>Archive Item</h2>
+                <p>Are you sure you want to archive {{ item.name }}?</p>
+                <form action="/inventory/archive/{{ item.clothing_id }}/" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Archive</button>
+                    <a href="/inventory/" class="btn btn-secondary">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+                

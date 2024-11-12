@@ -1,11 +1,13 @@
 ﻿from datetime import timedelta, datetime
 
-from django.contrib.auth.models import Group
+from django.contrib.auth.models import Group, User
 from django.db import models
 from django.template.defaultfilters import default
 from django.template.defaulttags import now
 from django.utils import timezone
 from django.utils.crypto import get_random_string
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 from common.file_storage import get_random_filename
 
@@ -71,6 +73,13 @@ class Category(models.Model):
     def __str__(self):
         return self.category_name
 
+availability_statuses = (
+    ('available', 'Available'),
+    ('on_order', 'On Order'),
+    ('picked_up', 'Picked Up'),
+    ('archived', 'Archived'),
+)
+
 
 # ClothingItem Model
 class ClothingItem(models.Model):
@@ -81,9 +90,9 @@ class ClothingItem(models.Model):
     color = models.ForeignKey(Color, on_delete=models.CASCADE)  # ForeignKey to Color
     category = models.ForeignKey(Category, on_delete=models.CASCADE)  # ForeignKey to Category
     gender = models.ForeignKey(Gender, on_delete=models.SET_NULL, null=True, default=1)
-    availability_status = models.CharField(max_length=50)
+    availability_status = models.CharField(max_length=50, choices=availability_statuses, default='available')
     date_added = models.DateTimeField(auto_now_add=True)
-    images = models.ManyToManyField('ClothingItemImage', related_name='clothing_images')
+    images = models.ManyToManyField('ClothingItemImage', related_name='clothing_images', blank=True)
 
     def __str__(self):
         return self.name
@@ -91,18 +100,28 @@ class ClothingItem(models.Model):
 class ClothingItemImage(models.Model):
     clothing_item = models.ForeignKey(ClothingItem, on_delete=models.CASCADE, related_name='clothing_images')
     image = models.ImageField(upload_to=get_random_filename)
+    index = models.IntegerField(default=0)
 
     def __str__(self):
         return self.clothing_item.name
 
 # User (for identification only)
 class Customer(models.Model):
-    user_id = models.AutoField(primary_key=True)  # Random identifier or confirmation number
+    id = models.AutoField(primary_key=True, default=1)  # Manually define a default value
+    user = models.OneToOneField(User, on_delete=models.CASCADE, default=1)
     email = models.EmailField(max_length=254)
 
     def __str__(self):
-        return f"{self.email} - {self.user_id}"
+        return f"{self.user.username} - {self.email}"
 
+@receiver(post_save, sender=User)
+def create_customer_profile(sender, instance, created, **kwargs):
+    if created:
+        Customer.objects.create(user=instance, email=instance.email)
+
+@receiver(post_save, sender=User)
+def save_customer_profile(sender, instance, **kwargs):
+    instance.customer.save()
 
 # Transaction Model
 class Transaction(models.Model):
@@ -113,3 +132,17 @@ class Transaction(models.Model):
 
     def __str__(self):
         return f"Transaction {self.transaction_id}: {self.user.email} - {self.clothing_item.name} on {self.transaction_date}"
+
+class Cart(models.Model):
+    user = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Cart {self.id} for {self.user.username}"
+    
+class CartItem(models.Model):
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name="items")
+    clothing_item = models.OneToOneField(ClothingItem, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.clothing_item.name} in cart {self.cart.id}"
