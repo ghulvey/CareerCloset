@@ -252,11 +252,20 @@ h3{
  min-height: 500px;            /* adjust this value to make the container longer */
 }
 
+.image-container2 {
+ margin-bottom: 10px;
+ display: flex; 
+ padding-left: 50px;
+ align-items: center; 
+ gap: 25px; 
+ position: relative; 
+}
+
 .text-container1{
  position: absolute;
  z-index: 10;
- margin-top: -150px;
- margin-left: 34px;
+ transform: translateY(-160px); /* Moves the container up */
+ margin-left: 20px;
  width: 1200px;
 }
 
@@ -356,15 +365,6 @@ h3{
  margin-left: 34px;
  width: 300px;
  transform: scaleX(6);  
-}
-
-.image-container2 {
- margin-bottom: 10px;
- display: flex; 
- padding-left: 50px;
- align-items: center; 
- gap: 25px; 
- position: relative; 
 }
 /* container: two */
 #two {
