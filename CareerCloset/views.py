@@ -67,9 +67,7 @@ def clothing_item_detail(request, clothing_id):
 
 @login_required
 def add_to_cart(request, clothing_id):
-    # Get the Customer profile associated with the current user
-    customer = get_object_or_404(Customer, user=request.user)
-    cart, created = Cart.objects.get_or_create(user=customer)
+    cart, created = Cart.objects.get_or_create(user=request.user)
     clothing_item = get_object_or_404(ClothingItem, pk=clothing_id)
 
     # Check if the item is already in the cart
@@ -84,14 +82,12 @@ def add_to_cart(request, clothing_id):
 
 @login_required
 def view_cart(request):
-    customer = get_object_or_404(Customer, user=request.user)  # Get Customer associated with User
-    cart, created = Cart.objects.get_or_create(user=customer)
+    cart, created = Cart.objects.get_or_create(user=request.user)
     return render(request, 'cart/view_cart.html', {'cart': cart})
 
 @login_required
 def remove_from_cart(request, cart_item_id):
-    customer = get_object_or_404(Customer, user=request.user)
-    cart = get_object_or_404(Cart, user=customer)
+    cart = get_object_or_404(Cart, user=request.user)
     cart_item = get_object_or_404(CartItem, cart=cart, id=cart_item_id)
     cart_item.delete()
     return redirect("view_cart")
@@ -99,14 +95,13 @@ def remove_from_cart(request, cart_item_id):
 
 @login_required
 def checkout(request):
-    customer = get_object_or_404(Customer, user=request.user)
-    cart = get_object_or_404(Cart, user=customer)
+    cart = get_object_or_404(Cart, user=request.user)
 
     order = models.Order.objects.create(user=request.user)
 
     for item in cart.items.all():
         item.clothing_item.availability_status = 'on_order'
-        Transaction.objects.create(user=customer, clothing_item=item.clothing_item, order=order)
+        Transaction.objects.create(user=request.user, clothing_item=item.clothing_item, order=order)
         item.clothing_item.save()
 
     cart.items.all().delete()
@@ -117,8 +112,7 @@ def checkout(request):
 def backend_home(request):
 
     permissions = request.user.get_all_permissions()
-    print(permissions)
-
+    
     access_permission = 'access.view_accessassignment' in permissions
     order_permission = 'access.view_order' in permissions
     inventory_permission = 'access.view_clothingitem' in permissions
