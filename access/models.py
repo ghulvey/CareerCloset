@@ -146,3 +146,19 @@ class CartItem(models.Model):
 
     def __str__(self):
         return f"{self.clothing_item.name} in cart {self.cart.id}"
+    
+class Favorite(models.Model):
+    user = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name="favorites")
+    clothing_item = models.ForeignKey(ClothingItem, on_delete=models.CASCADE, related_name="favorited_by")
+    added_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user.user.username}'s favorite: {self.clothing_item.name}"
+
+class FavoriteItem(models.Model):
+    favorite = models.ForeignKey(Favorite, on_delete=models.CASCADE, related_name="items")
+    clothing_item = models.OneToOneField(ClothingItem, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.clothing_item.name} in favorite {self.favorite.id}"
+

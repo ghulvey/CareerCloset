@@ -12,7 +12,7 @@
     z-index: -1;
   }
 
-  .cart-container {
+  .favorites-container {
     margin: 3rem auto;
     max-width: 800px;
     background-color: #fff;
@@ -42,12 +42,12 @@
     font-weight: bold;
   }
 
-  .cart-summary {
+  .favorites-summary {
     margin-top: 1rem;
     text-align: center;
   }
 
-  .empty-cart {
+  .favorites-cart {
     text-align: center;
     font-style: italic;
     color: #555;
@@ -71,8 +71,8 @@
 <div class="container">
   <h1 class="text-center my-4" style="padding-top: 50px;">Cart</h1>
 
-  {% if cart.items.all %}
-  <div class="cart-container">
+  {% if favorites.items.all %}
+  <div class="favorites-container">
     <table class="table table-striped table-hover">
       <thead>
         <tr>
@@ -84,7 +84,7 @@
         </tr>
       </thead>
       <tbody>
-        {% for item in cart.items.all %}
+        {% for item in favorites.items.all %}
         <tr>
           <td>
           <a href="{% url 'clothing_item_detail' item.clothing_item.clothing_id %}">
@@ -95,20 +95,20 @@
           <td>{{ item.clothing_item.size }}</td>
           <td>{{ item.clothing_item.color.color_name }}</td>
           <td>
-            <a href="{% url 'remove_from_cart' item.id %}" class="btn btn-danger">Remove</a>
+            <a href="{% url 'remove_from_favorites' item.id %}" class="btn btn-danger">Remove</a>
           </td>
         </tr>
         {% endfor %}
       </tbody>
     </table>
 
-    <div class="cart-summary">
+    <div class="favorites-summary">
       <a href="{% url 'checkout' %}" class="btn btn-success">Proceed to Checkout</a>
     </div>
   </div>
 
   {% else %}
-  <p class="empty-cart">Your cart is empty.</p>
+  <p class="empty-favorites">Your cart is empty.</p>
   {% endif %}
 </div>
 </body>
