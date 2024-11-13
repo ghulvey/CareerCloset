@@ -1,4 +1,5 @@
 {% extends 'base.html' %} 
+{% load static %}
 {% block content %}
 <body>
   <style>
@@ -53,7 +54,7 @@
                   <img src="{{ item.images.first.image.url }}" alt="{{ item.name }} image" class="clothing-image">
                 </a>
               {% else %}
-                <img src="../static/images/Image-not-found.png" alt="Placeholder Image" class="clothing-image">
+                <img src="{% static 'images/Image-not-found.png' %}" alt="Placeholder Image" class="clothing-image">
               {% endif %}
             </div>
             <div class="card-body">

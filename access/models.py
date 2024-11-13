@@ -109,7 +109,7 @@ class ClothingItemImage(models.Model):
 # User (for identification only)
 class Customer(models.Model):
     id = models.AutoField(primary_key=True, default=1)  # Manually define a default value
-    user = models.OneToOneField(User, on_delete=models.CASCADE, default=1)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     email = models.EmailField(max_length=254)
 
     def __str__(self):
@@ -127,7 +127,7 @@ class Customer(models.Model):
 # Transaction Model
 class Transaction(models.Model):
     transaction_id = models.AutoField(primary_key=True)
-    user = models.ForeignKey(Customer, on_delete=models.CASCADE)  # ForeignKey to User for identification
+    user = models.ForeignKey(User, on_delete=models.CASCADE)  # ForeignKey to User for identification
     clothing_item = models.ForeignKey(ClothingItem, on_delete=models.CASCADE)  # ForeignKey to ClothingItem
     transaction_date = models.DateTimeField(auto_now_add=True)
     order = models.ForeignKey('Order', on_delete=models.CASCADE, null=True)
@@ -151,7 +151,7 @@ order_statuses = (
 class Order(models.Model):
     order_id = models.AutoField(primary_key=True)
     order_status = models.CharField(max_length=50, choices=order_statuses, default='pending')
-    user = models.OneToOneField('auth.User', on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE, null=True)
     transactions = models.ManyToOneRel(Transaction, field_name='order', related_name='transactions', to='access.Transaction')
     expiration_date = models.DateTimeField(blank=True, null=True)
     order_date = models.DateTimeField(auto_now_add=True)
@@ -167,7 +167,7 @@ class Order(models.Model):
         return f"Order {self.order_id}: {self.user.email} on {self.order_date}"
 
 class Cart(models.Model):
-    user = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -175,7 +175,7 @@ class Cart(models.Model):
     
 class CartItem(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name="items")
-    clothing_item = models.OneToOneField(ClothingItem, on_delete=models.CASCADE)
+    clothing_item = models.ForeignKey(ClothingItem, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"{self.clothing_item.name} in cart {self.cart.id}"
