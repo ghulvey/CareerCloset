@@ -162,11 +162,8 @@ MEDIA_URL = os.getenv('S3_MEDIA_URL', '/media/')
 
 STORAGES = {
     "default": {
-        "BACKEND": "storages.backends.s3boto3.S3Boto3Storage" if USE_SUPABASE_FILE_STORAGE else "django.core.files.storage.FileSystemStorage",
-        "options": {} if USE_SUPABASE_FILE_STORAGE else {
-            "location": "media",
-        },
-
+        "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
+        "options": {}
     },
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
