@@ -76,6 +76,10 @@ def add_to_cart(request, clothing_id):
     return redirect("view_cart")
 
 @login_required
+def favorites(request):
+    return render(request, 'favorites.html')
+
+@login_required
 def view_cart(request):
     customer = get_object_or_404(Customer, user=request.user)  # Get Customer associated with User
     cart, created = Cart.objects.get_or_create(user=customer)
