@@ -6,7 +6,7 @@ from django.urls import reverse
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 from access import models
-from access.models import Cart, CartItem, ClothingItem, Transaction, Customer
+from access.models import Cart, CartItem, ClothingItem, Transaction, Customer, Favorite, FavoriteItem
 from django.contrib.auth.models import Permission
 
 @login_required
@@ -64,6 +64,67 @@ def clothing_item_detail(request, clothing_id):
         'images': images,
     }
     return render(request, 'clothing_item_detail.html', context)
+
+"""
+@login_required
+def add_to_favorites(request, clothing_id):
+    # Ensure the user is logged in
+    if not request.user.is_authenticated:
+        return redirect('login')  # Redirect to login if not authenticated
+    
+    # Get the Customer instance associated with the logged-in user
+    customer = get_object_or_404(Customer, user=request.user)
+    
+    # Get the ClothingItem instance by clothing_id
+    clothing_item = get_object_or_404(ClothingItem, clothing_id=clothing_id)
+    
+    # Add the clothing item to favorites (if not already in favorites)
+    favorite, created = Favorite.objects.get_or_create(customer=customer, clothing_item=clothing_item)
+    
+    # Redirect to favorites page or any other page as needed
+    return redirect('favorites')
+"""
+
+@login_required
+def add_to_favorites(request, clothing_id):
+    # Get the Customer profile associated with the current user
+    customer = get_object_or_404(Customer, user=request.user)
+    favorite, created = Favorite.objects.get_or_create(user=customer)
+    clothing_item = get_object_or_404(ClothingItem, pk=clothing_id)
+
+    # Check if the item is already in the cart
+    if Favorite.objects.filter(favorite=favorite, clothing_item=clothing_item).exists():
+        messages.info(request, "This item is already in your favorites.")
+    else:
+        # Add item to cart if not already present
+        Favorite.objects.create(favorite=favorite, clothing_item=clothing_item)
+        messages.success(request, "Item added to favoroite.")
+
+    return redirect("view_cart")
+
+@login_required
+def view_favorites(request):
+    # Get the Customer instance associated with the logged-in User
+    customer = get_object_or_404(Customer, user=request.user)
+    
+    # Fetch all favorited items for the Customer
+    favorites = Favorite.objects.filter(user=customer)
+
+    return render(request, 'favorites/view_favorites.html', {'favorites': favorites})
+
+@login_required
+def remove_from_favorites(request, clothing_id):
+    favorite = get_object_or_404(Favorite, user=request.user)
+    clothing_item = get_object_or_404(ClothingItem, pk=clothing_id)
+
+    # Remove item from favorites
+    if favorite.clothing_items.filter(pk=clothing_item.pk).exists():
+        favorite.clothing_items.remove(clothing_item)
+        messages.success(request, "Item removed from favorites.")
+    else:
+        messages.info(request, "This item is not in your favorites.")
+
+    return redirect("view_favorites")
 
 @login_required
 def add_to_cart(request, clothing_id):

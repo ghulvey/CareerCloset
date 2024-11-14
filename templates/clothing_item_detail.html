@@ -76,7 +76,10 @@
           <div class="item-description">{{ clothing_item.description }}</div>
           <div class="item-specs">Size: {{ clothing_item.size }}</div>
           <div class="item-specs">Color: {{ clothing_item.color.color_name }}</div>
-          <a href="{% url 'add_to_cart' clothing_item.clothing_id %}" class="btn btn-primary mt-3">Add to Cart</a>
+          <div class="mt-3">
+            <a href="{% url 'add_to_cart' clothing_item.clothing_id %}" class="btn btn-primary">Add to Cart</a>
+            <a href="{% url 'add_to_favorites' clothing_item.clothing_id %}" class="btn btn-primary">Add to Favorites</a>
+          </div>
         </div>
       </div>
     
