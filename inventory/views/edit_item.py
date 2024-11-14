@@ -9,7 +9,7 @@ from access.models import ClothingItem, Category, Color, Size, Gender, ClothingI
 class EditItem(View):
 
     @method_decorator(login_required)
-    @method_decorator(permission_required('change_clothingitem', raise_exception=True))
+    @method_decorator(permission_required('access.change_clothingitem', raise_exception=True))
     def get(self, request, *args, **kwargs):
 
         item = ClothingItem.objects.get(clothing_id=kwargs['pk'])
@@ -31,7 +31,7 @@ class EditItem(View):
         })
     
     @method_decorator(login_required)
-    @method_decorator(permission_required('change_clothingitem', raise_exception=True))
+    @method_decorator(permission_required('access.change_clothingitem', raise_exception=True))
     def post(self, request, *args, **kwargs):
 
         item = ClothingItem.objects.get(clothing_id=kwargs['pk'])

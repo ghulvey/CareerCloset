@@ -1,4 +1,4 @@
-﻿FROM python:3.11-slim
+﻿FROM python:3.12-slim
 
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
@@ -12,6 +12,11 @@ COPY . /app
 
 EXPOSE 8000
 
-RUN python manage.py migrate
+RUN rm /app/CareerCloset/settings.py
+RUN mv /app/CareerCloset/settings-prod.py /app/CareerCloset/settings.py
 
-CMD ["python", "manage.py", "runserver", "0.0.0.0", "8000"]
+RUN python manage.py collectstatic --noinput
+
+RUN pip install gunicorn
+
+CMD ["sh", "-c", "python manage.py migrate &&  python manage.py create_groups && gunicorn --bind 0.0.0.0:8000 CareerCloset.wsgi:application"]

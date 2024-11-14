@@ -1,0 +1,101 @@
+{% extends base_template %}
+
+{% block title %}Career Closet | View Orders{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="card mt-4">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center my-3">
+                    <h2>Pending Orders</h2>
+                </div>
+
+                    {% if pending_orders|length == 0 %}
+                        <p class="no-content-message">No active orders.</p>
+                    {% else %}
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Order No.</th>
+                                <th>Customer</th>
+                                <th>Submitted On</th>
+                                <th class="text-right">Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for order in pending_orders %}
+                                <tr>
+                                    <td>{{ order.order_id }}</td>
+                                    <td>
+                                        {{ order.user.email }}
+                                    </td>
+                                    <td>
+                                        {{ order.order_date }}
+                                    </td>
+                                    <td class="text-right">
+                                        <a href="/orders/{{ order.order_id }}/" class="btn btn-primary">View</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    {% endif %}
+            </div>
+        </div>
+        <div class="card my-4">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center my-3">
+                    <h2>Ready for Pickup</h2>
+                </div>
+
+                    {% if pickup_orders|length == 0 %}
+                        <p class="no-content-message">No active orders.</p>
+                    {% else %}
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Order No.</th>
+                                <th>Customer</th>
+                                <th>Pickup Type</th>
+                                <th>Pickup Code</th>
+                                <th>Pickup Deadline</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for item in pickup_orders %}
+                                <tr>
+                                    <td>{{ item.order_id }}</td>
+                                    <td>
+                                        {{ item.user.email }}
+                                    </td>
+                                    <td>
+                                        {% if item.pickup_method == 'self' %}
+                                        Self Service
+                                        {% else %}
+                                        Desk Pickup
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        
+                                        {% if item.pickup_method == 'self' %}
+                                        <strong>Box: </strong>{{ item.pickup_code }}
+                                        {% else %}
+                                        <strong>Code: </strong>{{ item.pickup_code }}
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {{ item.expiration_date }}
+                                    </td>
+                                    <td>
+                                        <a href="/orders/{{ item.order_id }}/" class="btn btn-primary">View</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

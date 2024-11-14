@@ -1,0 +1,162 @@
+{% extends base_template %}
+
+{% block title %}Career Closet | View Order{% endblock %}
+
+{% block content %}
+    <div class="container">
+
+        {% if order.order_status != 'pending' and order.order_status != 'processed' %}
+        <div class="alert alert-primary mt-4" role="alert">
+            The current order status is <strong>{{ order.order_status }}</strong>. No changes can be made.
+          </div>
+        {% endif %}
+
+        <div class="card mt-4">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center my-3">
+                    <h2>Order #{{ order.order_id }}</h2>
+                    <div>
+                        <p><strong>Status:</strong> {{ order.order_status }}</p>
+                        <p><strong>Customer:</strong> {{ order.user.email }}</p>
+                    </div>
+                </div>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Item Id</th>
+                        <th>Type</th>
+                        <th>Color</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in items %}
+                        <tr>
+                            <td>
+                                <img src="{{ item.image }}" alt="{{ item.clothing_item.category }}" class="img-thumbnail" style="width: 100px; height: 100px; object-fit: cover;">
+                            </td>
+                            <td>{{ item.id }}</td>
+                            <td>{{ item.category }}</td>
+                            <td>{{ item.color }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    
+        
+            {% if order.order_status == 'pending' %}
+            <div class="card my-4">
+            <div class="card-body">
+                <form action="/orders/{{ order.order_id }}/" method="post">
+                    {% csrf_token %}
+                    <h3>Pickup Information</h3>
+                    <div class="form-group">
+                        <label for="pickup_type">Pickup Type</label>
+                        <div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="pickup_type" id="desk_pickup" value="desk" required checked>
+                                <label class="form-check-label" for="desk_pickup">
+                                    Pickup at Desk
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="pickup_type" id="self_pickup" value="self_serve" required>
+                                <label class="form-check-label" for="self_pickup">
+                                    Self Service Pickup
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="pickup_box">Pickup Box</label>
+                            <input type="text" class="form-control" id="pickup_box" name="pickup_box" disabled>
+                        </div>
+                    <button type="submit" name="action" value="ready" class="btn btn-primary mt-4">Mark as Ready for Pickup</button>
+                    <!-- Cancel Confirmation Modal -->
+                    <div class="modal fade" id="cancelModal" tabindex="-1" role="dialog" aria-labelledby="cancelModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="cancelModalLabel">Confirm Cancellation</h5>
+                                </div>
+                                <div class="modal-body">
+                                    Are you sure you want to cancel this order?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="submit" name="action" value="cancel" class="btn btn-danger">Cancel Order</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Trigger Modal -->
+                    <button type="button" class="btn btn-danger mt-4 ml-2" data-toggle="modal" data-target="#cancelModal">
+                        Cancel Order
+                    </button>
+                </form>
+            </div>
+        </div>
+            {% endif %}
+            {% if order.order_status == 'processed' %}
+            <div class="card my-4">
+            <div class="card-body">
+                <form action="/orders/{{ order.order_id }}/" method="post">
+                    {% csrf_token %}
+                    <h3>Item Reciept</h3>
+                    <hr>
+
+                    {% if order.pickup_method == 'self' %}
+                    <p><strong>Pickup Method:</strong> Self Service Boxes</p>
+                    <p><strong>Box Number:</strong> {{ order.pickup_code }}</p>
+                    <p><strong>Pickup Deadline:</strong> {{ order.expiration_date }}</p>
+                    {% else %}
+                    <p><strong>Pickup Method:</strong> At Front Desk</p>
+                    <p><strong>Pickup Code:</strong> {{ order.pickup_code }}</p>
+                    <p><strong>Pickup Deadline:</strong> {{ order.expiration_date }}</p>
+                    {% endif %}
+
+                
+                    <button type="submit" name="action" value="picked_up" class="btn btn-primary mt-4">Mark as Picked Up</button>
+                    <!-- Cancel Confirmation Modal -->
+                    <div class="modal fade" id="cancelModal" tabindex="-1" role="dialog" aria-labelledby="cancelModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="cancelModalLabel">Confirm Cancellation</h5>
+                                </div>
+                                <div class="modal-body">
+                                    Are you sure you want to cancel this order?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="submit" name="action" value="cancel" class="btn btn-danger">Cancel Order</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Trigger Modal -->
+                    <button type="button" class="btn btn-danger mt-4 ml-2" data-toggle="modal" data-target="#cancelModal">
+                        Cancel Order
+                    </button>
+                </form>
+            </div>
+        </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('desk_pickup').addEventListener('change', function() {
+            document.getElementById('pickup_box').disabled = true;
+            document.getElementById('pickup_box').required = false;
+        });
+        document.getElementById('self_pickup').addEventListener('change', function() {
+            document.getElementById('pickup_box').disabled = false;
+            document.getElementById('pickup_box').required = true;
+        });
+    </script>
+{% endblock %}

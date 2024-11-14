@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
+{% load static %}
 <body> 
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link rel="stylesheet" href="/static/home.css"> 
+  <link rel="stylesheet" href="{% static 'home.css' %}"> 
   
 {% block content %}
 <!-- jumbotron -->
@@ -27,20 +28,22 @@
 
 <!-- Shopping Bag Link -->
 <a class="nav-link" href="{% url 'view_cart' %}">
-  <img src="static/images/shoppingbag.png" class="img-bag" alt="White Shopping Bag">
+  <img src="{% static 'images/shoppingbag.png' %}" class="img-bag" alt="White Shopping Bag">
 </a>
 
 
 <!-- one -->
 <div id="one" class="container-fluid">
   <div class="image-container2">
-    <img src="static/images/hangers.png" alt="Blue Hanger Background" style="width: 100%; height: 100vh; margin-top: 2px;">
+
+    <img src="{% static 'images/hangers.png' %}" alt="Blue Hanger Background" style="width: 100%; height: 100vh; margin-top: 2px;">
+
 
     <div class="text-container1">
       <div class="seasonreg-text1">
         <p>CHOOSE YOUR OUTFIT</p>
       </div>
-      <img src="static/images/whitebox.png" class="whitebox-img" alt="white Background Box">
+      <img src="{% static 'images/whitebox.png' %}" class="whitebox-img" alt="white Background Box">
       <div class="seasonitl-text1">
         <p> Explore our career-ready options</p>
       </div> 
@@ -56,7 +59,7 @@
             <div class="divider"></div>  <!-- divider line -->
         </div>
       </div>
-      <img src="static/images/shoppingbags.png" class="shopbag-img" alt="Two Shopping Bags">
+      <img src="{% static 'images/shoppingbags.png' %}" class="shopbag-img" alt="Two Shopping Bags">
     </div>
 
   </div>
@@ -65,9 +68,9 @@
 <!-- two -->
 <div id="two" class="container-fluid">
   <div class="image-container3">
-    <img src="static/images/yellowmarquee.png" class="img-yellowpanel" alt="Yellow Panel" />
-    <img src="static/images/marqueetext.png"   class="marquee-text"    alt="Yellow Panel" />
-    <img src="static/images/hanger.png" class="hanger-img" alt="Hanger Image">
+    <img src="{% static 'images/yellowmarquee.png' %}" class="img-yellowpanel" alt="Yellow Panel" />
+    <img src="{% static 'images/marqueetext.png' %}"   class="marquee-text"    alt="Yellow Panel" />
+    <img src="{% static 'images/hanger.png' %}" class="hanger-img" alt="Hanger Image">
   </div>
 
   <div class="text-container2">
@@ -94,9 +97,9 @@
 <!-- three -->
 <div id="three" class="container-fluid">
   <div class="image-container4">
-    <img src="static/images/yellowbackground.png" class="img-yellowbackground" alt="Yellow Background" />
-    <img src="static/images/checkout.png"         class="img-checkout"         alt="Check Out Image" />
-    <img src="static/images/orangepage.png"       class="img-orangepage"       alt="Orange Page Image" />
+    <img src="{% static 'images/yellowbackground.png' %}" class="img-yellowbackground" alt="Yellow Background" />
+    <img src="{% static 'images/checkout.png' %}"         class="img-checkout"         alt="Check Out Image" />
+    <img src="{% static 'images/orangepage.png' %}"       class="img-orangepage"       alt="Orange Page Image" />
   </div>
 </div>
 
@@ -240,7 +243,7 @@ showSlides();
 
 
 <!-- Include the JavaScript file -->
-<script src="/static/home.js"></script>
+<script src="{% static 'home.js' %}"></script>
 {% endblock %}
 
 </body>

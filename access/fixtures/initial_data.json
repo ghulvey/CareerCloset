@@ -319,13 +319,6 @@
     }
 },
 {
-    "model": "access.customer",
-    "pk": 1,
-    "fields": {
-        "email": "jdoe@kent.edu"
-    }
-},
-{
     "model": "access.transaction",
     "pk": 1,
     "fields": {

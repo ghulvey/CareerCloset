@@ -1,4 +1,4 @@
-# GoldenOpportunities
+# Career Closet
 
 ## Problem Statement
 

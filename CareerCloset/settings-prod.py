@@ -29,7 +29,7 @@ load_dotenv()
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 CSRF_TRUSTED_ORIGINS = ['http://localhost:8000']
@@ -119,8 +119,8 @@ Database Settings
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql" if USE_SUPABASE_DB else "django.db.backends.sqlite3",
-        "NAME": os.getenv('DB_NAME') if USE_SUPABASE_DB else BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.getenv('DB_NAME'),
         "USER": os.getenv('DB_USER', ''),
         "PASSWORD": os.getenv('DB_PASSWORD', ''),
         "HOST": os.getenv('DB_HOST', 'localhost'),  # Defaults to localhost if not set

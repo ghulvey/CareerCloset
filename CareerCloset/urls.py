@@ -30,6 +30,7 @@ urlpatterns = [
     path('auth/', include('access.urls')),
     path('oidc/', include('mozilla_django_oidc.urls')),
     path('inventory/', include('inventory.urls')),
+    path('orders/', include('orders.urls')),
     path('', views.index, name='index'),
     path('women/', views.women, name='women'),
     path('men/', views.men, name='men'),
@@ -42,4 +43,5 @@ urlpatterns = [
     path("favorites/", views.view_favorites, name="view_favorites"),
     path('favorites/add/<int:clothing_id>/', views.add_to_favorites, name='add_to_favorites'),
     path("favorites/remove/<int:cart_item_id>/", views.remove_from_favorites, name="remove_from_favorites"),
+    path('backend', views.backend_home, name='backend'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

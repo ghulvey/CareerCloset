@@ -10,8 +10,8 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         group_names = [
             ("Admin", ['add_accessassignment', 'change_accessassignment', 'delete_accessassignment', 'view_accessassignment', 'add_clothingitem', 'change_clothingitem', 'delete_clothingitem', 'view_clothingitem']),
-            ("Employee", ['add_clothingitem', 'change_clothingitem', 'delete_clothingitem', 'view_clothingitem']),
-            ("Student Employee", ['add_clothingitem', 'change_clothingitem', 'delete_clothingitem', 'view_clothingitem']),
+            ("Employee", ['add_clothingitem', 'change_clothingitem', 'delete_clothingitem', 'view_clothingitem', 'add_order', 'change_order', 'delete_order', 'view_order']),
+            ("Student Employee", ['add_clothingitem', 'change_clothingitem', 'delete_clothingitem', 'view_clothingitem', 'add_order', 'change_order', 'delete_order', 'view_order']),
         ]
 
         sizes = [
