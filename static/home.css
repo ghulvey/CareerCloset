@@ -38,6 +38,13 @@ h2{
  text-align: left;
 }
 
+h3{
+ font-family: 'The Seasons Bold';
+ font-size: 30px !important;
+ color: #323232;
+ text-align: center;
+}
+
 /* navigation bar */
 .navbar {
  background-color: transparent; /* make the navbar transparent */
@@ -242,15 +249,25 @@ h2{
 }
 /* container: one */
 #one {
- min-height: 500px;            /* adjust this value to make the container longer */
+ min-height: 100vh;            /* adjust this value to make the container longer */
+}
+
+.image-container2 {
+ margin-bottom: 10px;
+ display: flex; 
+ padding-left: 50px;
+ align-items: center; 
+ gap: 25px; 
+ position: relative; 
 }
 
 .text-container1{
  position: absolute;
  z-index: 10;
- margin-top: -150px;
- margin-left: 34px;
- width: 1200px;
+ transform: translateY(-160px); /* moves the container up */
+ margin-left: 2%;
+ width: 90%;
+ height: auto;
 }
 
 .seasonreg-text1{
@@ -345,19 +362,11 @@ h2{
 .whitebox-img{
  position: absolute;
  z-index: -90;
- margin-top: -70px;
+ margin-top: -30px;
  margin-left: 34px;
  width: 300px;
+ height: 20vh;
  transform: scaleX(6);  
-}
-
-.image-container2 {
- margin-bottom: 10px;
- display: flex; 
- padding-left: 50px;
- align-items: center; 
- gap: 25px; 
- position: relative; 
 }
 /* container: two */
 #two {
@@ -413,7 +422,7 @@ h2{
 
 .img-yellowpanel {
  width: 100%;                      /* adjust the size of the marquee image */
- height: 800px;                    /* reduce height to make the image smaller */
+ height: 100vh;                    /* reduce height to make the image smaller */
  z-index: 900;
  position: relative;
 }
@@ -422,30 +431,30 @@ h2{
  position: absolute;
  top: 0;                           /* pin the marquee to the top of the image */
  width: 100%;                      /* ensure the marquee spans the full width */
- height: 40px;                     /* adjust marquee height to make it smaller */
+ height: 5vh;                      /* adjust marquee height to make it smaller */
  overflow: hidden;
  background-color: rgba(255, 255, 255, 0); 
  box-sizing: border-box;
 }
-
+/*
 .marquee-content {
  display: inline-block;
  white-space: nowrap;
  color: #9edcff;                        
- font-size: 18px;                  /* reduce font size to make the text smaller */
+ font-size: clamp(1rem, 2vw, 2rem);                  
  font-weight: 900 !important;            
  font-family: Arial, sans-serif;        
  animation: marquee 15s linear infinite;  
 }
 
 .marquee-text{
- width: 100%;                      /* adjust the size of the marquee image */
- height: 800px;                    /* reduce height to make the image smaller */
+ width: 100%;                      
+ height: 100%;                    
  z-index: 900;
  position: relative;
- margin-top: -800px;               /* move the entire yellow marquee section higher */
+ margin-top: -101vh;               
 }
-
+*/
 .hanger-img{
  position: relative;
  z-index: 2000;
@@ -468,13 +477,32 @@ h2{
 .text-container3{
  position: absolute;
  z-index: 10;
- margin-top: -2300px;
- margin-left: 150px;
+ margin-top: -2400px;
+ margin-left: 200px;
  width: 1200px;
 }
 
+.seasonreg-text1 p {
+ margin: 0;                          /* removes default paragraph margin */
+ line-height: 1.7;                   /* adjusts line spacing to your preference */
+}
+
+.seasonitl-text1 p {
+ margin-top: 55px;                  /* removes default paragraph margin */
+ line-height: 1;                    /* adjusts line spacing to your preference */
+}
+
+.seasonnumb-text1 p1{
+ margin-left: -160px;
+}
+
+.dropdown-left {
+ margin-top: -150px;
+ left: -150px;                      /* adjust this value to move it further to the left */
+}
+
 .dropdown-content {
- z-index: 1600;                    /* ensure the dropdown is visible and above other elements */
+ z-index: 1600;                     /* ensure the dropdown is visible and above other elements */
 }
 
 .dropdown-content a:hover {
@@ -492,12 +520,231 @@ h2{
 .img-orangepage{
  position: relative;
  z-index: 2000;
- margin-top: -1500px;
+ margin-top: -1900px;
  margin-left: -450px;
  width: 2270px;
+ transform: scaleY(0.8);
 }
 
-/* Optional: Adjust the marquee animation speed */
+/* container: four */
+#four {
+ min-height: 30px;                    /* adjust container height as necessary */
+}
+
+.img-abouttext{
+ position: relative;
+ z-index: 2100;
+ width: 1700px;
+ margin-top: -2500px;
+ margin-left: -500px;
+}
+
+.slideshow-container {
+ position: relative;
+ z-index: 3000;
+ max-width: 1200px;
+ max-height: 5000px;
+ margin: auto;
+ overflow: hidden;                   /* ensures that overflow content is hidden */
+ border: 1px solid #ffffff00;   
+ border-radius: 10px; 
+ margin-top: -1300px;
+ display: flex;
+ justify-content: center;
+ align-items: center;                /* vertically centers the content */
+}
+
+.about1{
+ height:300px;
+}
+
+.about2{
+ height:300px;
+}
+
+.about3{
+ height:270px;
+}
+
+.arrow-container {
+ position: absolute;
+ bottom: 10px; 
+ width: 100%;
+ display: flex;
+ justify-content: space-between;
+ padding: 0 20px;
+}
+
+.arrow {
+ cursor: pointer;
+ width: 80px; 
+ height: auto;
+}
+
+.img-whiteblock-container {
+ position: relative; 
+ width: 100%;        
+ height: 300px;      
+}
+
+.img-whiteblock {
+ position: absolute;
+ height: 800px; 
+ margin-top: -590px;    
+ left: 0;     
+} 
+
+.img-press {
+ position: absolute;
+ height: 800px; 
+ margin-top: -510px;    
+ left: 0;     
+ align-items: center;
+} 
+
+.presstext-container1{
+ position: relative; 
+ width: 590px;        
+ height: 200px;
+ margin-left: 673px;
+ margin-top: -745px;
+ text-align: center;
+}
+
+.presstext-container1 h3 {
+ color: #323232;
+ margin-bottom: 15px;                    /* adds space below h3 */
+ text-align: center;
+}
+
+.presstext-container1 p1{
+ position: relative;
+ text-align: center;
+ align-items: center;
+ color: #323232;
+ font-size: 20px;
+ font-weight: 90;
+}
+
+.presstext-container2{
+ position: relative; 
+ width: 590px;        
+ height: 200px;
+ margin-left: 673px;
+ margin-top: -180px;
+ text-align: center;
+}
+
+.presstext-container2 h3 {
+ color: #323232;
+ margin-bottom: 15px; 
+ text-align: center;
+}
+
+.presstext-container2 p1{
+ position: relative;
+ text-align: center;
+ align-items: center;
+ color: #323232;
+ font-size: 20px;
+ font-weight: 90;
+}
+
+.presstext-container3{
+ position: relative; 
+ width: 590px;        
+ height: 200px;
+ margin-left: 673px;
+ margin-top: 20px;
+ text-align: center;
+}
+
+.presstext-container3 h3 {
+ color: #323232;
+ margin-bottom: 15px; 
+ text-align: center;
+}
+
+.presstext-container3 p1{
+ position: relative;
+ text-align: center;
+ align-items: center;
+ color: #323232;
+ font-size: 20px;
+ font-weight: 90;
+}
+
+.img-arrow1{
+ position: absolute; 
+ width: auto;        
+ height: 80px;
+ margin-left: 1270px;
+ margin-top: -350px;
+}
+
+.img-arrow2{
+ position: absolute; 
+ width: auto;        
+ height: 80px;
+ margin-left: 1270px;
+ margin-top: -150px;
+}
+
+.img-arrow3{
+ position: absolute; 
+ width: auto;        
+ height: 80px;
+ margin-left: 1270px;
+ margin-top: -150px;
+}
+
+/* container: five */
+#five{
+ min-height: 30px;    
+}
+.image-container6{
+ height:auto;
+ width: auto;
+}
+.img-footer{
+ margin-top: 1000px;
+ height: auto;
+ width: 102%;
+ margin-left: -15px;
+ align-items: center;
+}
+
+.img-footerlogo{
+ margin-top: -500px;
+ margin-left: 670px;
+ height: 40px;
+ width: auto;
+ position: relative;
+}
+
+.footertext-container{
+ margin-top: -580px;
+ margin-left: 670px;
+ height: 400px;
+ width: 400px;
+}
+
+.footertext-container h4{
+ font-family: 'The Seasons Bold' ;
+ color: #ffde59 !important;
+}
+
+.footertext-container h5{
+ font-family: 'The Seasons Bold' ;
+ color: #ffffff !important;
+}
+
+.footertext-container p{
+ color: #ffffff;
+ font-size: 20px;
+ font-weight: 90;
+}
+
 @keyframes marquee {
  0% { transform: translateX(100%); }
  100% { transform: translateX(-100%); }
