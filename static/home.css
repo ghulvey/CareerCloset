@@ -249,7 +249,7 @@ h3{
 }
 /* container: one */
 #one {
- min-height: 500px;            /* adjust this value to make the container longer */
+ min-height: 100vh;            /* adjust this value to make the container longer */
 }
 
 .image-container2 {
@@ -264,9 +264,10 @@ h3{
 .text-container1{
  position: absolute;
  z-index: 10;
- transform: translateY(-160px); /* Moves the container up */
- margin-left: 20px;
- width: 1200px;
+ transform: translateY(-160px); /* moves the container up */
+ margin-left: 2%;
+ width: 90%;
+ height: auto;
 }
 
 .seasonreg-text1{
@@ -361,9 +362,10 @@ h3{
 .whitebox-img{
  position: absolute;
  z-index: -90;
- margin-top: -70px;
+ margin-top: -30px;
  margin-left: 34px;
  width: 300px;
+ height: 20vh;
  transform: scaleX(6);  
 }
 /* container: two */
@@ -420,7 +422,7 @@ h3{
 
 .img-yellowpanel {
  width: 100%;                      /* adjust the size of the marquee image */
- height: 800px;                    /* reduce height to make the image smaller */
+ height: 100vh;                    /* reduce height to make the image smaller */
  z-index: 900;
  position: relative;
 }
@@ -429,29 +431,31 @@ h3{
  position: absolute;
  top: 0;                           /* pin the marquee to the top of the image */
  width: 100%;                      /* ensure the marquee spans the full width */
- height: 40px;                     /* adjust marquee height to make it smaller */
+ height: 5vh;                      /* adjust marquee height to make it smaller */
  overflow: hidden;
  background-color: rgba(255, 255, 255, 0); 
  box-sizing: border-box;
 }
-
+/*
 .marquee-content {
  display: inline-block;
  white-space: nowrap;
  color: #9edcff;                        
- font-size: 18px;                  /* reduce font size to make the text smaller */
+ font-size: clamp(1rem, 2vw, 2rem);                  
  font-weight: 900 !important;            
  font-family: Arial, sans-serif;        
  animation: marquee 15s linear infinite;  
 }
 
+
 .marquee-text{
- width: 100%;                      /* adjust the size of the marquee image */
- height: 800px;                    /* reduce height to make the image smaller */
+ width: 100%;                      
+ height: 100%;                    
  z-index: 900;
  position: relative;
- margin-top: -800px;               /* move the entire yellow marquee section higher */
+ margin-top: -101vh;               
 }
+*/
 
 .hanger-img{
  position: relative;
