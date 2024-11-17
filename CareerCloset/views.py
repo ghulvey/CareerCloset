@@ -147,14 +147,11 @@ def view_favorites(request):
     return render(request, 'favorites/view_favorites.html', {'favorite_items': favorite_items})
 
 @login_required
-def remove_from_favorites(request, clothing_id):
-    favorite = get_object_or_404(Favorite, user=request.user, clothing_item__id=clothing_id)
-
-    favorite.delete()
-    messages.success(request, "Item removed from favorites.")
-
+def remove_from_favorites(request, favorite_item_id):
+    favorite = get_object_or_404(Favorite, user=request.user)
+    favorite_item = get_object_or_404(FavoriteItem, favorite=favorite, id=favorite_item_id)
+    favorite_item.delete()
     return redirect("view_favorites")
-
 
 @login_required
 def add_to_cart(request, clothing_id):
@@ -182,7 +179,6 @@ def remove_from_cart(request, cart_item_id):
     cart_item = get_object_or_404(CartItem, cart=cart, id=cart_item_id)
     cart_item.delete()
     return redirect("view_cart")
-
 
 @login_required
 def checkout(request):
