@@ -31,26 +31,64 @@ def login(request, *args, **kwargs):
     return render(request,'registration/login.html',{'form':form})
 
 @login_required
-def women(request):
+def women(request, *args, **kwargs):
+
+    category_name = request.GET.get('category', None)
+    category = None
+    if category_name:
+        category = models.Category.objects.filter(category_name=category_name).first()
+
+    women_clothing_items = []
+    title = ""
     women_gender = models.Gender.objects.get(gender_name="Female")
     genderless = models.Gender.objects.get(gender_name = "Genderless")
-    women_clothing_items = models.ClothingItem.objects.filter(gender=women_gender, availability_status="available").prefetch_related('images')
-    women_clothing_items |= models.ClothingItem.objects.filter(gender=genderless, availability_status="available").prefetch_related('images')
-
+    if category:
+        women_clothing_items = models.ClothingItem.objects.filter(gender=women_gender, availability_status="available", category=category).prefetch_related('images')
+        women_clothing_items |= models.ClothingItem.objects.filter(gender=genderless, availability_status="available", category=category).prefetch_related('images')
+        if not category_name.endswith('s'):
+            title = "Womens " + category_name + "s"
+        else:
+            title = "Womens " + category_name
+    
+    else:
+        women_clothing_items = models.ClothingItem.objects.filter(gender=women_gender, availability_status="available").prefetch_related('images')
+        women_clothing_items |= models.ClothingItem.objects.filter(gender=genderless, availability_status="available").prefetch_related('images')
+        title = "Womens Clothing"
 
     context = {
+        'title': title,
         'context': women_clothing_items,
     }
     return render(request, 'women.html', context)
 
 @login_required
-def men(request):
-    men_gender = models.Gender.objects.get(gender_name="Men")
+def men(request, *args, **kwargs):
+
+    category_name = request.GET.get('category', None)
+    category = None
+    if category_name:
+        category = models.Category.objects.filter(category_name=category_name).first()
+
+    men_clothing_items = []
+    title = ""
+    men_gender = models.Gender.objects.get(gender_name="Male")
     genderless = models.Gender.objects.get(gender_name="Genderless")
-    men_clothing_items = models.ClothingItem.objects.filter(gender=men_gender, availability_status="available").prefetch_related('images')
-    men_clothing_items |= models.ClothingItem.objects.filter(gender=genderless, availability_status="available").prefetch_related('images')
-    
+
+    if category:
+        men_clothing_items = models.ClothingItem.objects.filter(gender=men_gender, availability_status="available", category=category).prefetch_related('images')
+        men_clothing_items |= models.ClothingItem.objects.filter(gender=genderless, availability_status="available", category=category).prefetch_related('images')
+        if not category_name.endswith('s'):
+            title = "Mens " + category_name + "s"
+        else:
+            title = "Mens " + category_name
+
+    else:
+        men_clothing_items = models.ClothingItem.objects.filter(gender=men_gender, availability_status="available").prefetch_related('images')
+        men_clothing_items |= models.ClothingItem.objects.filter(gender=genderless, availability_status="available").prefetch_related('images')
+        title = "Mens Clothing"
+
     context = {
+        'title': title,
         'context': men_clothing_items,
     }
     return render(request, 'men.html', context)

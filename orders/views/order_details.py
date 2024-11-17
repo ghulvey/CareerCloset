@@ -81,7 +81,7 @@ class OrderDetails(View):
                 transaction.clothing_item.save()
 
             order.save()
-            log_event('Order', 'Order Marked Ready', request.user.id, 'Order processed: ' + order.order_id)
+            log_event('Order', 'Order Marked Ready', request.user.id, 'Order processed: ' + str(order.order_id))
 
         elif request.POST['action'] == 'picked_up':
             order.order_status = 'picked_up'
@@ -95,6 +95,6 @@ class OrderDetails(View):
                 transaction.clothing_item.save()
 
             order.save()
-            log_event('Order', 'Order Picked Up', request.user.id, 'Order picked up: ' + order.order_id)
+            log_event('Order', 'Order Picked Up', request.user.id, 'Order picked up: ' + str(order.order_id))
 
         return redirect('view_order', pk=order.order_id)
