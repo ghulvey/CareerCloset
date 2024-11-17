@@ -1,9 +1,11 @@
-﻿<!DOCTYPE html>
+﻿{% load static %}
+
+<!DOCTYPE html>
 <html>
 <head>
     <title>Career Closet | Login</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://unpkg.com/htmx.org@2.0.2/dist/htmx.js" integrity="sha384-yZq+5izaUBKcRgFbxgkRYwpHhHHCpp5nseXp0MEQ1A4MTWVMnqkmcuFez8x5qfxr" crossorigin="anonymous"></script>
 
@@ -26,7 +28,7 @@
 <div class="login-container">
     <div>
         <div class="login-header">
-            <img src="/static/images/ksu-white-logo.png" height="50">
+            <img src="{% static 'images/ksu-white-logo.png' %}" height="50">
             <h2 class="login-title">Career Closet</h2>
         </div>
         <div class="card login-form">

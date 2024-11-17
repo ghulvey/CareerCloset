@@ -4,6 +4,7 @@ from django.utils.decorators import method_decorator
 from django.views import View
 
 from access.models import ClothingItemImage
+from common.log_event import log_event
 
 
 
@@ -17,4 +18,5 @@ class DeleteImage(View):
 
         image.delete()
 
+        log_event('Inventory', 'Image Deleted', request.user.id, 'Image deleted: ' + image.id)
         return HttpResponse(status=204)

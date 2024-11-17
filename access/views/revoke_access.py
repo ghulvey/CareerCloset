@@ -5,6 +5,7 @@ from django.utils.decorators import method_decorator
 from django.views.generic import View
 
 from access.models import AccessAssignment
+from common.log_event import log_event
 
 
 class RevokeAccessView(View):
@@ -24,6 +25,7 @@ class RevokeAccessView(View):
         user.is_superuser = False
         user.is_staff = False
         user.save()
+        log_event('Access', 'Access Revoked', request.user.id, 'Access revoked for ' + user.username)
         return redirect('access_list')
 
     @method_decorator(login_required)
