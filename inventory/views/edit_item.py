@@ -4,6 +4,7 @@ from django.utils.decorators import method_decorator
 from django.views import View
 
 from access.models import ClothingItem, Category, Color, Size, Gender, ClothingItemImage
+from common.log_event import log_event
 
 
 class EditItem(View):
@@ -67,4 +68,5 @@ class EditItem(View):
 
         item.save()
 
+        log_event('Inventory', 'Item Edited', request.user.id, 'Item edited: ' + item.clothing_id)
         return redirect('inventory_view')

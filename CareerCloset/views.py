@@ -13,7 +13,6 @@ from django.contrib.auth.models import Permission
 def index(request):
     return render(request, 'home.html')
 
-
 def login(request, *args, **kwargs):
     if request.method == 'POST':
         form = AuthenticationForm(request.POST)
@@ -31,7 +30,7 @@ def login(request, *args, **kwargs):
         form = AuthenticationForm()
     return render(request,'registration/login.html',{'form':form})
 
-
+@login_required
 def women(request):
     women_gender = models.Gender.objects.get(gender_name="Female")
     genderless = models.Gender.objects.get(gender_name = "Genderless")
@@ -44,6 +43,7 @@ def women(request):
     }
     return render(request, 'women.html', context)
 
+@login_required
 def men(request):
     men_gender = models.Gender.objects.get(gender_name="Men")
     genderless = models.Gender.objects.get(gender_name="Genderless")
@@ -55,6 +55,7 @@ def men(request):
     }
     return render(request, 'men.html', context)
 
+@login_required
 def clothing_item_detail(request, clothing_id):
     clothing_item = get_object_or_404(ClothingItem, pk=clothing_id)
     images = clothing_item.images.all() 
