@@ -7,6 +7,7 @@ from django.utils.decorators import method_decorator
 from django.views import View
 
 from access.models import Category, Color, Size, ClothingItem, ClothingItemImage, Gender
+from common.log_event import log_event
 
 class ArchiveItemView(View):
 
@@ -26,4 +27,5 @@ class ArchiveItemView(View):
         item = ClothingItem.objects.get(pk=item_id)
         item.availability_status = 'archived'
         item.save()
+        log_event('Inventory', 'Item Archived', request.user.id, 'Item archived: ' + str(item_id))
         return redirect('inventory_view')

@@ -6,6 +6,7 @@ from django.utils.decorators import method_decorator
 from django.views.generic import View
 
 from access.models import AccessAssignment
+from common.log_event import log_event
 
 
 class ChangePermissions(View):
@@ -35,6 +36,7 @@ class ChangePermissions(View):
         else:
             user.is_superuser = False
         user.save()
+        log_event('Access', 'Permissions Changed', request.user.id, 'Permissions changed for ' + user.username + ' to ' + group.name)
         return redirect('access_list')
 
     @method_decorator(login_required)

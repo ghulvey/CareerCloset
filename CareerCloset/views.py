@@ -13,7 +13,6 @@ from django.contrib.auth.models import Permission
 def index(request):
     return render(request, 'home.html')
 
-
 def login(request, *args, **kwargs):
     if request.method == 'POST':
         form = AuthenticationForm(request.POST)
@@ -31,30 +30,70 @@ def login(request, *args, **kwargs):
         form = AuthenticationForm()
     return render(request,'registration/login.html',{'form':form})
 
+@login_required
+def women(request, *args, **kwargs):
 
-def women(request):
+    category_name = request.GET.get('category', None)
+    category = None
+    if category_name:
+        category = models.Category.objects.filter(category_name=category_name).first()
+
+    women_clothing_items = []
+    title = ""
     women_gender = models.Gender.objects.get(gender_name="Female")
     genderless = models.Gender.objects.get(gender_name = "Genderless")
-    women_clothing_items = models.ClothingItem.objects.filter(gender=women_gender, availability_status="available").prefetch_related('images')
-    women_clothing_items |= models.ClothingItem.objects.filter(gender=genderless, availability_status="available").prefetch_related('images')
-
+    if category:
+        women_clothing_items = models.ClothingItem.objects.filter(gender=women_gender, availability_status="available", category=category).prefetch_related('images')
+        women_clothing_items |= models.ClothingItem.objects.filter(gender=genderless, availability_status="available", category=category).prefetch_related('images')
+        if not category_name.endswith('s'):
+            title = "Womens " + category_name + "s"
+        else:
+            title = "Womens " + category_name
+    
+    else:
+        women_clothing_items = models.ClothingItem.objects.filter(gender=women_gender, availability_status="available").prefetch_related('images')
+        women_clothing_items |= models.ClothingItem.objects.filter(gender=genderless, availability_status="available").prefetch_related('images')
+        title = "Womens Clothing"
 
     context = {
+        'title': title,
         'context': women_clothing_items,
     }
     return render(request, 'women.html', context)
 
-def men(request):
-    men_gender = models.Gender.objects.get(gender_name="Men")
+@login_required
+def men(request, *args, **kwargs):
+
+    category_name = request.GET.get('category', None)
+    category = None
+    if category_name:
+        category = models.Category.objects.filter(category_name=category_name).first()
+
+    men_clothing_items = []
+    title = ""
+    men_gender = models.Gender.objects.get(gender_name="Male")
     genderless = models.Gender.objects.get(gender_name="Genderless")
-    men_clothing_items = models.ClothingItem.objects.filter(gender=men_gender, availability_status="available").prefetch_related('images')
-    men_clothing_items |= models.ClothingItem.objects.filter(gender=genderless, availability_status="available").prefetch_related('images')
-    
+
+    if category:
+        men_clothing_items = models.ClothingItem.objects.filter(gender=men_gender, availability_status="available", category=category).prefetch_related('images')
+        men_clothing_items |= models.ClothingItem.objects.filter(gender=genderless, availability_status="available", category=category).prefetch_related('images')
+        if not category_name.endswith('s'):
+            title = "Mens " + category_name + "s"
+        else:
+            title = "Mens " + category_name
+
+    else:
+        men_clothing_items = models.ClothingItem.objects.filter(gender=men_gender, availability_status="available").prefetch_related('images')
+        men_clothing_items |= models.ClothingItem.objects.filter(gender=genderless, availability_status="available").prefetch_related('images')
+        title = "Mens Clothing"
+
     context = {
+        'title': title,
         'context': men_clothing_items,
     }
     return render(request, 'men.html', context)
 
+@login_required
 def clothing_item_detail(request, clothing_id):
     clothing_item = get_object_or_404(ClothingItem, pk=clothing_id)
     images = clothing_item.images.all() 
@@ -88,11 +127,10 @@ def add_to_favorites(request, clothing_id):
 @login_required
 def add_to_favorites(request, clothing_id):
     # Get or create the Customer profile associated with the current user
-    customer, created = Customer.objects.get_or_create(user=request.user)
     clothing_item = get_object_or_404(ClothingItem, pk=clothing_id)
 
     # Check if the item is already in the user's favorites
-    favorite, created = Favorite.objects.get_or_create(user=customer, clothing_item=clothing_item)
+    favorite, created = Favorite.objects.get_or_create(user=request.user, clothing_item=clothing_item)
 
     if not created:
         messages.info(request, "This item is already in your favorites.")
@@ -104,8 +142,7 @@ def add_to_favorites(request, clothing_id):
 
 @login_required
 def view_favorites(request):
-    customer, created = Customer.objects.get_or_create(user=request.user)
-    favorite_items = Favorite.objects.filter(user=customer).select_related('clothing_item')
+    favorite_items = Favorite.objects.filter(user=request.user).select_related('clothing_item')
 
     return render(request, 'favorites/view_favorites.html', {'favorite_items': favorite_items})
 

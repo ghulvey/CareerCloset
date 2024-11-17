@@ -4,6 +4,7 @@ from django.utils.decorators import method_decorator
 from django.views import View
 from django.shortcuts import render, redirect
 from access.models import AccessAssignment
+from common.log_event import log_event
 
 
 class DeleteInvite(View):
@@ -20,4 +21,5 @@ class DeleteInvite(View):
         invite = get_object_or_404(AccessAssignment, pk=kwargs['pk'])
         invite.state = 'canceled'
         invite.save()
+        log_event('Access', 'Invite Deleted', request.user.id, 'Invite deleted for ' + invite.email)
         return redirect('access_list')

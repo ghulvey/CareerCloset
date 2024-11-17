@@ -7,6 +7,7 @@ from django.utils.decorators import method_decorator
 from django.views import View
 
 from access.models import Category, Color, Size, ClothingItem, ClothingItemImage, Gender
+from common.log_event import log_event
 
 
 class CreateItem(View):
@@ -56,4 +57,5 @@ class CreateItem(View):
             item.images.add(image)
             number_of_images += 1
 
+        log_event('Inventory', 'Item Created', request.user.id, 'Item created: ' + str(item.clothing_id))
         return redirect('inventory_view')

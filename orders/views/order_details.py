@@ -8,6 +8,7 @@ from django.utils.decorators import method_decorator
 from django.views import View
 
 from access.models import Order, Transaction, ClothingItemImage
+from common.log_event import log_event
 from common.send_email import send_generic_email
 
 class OrderDetails(View):
@@ -59,6 +60,7 @@ class OrderDetails(View):
             order.save()
 
             send_generic_email(order.user.email, 'Career Closet Order', 'Your order from the Kent State Career Closet has been canceled. This may be because you have not picked up your order within 7 days or requested the order be cancelled. If this is not the case please check for an email sent from our staff, they will provide explanation on why the order could not be completed. If you have any questions please feel free to contact the Career Service office.')
+            log_event('Order', 'Order Canceled', request.user.id, 'Order canceled: ' + order.order_id)
 
         elif request.POST['action'] == 'ready':
             order.order_status = 'processed'
@@ -79,6 +81,7 @@ class OrderDetails(View):
                 transaction.clothing_item.save()
 
             order.save()
+            log_event('Order', 'Order Marked Ready', request.user.id, 'Order processed: ' + str(order.order_id))
 
         elif request.POST['action'] == 'picked_up':
             order.order_status = 'picked_up'
@@ -92,5 +95,6 @@ class OrderDetails(View):
                 transaction.clothing_item.save()
 
             order.save()
+            log_event('Order', 'Order Picked Up', request.user.id, 'Order picked up: ' + str(order.order_id))
 
         return redirect('view_order', pk=order.order_id)
