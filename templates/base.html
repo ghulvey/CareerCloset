@@ -2,6 +2,71 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <style>
+      .menu {
+        display: flex; /* Use flexbox for layout */
+        justify-content: flex-start; /* Center the menu items */
+        margin: 0 auto;
+        margin-left: 10px;
+        position: relative;
+        width: auto; /* Change to auto for better flexibility */
+        z-index: 100;
+      }
+      
+      
+      .menu > li {
+        position: relative; /* Needed for absolute positioning of dropdowns */
+        margin: 0 10px; /* Add some margin between menu items */
+        list-style: none;
+      }
+      
+      .menu > li > a {
+        background: transparent;
+        color: #fff;
+        display: block;
+        padding: 10px 20px;
+        text-align: left;
+        text-decoration: none;
+      }
+      
+      .menu ul {
+        background: transparent; /* Change background to white */
+        opacity: 0;
+        position: absolute;
+        transition: all 0.5s ease;
+        top: 100%; /* Position dropdown directly below parent */
+        width: auto; /* Set to auto or specific width */
+        min-width: 150px; /* Minimum width for better spacing */
+        z-index: 1000; /* Higher z-index to ensure dropdown is above other elements */
+        padding: 10px 0; /* Add padding on top and bottom */
+        margin: 0; /* Reset margin */
+      }
+      
+      .menu, .menu ul {
+        list-style: none; /* Remove default list styling */
+        padding: 0; /* Remove padding */
+        margin: 0; /* Remove margin */
+      }
+
+      
+      .menu li:hover ul {
+        height: auto; /* Allow dropdown to grow with content */
+        opacity: 1;
+        transform: translateY(0);
+      }
+      
+      .menu ul li {
+        margin: 10px 0; /* Add vertical spacing between items */
+      }
+
+      .menu ul a {
+        color: #efab00;
+        display: block;
+        padding: 10px 20px; /* Increased padding for child links */
+        white-space: nowrap; /* Prevent text from wrapping */
+      }
+      
+          </style>
     <title>Kent State Career Closet</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -29,13 +94,38 @@
             />
           </a>
         </div>
-
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item me-3">
-            <a class="nav-link text-decoration-none" href="{% url 'women' %}">WOMEN</a>
+        <ul class="menu">
+          <li>
+            <a href="{% url 'women' %}">WOMEN</a>
+            
+            <ul>
+              <li><a href="#">Jackets</a></li>
+              <div class="divider"></div>
+              <li><a href="#">Tops</a></li>
+              <div class="divider"></div>
+              <li><a href="#">Skirts</a></li>
+              <div class="divider"></div>
+              <li><a href="#">Pants</a></li>
+              <div class="divider"></div>
+              <li><a href="#">Other</a></li>
+              <div class="divider"></div>
+            </ul>
           </li>
-          <li class="nav-item me-3">
-            <a class="nav-link text-decoration-none" href="{% url 'men' %}">MEN</a>
+          <li>
+            <a href="{% url 'men' %}">MEN</a>
+            
+            <ul>
+              <li><a href="#">Jackets</a></li>
+              <div class="divider"></div>
+              <li><a href="#">Shirts</a></li>
+              <div class="divider"></div>
+              <li><a href="#">Pants</a></li>
+              <div class="divider"></div>
+              <li><a href="#">Ties</a></li>
+              <div class="divider"></div>
+              <li><a href="#">Other</a></li>
+              <div class="divider"></div>
+            </ul>
           </li>
         </ul>
 
