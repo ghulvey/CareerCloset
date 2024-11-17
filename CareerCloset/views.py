@@ -127,11 +127,10 @@ def add_to_favorites(request, clothing_id):
 @login_required
 def add_to_favorites(request, clothing_id):
     # Get or create the Customer profile associated with the current user
-    customer, created = Customer.objects.get_or_create(user=request.user)
     clothing_item = get_object_or_404(ClothingItem, pk=clothing_id)
 
     # Check if the item is already in the user's favorites
-    favorite, created = Favorite.objects.get_or_create(user=customer, clothing_item=clothing_item)
+    favorite, created = Favorite.objects.get_or_create(user=request.user, clothing_item=clothing_item)
 
     if not created:
         messages.info(request, "This item is already in your favorites.")
@@ -143,15 +142,13 @@ def add_to_favorites(request, clothing_id):
 
 @login_required
 def view_favorites(request):
-    customer, created = Customer.objects.get_or_create(user=request.user)
-    favorite_items = Favorite.objects.filter(user=customer).select_related('clothing_item')
+    favorite_items = Favorite.objects.filter(user=request.user).select_related('clothing_item')
 
     return render(request, 'favorites/view_favorites.html', {'favorite_items': favorite_items})
 
 @login_required
 def remove_from_favorites(request, clothing_id):
-    customer = get_object_or_404(Customer, user=request.user)
-    favorite = get_object_or_404(Favorite, user=customer, clothing_item__id=clothing_id)
+    favorite = get_object_or_404(Favorite, user=request.user, clothing_item__id=clothing_id)
 
     favorite.delete()
     messages.success(request, "Item removed from favorites.")
