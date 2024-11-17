@@ -22,6 +22,29 @@ class Command(BaseCommand):
             "X-Large",
             "2XL",
             "3XL",
+            "4",
+            "6",
+            "8",
+            "10",
+            "12",
+            "14",
+            "16",
+            "18",
+            "20",
+            "22",
+            "24",
+            "26",
+            "28",
+            "30",
+            "32",
+            "34",
+            "36",
+            "38",
+            "40",
+            "42",
+            "44",
+            "46",
+            "48",
         ]
 
         genders = [
@@ -31,25 +54,34 @@ class Command(BaseCommand):
         ]
 
         colors = [
+            "Red",
+            "Blue",
+            "Green",
+            "Yellow",
             "Black",
-            "Grey",
+            "White",
+            "Gray",
+            "Pink",
+            "Purple",
+            "Orange",
             "Brown",
             "Beige",
-            "Red",
-            "Pink",
-            "Assortment",
-            "Plaid/Brown",
-            "Green",
-            "Blue",
+            "Navy",
+            "Maroon",
+            "Teal",
+            "Olive",
+            "Multi Color",
+            "Other"
         ]
 
         categories = [
             "Jacket",
             "Skirt",
+            "Dress",
+            "Shirt",
             "Pants",
             "Belt",
             "Tie",
-            "Skirt",
             "Outfit",
 
         ]

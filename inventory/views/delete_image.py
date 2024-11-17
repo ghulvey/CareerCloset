@@ -18,5 +18,5 @@ class DeleteImage(View):
 
         image.delete()
 
-        log_event('Inventory', 'Image Deleted', request.user.id, 'Image deleted: ' + image.id)
+        log_event('Inventory', 'Image Deleted', request.user.id, 'Image deleted: ' + str(image.id))
         return HttpResponse(status=204)

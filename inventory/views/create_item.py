@@ -57,5 +57,5 @@ class CreateItem(View):
             item.images.add(image)
             number_of_images += 1
 
-        log_event('Inventory', 'Item Created', request.user.id, 'Item created: ' + item.clothing_id)
+        log_event('Inventory', 'Item Created', request.user.id, 'Item created: ' + str(item.clothing_id))
         return redirect('inventory_view')

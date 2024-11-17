@@ -27,5 +27,5 @@ class ArchiveItemView(View):
         item = ClothingItem.objects.get(pk=item_id)
         item.availability_status = 'archived'
         item.save()
-        log_event('Inventory', 'Item Archived', request.user.id, 'Item archived: ' + item_id)
+        log_event('Inventory', 'Item Archived', request.user.id, 'Item archived: ' + str(item_id))
         return redirect('inventory_view')

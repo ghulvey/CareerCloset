@@ -68,5 +68,5 @@ class EditItem(View):
 
         item.save()
 
-        log_event('Inventory', 'Item Edited', request.user.id, 'Item edited: ' + item.clothing_id)
+        log_event('Inventory', 'Item Edited', request.user.id, 'Item edited: ' + str(item.clothing_id))
         return redirect('inventory_view')
