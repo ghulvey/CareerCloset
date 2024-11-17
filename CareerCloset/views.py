@@ -71,7 +71,7 @@ def men(request, *args, **kwargs):
 
     men_clothing_items = []
     title = ""
-    men_gender = models.Gender.objects.get(gender_name="Male")
+    men_gender = models.Gender.objects.get(gender_name="Men")
     genderless = models.Gender.objects.get(gender_name="Genderless")
 
     if category:
