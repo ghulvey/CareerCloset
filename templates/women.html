@@ -61,6 +61,7 @@
               <h5 class="card-title">{{ item.name }}</h5>
               <p class="card-text">{{ item.description|truncatewords:20 }}</p>
               <a href="{% url 'add_to_cart' item.clothing_id %}" class="btn btn-primary">Add to Cart</a>
+              <a href="{% url 'add_to_favorites' item.clothing_id %}" class="btn btn-secondary">Add to Favorites</a>
             </div>
           </div>
         </div>
