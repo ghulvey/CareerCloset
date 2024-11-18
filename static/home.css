@@ -371,20 +371,25 @@ h3{
 /* container: two */
 #two {
  min-height: 1000px;                /* adjust container height as necessary */
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ align-items: center;
+ position: relative;
 }
 
 .image-container3 {
  position: relative;
- overflow: hidden;
- margin-top: -250px;               
+ width: 100%;
+ margin-top: -55%;               
 }
 
 .text-container2{
  position: absolute;
  z-index: 15000;
- margin-top: -650px;
- margin-left: 800px;
- width: 1200px;
+ margin-top: -10%;
+ margin-left: 110%;
+ width: 100%;
 }
 
 .seasonreg-text2{
@@ -436,31 +441,14 @@ h3{
  background-color: rgba(255, 255, 255, 0); 
  box-sizing: border-box;
 }
-/*
-.marquee-content {
- display: inline-block;
- white-space: nowrap;
- color: #9edcff;                        
- font-size: clamp(1rem, 2vw, 2rem);                  
- font-weight: 900 !important;            
- font-family: Arial, sans-serif;        
- animation: marquee 15s linear infinite;  
-}
 
-.marquee-text{
- width: 100%;                      
- height: 100%;                    
- z-index: 900;
- position: relative;
- margin-top: -101vh;               
-}
-*/
 .hanger-img{
- position: relative;
+ position: absolute;
  z-index: 2000;
- margin-top: -510px;
- margin-left: -150px;
- width: 1500px;
+ margin-top: 23%;
+ margin-left: -110%;
+ width: 100%;
+ max-width: 1500px;
 }
 
 /* container: three */

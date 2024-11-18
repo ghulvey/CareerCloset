@@ -186,8 +186,8 @@ class Favorite(models.Model):
     added_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.user.user.username}'s favorite: {self.clothing_item.name}"
-
+        return f"{self.user.username}'s favorite: {self.clothing_item.name}"
+    
 class FavoriteItem(models.Model):
     favorite = models.ForeignKey(Favorite, on_delete=models.CASCADE, related_name="items")
     clothing_item = models.OneToOneField(ClothingItem, on_delete=models.CASCADE)
