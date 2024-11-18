@@ -381,16 +381,15 @@ h3{
 .image-container3 {
  position: relative;
  width: 100%;
- overflow: hidden;
- margin-top: -500px;               
+ margin-top: -55%;               
 }
 
 .text-container2{
  position: absolute;
  z-index: 15000;
- margin-top: -650px;
- margin-left: 800px;
- width: 1200px;
+ margin-top: -10%;
+ margin-left: 110%;
+ width: 100%;
 }
 
 .seasonreg-text2{
@@ -446,8 +445,8 @@ h3{
 .hanger-img{
  position: absolute;
  z-index: 2000;
- margin-top: -25%;
- margin-left: -10%;
+ margin-top: 23%;
+ margin-left: -110%;
  width: 100%;
  max-width: 1500px;
 }
