@@ -25,13 +25,15 @@
         color: #fff;
         display: block;
         padding: 10px 20px;
-        text-align: left;
         text-decoration: none;
       }
       
       .menu ul {
         background: transparent; /* Change background to white */
         opacity: 0;
+        height: 0;
+        display: none;
+        text-align: center;
         position: absolute;
         transition: all 0.5s ease;
         top: 100%; /* Position dropdown directly below parent */
@@ -50,9 +52,8 @@
 
       
       .menu li:hover ul {
-        height: auto; /* Allow dropdown to grow with content */
-        opacity: 1;
-        transform: translateY(0);
+        transform: translateY(0); /* Ensure dropdown is positioned correctly */
+        background-color: white;
       }
       
       .menu ul li {
@@ -95,49 +96,35 @@
           </a>
         </div>
         <ul class="menu">
-          <li>
-            <a href="{% url 'women' %}">WOMEN</a>
+          <li id="women-link-region">
+            <a href="{% url 'women' %}" id="women-root-link">WOMEN</a>
             
-            <ul>
-              <li><a href="/women?category=Blazer">Blazers</a></li>
-              <div class="divider"></div>
-              <li><a href="/women?category=Shirt">Tops</a></li>
-              <div class="divider"></div>
-              <li><a href="/women?category=Skirt">Skirts</a></li>
-              <div class="divider"></div>
-              <li><a href="/women?category=Pants">Pants</a></li>
-              <div class="divider"></div>
-              <li><a href="/women?category=Outfit">Outfits</a></li>
-              <div class="divider"></div>
+            <ul id="women-link-list">
+              <li><a href="/women?category=Blazer" style="text-decoration: none;">Blazers</a></li>
+              <li><a href="/women?category=Shirt" style="text-decoration: none;">Tops</a></li>
+              <li><a href="/women?category=Skirt" style="text-decoration: none;">Skirts</a></li>
+              <li><a href="/women?category=Pants" style="text-decoration: none;">Pants</a></li>
+              <li><a href="/women?category=Outfit" style="text-decoration: none;">Outfits</a></li>
             </ul>
           </li>
-          <li>
-            <a href="{% url 'men' %}">MEN</a>
+          <li id="men-link-region">
+            <a href="{% url 'men' %}" id="men-root-link">MEN</a>
             
-            <ul>
-              <li><a href="/men?category=Blazer">Blazers</a></li>
-              <div class="divider"></div>
-              <li><a href="/men?category=Shirt">Shirts</a></li>
-              <div class="divider"></div>
-              <li><a href="/men?category=Pants">Pants</a></li>
-              <div class="divider"></div>
-              <li><a href="/men?category=Tie">Ties</a></li>
-              <div class="divider"></div>
-              <li><a href="/men?category=Belts">Belts</a></li>
-              <div class="divider"></div>
+            <ul id="men-link-list">
+                <li><a href="/men?category=Blazer" style="text-decoration: none;">Blazers</a></li>
+                <li><a href="/men?category=Shirt" style="text-decoration: none;">Shirts</a></li>
+                <li><a href="/men?category=Pants" style="text-decoration: none;">Pants</a></li>
+                <li><a href="/men?category=Tie" style="text-decoration: none;">Ties</a></li>
+                <li><a href="/men?category=Belts" style="text-decoration: none;">Belts</a></li>
             </ul>
           </li>
         </ul>
 
         <div class="d-flex align-items-center ms-auto navbar-icons">
-          <div class="search__container">
-            <p class="search__title"></p>
-            <input class="search__input" type="text" placeholder="Search..." />
-          </div>
           <a class="nav-link" href="{% url 'view_favorites' %}">
             <img
               src="{% static 'images/heart.png' %}"
-              class="img-heart"
+              class="img-bag"
               alt="White Heart"
             />
           </a>
@@ -146,6 +133,13 @@
               src="{% static 'images/shoppingbag.png' %}"
               class="img-bag"
               alt="White Shopping Bag"
+            />
+          </a>
+          <a class="nav-link" href="{% url 'customer_orders' %}">
+            <img
+              src="{% static 'images/boxicon.png' %}"
+              class="img-bag"
+              alt="My Orders"
             />
           </a>
         </div>
@@ -170,5 +164,61 @@
       integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
       crossorigin="anonymous"
     ></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        /*var menuItems = document.querySelectorAll('.menu > li');
+
+        menuItems.forEach(function(item) {
+          item.addEventListener('mouseenter', function() {
+            var dropdown = this.querySelector('ul');
+            if (dropdown) {
+              dropdown.style.opacity = '1';
+              dropdown.style.height = 'auto';
+            }
+          });
+
+          item.addEventListener('mouseleave', function() {
+            var dropdown = this.querySelector('ul');
+            if (dropdown) {
+              dropdown.style.opacity = '0';
+              dropdown.style.height = '0';
+            }
+          });
+        });
+        */
+        var womenRootLink = document.getElementById("women-root-link")
+        var womenLinkList = document.getElementById("women-link-list")
+        var womenLinkRegion = document.getElementById("women-link-region")
+
+        var menRootLink = document.getElementById("men-root-link")
+        var menLinkList = document.getElementById("men-link-list")
+        var menLinkRegion = document.getElementById("men-link-region")
+
+        womenRootLink.addEventListener('mouseenter', function() {
+          womenLinkList.style.opacity = 1
+          womenLinkList.style.height = 'auto'
+          womenLinkList.style.display = 'block'
+        })
+
+        menRootLink.addEventListener('mouseenter', function() {
+          menLinkList.style.opacity = 1
+          menLinkList.style.height = 'auto'
+          menLinkList.style.display = 'block'
+        })
+
+        womenLinkRegion.addEventListener('mouseleave', function() {
+          womenLinkList.style.opacity = '0'
+          womenLinkList.style.height = '0'
+          womenLinkList.style.display = 'none'
+        })
+
+        menLinkRegion.addEventListener('mouseleave', function() {
+          menLinkList.style.opacity = '0'
+          menLinkList.style.height = '0'
+          menLinkList.style.display = 'none'
+        })
+
+      });
+    </script>
   </body>
 </html>

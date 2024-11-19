@@ -43,5 +43,6 @@ urlpatterns = [
     path("favorites/", views.view_favorites, name="view_favorites"),
     path('favorites/add/<int:clothing_id>/', views.add_to_favorites, name='add_to_favorites'),
     path("favorites/remove/<int:favorite_item_id>/", views.remove_from_favorites, name="remove_from_favorites"),
-    path('backend', views.backend_home, name='backend'),
+    path("my-orders/", views.customer_orders, name="customer_orders"),
+    path('backend/', views.backend_home, name='backend'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
