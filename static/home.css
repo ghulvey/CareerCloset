@@ -165,7 +165,7 @@ h3{
  height: 35px;
  display: inline-block;
  transition: transform 0.3s ease;
- margin-left: px;                  /* adjust space between icons */
+ margin-left: 10px;                  /* adjust space between icons */
 }
 
 .img-bag:hover {
