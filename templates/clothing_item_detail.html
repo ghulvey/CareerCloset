@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
 <body>
   <style>
@@ -36,7 +37,7 @@
     }
 
     .arrow-left { left: -40px; }
-    .arrow-right { right: -40px; }
+    .arrow-right { right: -100px; }
 
     .item-details {
       text-align: center;
@@ -63,11 +64,21 @@
 
   <div class="background-container"></div>
   <div class="container my-5" style="padding-top: 50px;">
+
+        {% if clothing_item.availability_status != 'available' %}
+        <p class="text-center text-dark"><strong>Sorry, this item is no longer availabile. We apolagize for any inconvinence.</strong></p>
+        {% endif %}
+
         <div class="image-viewer">
           <span class="arrow arrow-left" onclick="prevImage()">&#10094;</span>
           {% for image in images %}
-          <img src="{{ image.image.url }}" alt="{{ clothing_item.name }}" class="product-image">
+            <img src="{{ image.image.url }}" alt="{{ clothing_item.name }}" class="product-image" style="display: {% if forloop.first %}block{% else %}none{% endif %};">
           {% endfor %}
+
+          {% if images|length == 0 %}
+            <img src="{% static 'images/Image-not-found.png' %}" alt="Placeholder Image" class="product-image">
+          {% endif %}
+
           <span class="arrow arrow-right" onclick="nextImage()">&#10095;</span>
         </div>
     
