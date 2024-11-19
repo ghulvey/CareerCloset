@@ -714,14 +714,14 @@ h3{
 
 .admin-link{
  font-family: 'The Seasons Bold' ;
- color: #ffffff !important;
+ color: #ffffff;
  transition: color 0.3s ease, background-color 0.3s ease;
  font-size: 20px;
  font-weight: 90;
 }
 
 .admin-link:hover {
- color: #ffde59; 
+ color: #ffde59;
  background-color: #ffffff00; 
  text-decoration: none;
 }
