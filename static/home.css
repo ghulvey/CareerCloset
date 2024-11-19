@@ -165,7 +165,7 @@ h3{
  height: 35px;
  display: inline-block;
  transition: transform 0.3s ease;
- margin-left: 10px;                  /* adjust space between icons */
+ margin-left: px;                  /* adjust space between icons */
 }
 
 .img-bag:hover {
@@ -508,9 +508,9 @@ h3{
 .img-orangepage{
  position: relative;
  z-index: 2000;
- margin-top: -1900px;
- margin-left: -450px;
- width: 2270px;
+ margin-top: -130%;
+ margin-left: -30%;
+ width: 160%;
  transform: scaleY(0.8);
 }
 
@@ -522,21 +522,21 @@ h3{
 .img-abouttext{
  position: relative;
  z-index: 2100;
- width: 1700px;
- margin-top: -2500px;
- margin-left: -500px;
+ width: 110%;
+ margin-top: -175%;
+ margin-left: -30%;
 }
 
 .slideshow-container {
  position: relative;
  z-index: 3000;
- max-width: 1200px;
- max-height: 5000px;
+ max-width: 100%;
+ max-height: 100%;
  margin: auto;
  overflow: hidden;                   /* ensures that overflow content is hidden */
  border: 1px solid #ffffff00;   
  border-radius: 10px; 
- margin-top: -1300px;
+ margin-top: -88%;
  display: flex;
  justify-content: center;
  align-items: center;                /* vertically centers the content */
@@ -556,7 +556,7 @@ h3{
 
 .arrow-container {
  position: absolute;
- bottom: 10px; 
+ bottom: 5%; 
  width: 100%;
  display: flex;
  justify-content: space-between;
@@ -565,7 +565,7 @@ h3{
 
 .arrow {
  cursor: pointer;
- width: 80px; 
+ width: 8%; 
  height: auto;
 }
 
@@ -690,10 +690,12 @@ h3{
 #five{
  min-height: 30px;    
 }
+
 .image-container6{
  height:auto;
  width: auto;
 }
+
 .img-footer{
  margin-top: 1000px;
  height: auto;
@@ -703,15 +705,29 @@ h3{
 }
 
 .img-footerlogo{
- margin-top: -500px;
+ margin-top: -10%;
  margin-left: 670px;
  height: 40px;
  width: auto;
  position: relative;
 }
 
+.admin-link{
+ font-family: 'The Seasons Bold' ;
+ color: #ffffff !important;
+ transition: color 0.3s ease, background-color 0.3s ease;
+ font-size: 20px;
+ font-weight: 90;
+}
+
+.admin-link:hover {
+ color: #ffde59; 
+ background-color: #ffffff00; 
+ text-decoration: none;
+}
+
 .footertext-container{
- margin-top: -580px;
+ margin-top: -30%;
  margin-left: 670px;
  height: 400px;
  width: 400px;
