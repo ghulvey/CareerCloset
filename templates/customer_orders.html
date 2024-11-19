@@ -68,40 +68,35 @@
   <div class="background-container"></div>
 
   <div class="container">
-    <h1 class="text-center my-4" style="padding-top: 50px">Favorites</h1>
+    <h1 class="text-center my-4" style="padding-top: 50px">Your Orders</h1>
 
-    {% if favorite_items %}
+    {% if orders %}
     <div class="favorites-container">
       <table class="table table-striped table-hover">
         <thead>
           <tr>
-            <th>Item</th>
-            <th>Description</th>
-            <th>Size</th>
-            <th>Color</th>
-            <th>Action</th>
+            <th>Order #</th>
+            <th>Ordered On</th>
+            <th>Status</th>
+            <th>Pickup Info</th>
           </tr>
         </thead>
         <tbody>
-          {% for item in favorite_items %}
+          {% for order in orders %}
           <tr>
-            <td>
-              <a
-                href="{% url 'clothing_item_detail' item.clothing_item.clothing_id %}"
-              >
-                {{ item.clothing_item.name }}
-              </a>
-            </td>
-            <td>{{ item.clothing_item.description }}</td>
-            <td>{{ item.clothing_item.size }}</td>
-            <td>{{ item.clothing_item.color.color_name }}</td>
-            <td>
-              <a
-                href="{% url 'remove_from_favorites' item.clothing_item.clothing_id %}"
-                class="btn btn-danger">
-                Remove
-              </a>
-            </td>
+            <td>Order #{{ order.order_id }}</td>
+            <td>{{ order.order_date }}</td>
+            <td>{{ order.order_status }}</td>
+
+            {% if order.order_status == 'processed' %}
+              {% if order.pickup_method == 'self' %}
+                <td><strong>Cubby </strong>#{{ order.pickup_code }}</td>
+              {% else %}
+                <td><strong>At Desk, Code: </strong>{{ order.pickup_code }}</td>
+              {% endif %}
+            {% else %}
+            <td></td>
+            {% endif %}
           </tr>
           {% endfor %}
         </tbody>
@@ -109,7 +104,7 @@
     </div>
 
     {% else %}
-    <p class="empty-favorites">You have no favorites yet.</p>
+    <p class="empty-favorites text-center">You have no orders yet.</p>
     {% endif %}
   </div>
 </body>

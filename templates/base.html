@@ -25,13 +25,13 @@
         color: #fff;
         display: block;
         padding: 10px 20px;
-        text-align: left;
         text-decoration: none;
       }
       
       .menu ul {
         background: transparent; /* Change background to white */
         opacity: 0;
+        text-align: center;
         position: absolute;
         transition: all 0.5s ease;
         top: 100%; /* Position dropdown directly below parent */
@@ -52,6 +52,7 @@
       .menu li:hover ul {
         height: auto; /* Allow dropdown to grow with content */
         opacity: 1;
+        background-color: white;
         transform: translateY(0);
       }
       
@@ -99,15 +100,15 @@
             <a href="{% url 'women' %}">WOMEN</a>
             
             <ul>
-              <li><a href="/women?category=Blazer">Blazers</a></li>
+              <li><a href="/women?category=Blazer" style="text-decoration: none;">Blazers</a></li>
               <div class="divider"></div>
-              <li><a href="/women?category=Shirt">Tops</a></li>
+              <li><a href="/women?category=Shirt" style="text-decoration: none;">Tops</a></li>
               <div class="divider"></div>
-              <li><a href="/women?category=Skirt">Skirts</a></li>
+              <li><a href="/women?category=Skirt" style="text-decoration: none;">Skirts</a></li>
               <div class="divider"></div>
-              <li><a href="/women?category=Pants">Pants</a></li>
+              <li><a href="/women?category=Pants" style="text-decoration: none;">Pants</a></li>
               <div class="divider"></div>
-              <li><a href="/women?category=Outfit">Outfits</a></li>
+              <li><a href="/women?category=Outfit" style="text-decoration: none;">Outfits</a></li>
               <div class="divider"></div>
             </ul>
           </li>
@@ -115,15 +116,15 @@
             <a href="{% url 'men' %}">MEN</a>
             
             <ul>
-              <li><a href="/men?category=Blazer">Blazers</a></li>
-              <div class="divider"></div>
-              <li><a href="/men?category=Shirt">Shirts</a></li>
-              <div class="divider"></div>
-              <li><a href="/men?category=Pants">Pants</a></li>
-              <div class="divider"></div>
-              <li><a href="/men?category=Tie">Ties</a></li>
-              <div class="divider"></div>
-              <li><a href="/men?category=Belts">Belts</a></li>
+                <li><a href="/men?category=Blazer" style="text-decoration: none;">Blazers</a></li>
+                <div class="divider"></div>
+                <li><a href="/men?category=Shirt" style="text-decoration: none;">Shirts</a></li>
+                <div class="divider"></div>
+                <li><a href="/men?category=Pants" style="text-decoration: none;">Pants</a></li>
+                <div class="divider"></div>
+                <li><a href="/men?category=Tie" style="text-decoration: none;">Ties</a></li>
+                <div class="divider"></div>
+                <li><a href="/men?category=Belts" style="text-decoration: none;">Belts</a></li>
               <div class="divider"></div>
             </ul>
           </li>
@@ -146,6 +147,13 @@
               src="{% static 'images/shoppingbag.png' %}"
               class="img-bag"
               alt="White Shopping Bag"
+            />
+          </a>
+          <a class="nav-link" href="{% url 'customer_orders' %}">
+            <img
+              src="{% static 'images/boxicon.png' %}"
+              class="img-bag"
+              alt="My Orders"
             />
           </a>
         </div>

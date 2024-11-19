@@ -75,15 +75,16 @@ class Command(BaseCommand):
         ]
 
         categories = [
-            "Jacket",
-            "Skirt",
-            "Dress",
-            "Shirt",
-            "Pants",
             "Belt",
-            "Tie",
+            "Blazer",
+            "Dress",
+            "Jacket",
             "Outfit",
-
+            "Pants",
+            "Shirt",
+            "Skirt",
+            "Tie",
+            "Other"
         ]
 
         for group_name in group_names:

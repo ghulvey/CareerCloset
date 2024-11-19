@@ -73,6 +73,10 @@
 
   {% if cart.items.all %}
   <div class="cart-container">
+    {% if error %}
+      <p style="color: black;"><strong>Error:</strong> {{ error }}</p>
+      <p style="color: black;">We apologize for the error, please feel free to contact our office if you are having trouble placing your order.</p>
+    {% endif %}
     <table class="table table-striped table-hover">
       <thead>
         <tr>

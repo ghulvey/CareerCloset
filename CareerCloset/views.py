@@ -71,7 +71,7 @@ def men(request, *args, **kwargs):
 
     men_clothing_items = []
     title = ""
-    men_gender = models.Gender.objects.get(gender_name="Men")
+    men_gender = models.Gender.objects.get(gender_name="Male")
     genderless = models.Gender.objects.get(gender_name="Genderless")
 
     if category:
@@ -148,9 +148,9 @@ def view_favorites(request):
 
 @login_required
 def remove_from_favorites(request, favorite_item_id):
-    favorite = get_object_or_404(Favorite, user=request.user)
-    favorite_item = get_object_or_404(FavoriteItem, favorite=favorite, id=favorite_item_id)
-    favorite_item.delete()
+    clothing_item = get_object_or_404(ClothingItem, clothing_id=favorite_item_id)
+    favorite = get_object_or_404(Favorite, user=request.user, clothing_item=clothing_item)
+    favorite.delete()
     return redirect("view_favorites")
 
 @login_required
@@ -184,6 +184,19 @@ def remove_from_cart(request, cart_item_id):
 def checkout(request):
     cart = get_object_or_404(Cart, user=request.user)
 
+    all_available = True
+    error_text = ""
+
+    for item in cart.items.all():
+        if item.clothing_item.availability_status != 'available':
+            all_available = False
+            error_text += item.clothing_item.name + " is no longer unavailable. "
+    if error_text != "":
+        error_text += "Please remove these items and try again"
+
+    if all_available == False:
+        return render(request, 'cart/view_cart.html', {'cart': cart, 'error': error_text})
+
     order = models.Order.objects.create(user=request.user)
 
     for item in cart.items.all():
@@ -192,7 +205,16 @@ def checkout(request):
         item.clothing_item.save()
 
     cart.items.all().delete()
-    return render(request, "cart/checkout.html")
+
+    return redirect("/my-orders")
+
+@login_required
+def customer_orders(request):
+    orders = models.Order.objects.filter(user=request.user)
+    print(orders)
+    orders = orders.order_by('-order_date')
+    print(orders)
+    return render(request, 'customer_orders.html', {'orders': orders})
 
 @login_required
 @permission_required('access.view_order')
