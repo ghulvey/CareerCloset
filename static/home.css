@@ -1,4 +1,5 @@
 /* home.css */
+
 body {
  color: #ffffff;
  background-color: #ffffff;
@@ -46,6 +47,7 @@ h3{
 }
 
 /* navigation bar */
+
 .navbar {
  background-color: transparent; /* make the navbar transparent */
  border: none;
@@ -173,6 +175,7 @@ h3{
 }
 
 /* container: home */
+
 .jumbotron {
  padding: 0;                
  background-color: #ffffff; 
@@ -247,7 +250,9 @@ h3{
  left: 46%;
  z-index: 8;  
 }
+
 /* container: one */
+
 #one {
  min-height: 100vh;            /* adjust this value to make the container longer */
 }
@@ -368,14 +373,26 @@ h3{
  height: 20vh;
  transform: scaleX(6);  
 }
+
 /* container: two */
+
 #two {
- min-height: 1000px;                /* adjust container height as necessary */
+ min-height: 100vh;                /* adjust container height as necessary */
  display: flex;
  flex-direction: column;
  justify-content: center;
  align-items: center;
  position: relative;
+}
+
+.center-continer1 {
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ justify-content: center;
+ gap: 10px; /* Add spacing between elements */
+ height: 100vh;
+ width: 100%;
 }
 
 .image-container3 {
@@ -387,7 +404,7 @@ h3{
 .text-container2{
  position: absolute;
  z-index: 15000;
- margin-top: -10%;
+ margin-top: -0%;
  margin-left: 110%;
  width: 100%;
 }
@@ -430,6 +447,7 @@ h3{
  height: 100vh;                    /* reduce height to make the image smaller */
  z-index: 900;
  position: relative;
+ top: 65vh;
 }
 
 .marquee {
@@ -445,13 +463,14 @@ h3{
 .hanger-img{
  position: absolute;
  z-index: 2000;
- margin-top: 23%;
- margin-left: -110%;
+ margin-top: -0%;
+ margin-left: -10%;
  width: 100%;
- max-width: 1500px;
+ max-width: 90%;
 }
 
 /* container: three */
+
 #three {
  min-height: 30px;                /* adjust container height as necessary */
 }
@@ -500,30 +519,31 @@ h3{
 .img-checkout{
  position: relative;
  z-index: 1000;
- margin-top: -3500px;
- margin-left: 150px;
- width: 1500px;
+ margin-top: -360vh;
+ margin-left: 25vh;
+ width: 190vh;
 }
 
 .img-orangepage{
  position: relative;
  z-index: 2000;
- margin-top: -130%;
+ margin-top: -90%;
  margin-left: -30%;
  width: 160%;
  transform: scaleY(0.8);
 }
 
 /* container: four */
+
 #four {
- min-height: 30px;                    /* adjust container height as necessary */
+ min-height: 30%;                    /* adjust container height as necessary */
 }
 
 .img-abouttext{
  position: relative;
  z-index: 2100;
  width: 110%;
- margin-top: -175%;
+ margin-top: -125%;
  margin-left: -30%;
 }
 
@@ -536,7 +556,7 @@ h3{
  overflow: hidden;                   /* ensures that overflow content is hidden */
  border: 1px solid #ffffff00;   
  border-radius: 10px; 
- margin-top: -88%;
+ margin-top: -50%;
  display: flex;
  justify-content: center;
  align-items: center;                /* vertically centers the content */
@@ -572,7 +592,7 @@ h3{
 .img-whiteblock-container {
  position: relative; 
  width: 100%;        
- height: 300px;      
+ height: 100vh;      
 }
 
 .img-whiteblock {
@@ -584,24 +604,24 @@ h3{
 
 .img-press {
  position: absolute;
- height: 800px; 
- margin-top: -510px;    
+ height: 100%; 
+ margin-top: -0vh;    
  left: 0;     
  align-items: center;
 } 
 
 .presstext-container1{
  position: relative; 
- width: 590px;        
- height: 200px;
- margin-left: 673px;
- margin-top: -745px;
+ width: 70vh;        
+ height: 25vh;
+ margin-left: 85vh;
+ margin-top: -92vh;
  text-align: center;
 }
 
 .presstext-container1 h3 {
  color: #323232;
- margin-bottom: 15px;                    /* adds space below h3 */
+ margin-bottom: 5%;                    /* adds space below h3 */
  text-align: center;
 }
 
@@ -616,16 +636,16 @@ h3{
 
 .presstext-container2{
  position: relative; 
- width: 590px;        
- height: 200px;
- margin-left: 673px;
- margin-top: -180px;
+ width: 70vh;       
+ height: 25vh;
+ margin-left: 85vh;
+ margin-top: 5vh;
  text-align: center;
 }
 
 .presstext-container2 h3 {
  color: #323232;
- margin-bottom: 15px; 
+ margin-bottom: 5%; 
  text-align: center;
 }
 
@@ -640,16 +660,16 @@ h3{
 
 .presstext-container3{
  position: relative; 
- width: 590px;        
- height: 200px;
- margin-left: 673px;
- margin-top: 20px;
+ width: 70vh;        
+ height: 25vh;
+ margin-left: 85vh;
+ margin-top: 5vh;
  text-align: center;
 }
 
 .presstext-container3 h3 {
  color: #323232;
- margin-bottom: 15px; 
+ margin-bottom: 5%; 
  text-align: center;
 }
 
@@ -665,28 +685,29 @@ h3{
 .img-arrow1{
  position: absolute; 
  width: auto;        
- height: 80px;
- margin-left: 1270px;
- margin-top: -350px;
+ height: 8%;
+ margin-left: 155vh;
+ margin-top: -10%;
 }
 
 .img-arrow2{
  position: absolute; 
  width: auto;        
- height: 80px;
- margin-left: 1270px;
- margin-top: -150px;
+ height: 8%;
+ margin-left: 155vh;
+ margin-top: -10%;
 }
 
 .img-arrow3{
  position: absolute; 
  width: auto;        
- height: 80px;
- margin-left: 1270px;
- margin-top: -150px;
+ height: 8%;
+ margin-left: 155vh;
+ margin-top: -10%;
 }
 
 /* container: five */
+
 #five{
  min-height: 30px;    
 }
@@ -697,7 +718,7 @@ h3{
 }
 
 .img-footer{
- margin-top: 1000px;
+ margin-top: 10vh;
  height: auto;
  width: 102%;
  margin-left: -15px;
@@ -706,8 +727,8 @@ h3{
 
 .img-footerlogo{
  margin-top: -10%;
- margin-left: 670px;
- height: 40px;
+ margin-left: 80.5vh;
+ height: 5vh;
  width: auto;
  position: relative;
 }
@@ -727,10 +748,10 @@ h3{
 }
 
 .footertext-container{
- margin-top: -30%;
- margin-left: 670px;
- height: 400px;
- width: 400px;
+ margin-top: -52vh;
+ margin-left: 80.5vh;
+ height: 40vh;
+ width: 45vh;
 }
 
 .footertext-container h4{
@@ -753,5 +774,3 @@ h3{
  0% { transform: translateX(100%); }
  100% { transform: translateX(-100%); }
 }
-
-
