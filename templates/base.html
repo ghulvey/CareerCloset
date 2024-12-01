@@ -33,7 +33,7 @@
         opacity: 0;
         height: 0;
         display: none;
-        text-align: center;
+        text-align: relative;
         position: absolute;
         transition: all 0.5s ease;
         top: 100%; /* Position dropdown directly below parent */
@@ -41,11 +41,13 @@
         min-width: 150px; /* Minimum width for better spacing */
         z-index: 1000; /* Higher z-index to ensure dropdown is above other elements */
         padding: 10px 0; /* Add padding on top and bottom */
-        margin: 0; /* Reset margin */
+        padding-top: 20px;
+        margin-top: 0; /* Reset margin */
       }
       
       .menu, .menu ul {
         list-style: none; /* Remove default list styling */
+        position: center;
         padding: 0; /* Remove padding */
         margin: 0; /* Remove margin */
       }
@@ -53,7 +55,7 @@
       
       .menu li:hover ul {
         transform: translateY(0); /* Ensure dropdown is positioned correctly */
-        background-color: white;
+        background-color: transparent;
       }
       
       .menu ul li {
